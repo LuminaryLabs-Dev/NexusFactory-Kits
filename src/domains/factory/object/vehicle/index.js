@@ -1,0 +1,2 @@
+import { defineDomain } from "../../../../domain.js";
+export const vehicleDomain = defineDomain({ id:"factory-object-vehicle-domain", domainPath:"n:factory:object:vehicle", parentDomainPath:"n:factory:object", requires:["factory:object"], provides:["factory:object:vehicle"], owns:["vehicle generation semantics"], doesNotOwn:["driving simulation", "editor rendering"], services:["vehicle-generation"] });

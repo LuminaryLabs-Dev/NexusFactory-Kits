@@ -1,0 +1,2 @@
+import { defineDomain } from "../../../../domain.js";
+export const pbrMaterialDomain = defineDomain({ id:"factory-material-pbr-domain", domainPath:"n:factory:material:pbr", parentDomainPath:"n:factory:material", requires:["factory:material"], provides:["factory:material:pbr"], owns:["PBR material generation semantics"], doesNotOwn:["renderer implementation"], services:["pbr-material-generation"] });

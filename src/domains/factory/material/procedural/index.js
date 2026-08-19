@@ -1,0 +1,2 @@
+import { defineDomain } from "../../../../domain.js";
+export const proceduralMaterialDomain = defineDomain({ id:"factory-material-procedural-domain", domainPath:"n:factory:material:procedural", parentDomainPath:"n:factory:material", requires:["factory:material"], provides:["factory:material:procedural"], owns:["procedural material generation semantics"], doesNotOwn:["renderer implementation"], services:["procedural-material-generation"] });

@@ -1,0 +1,2 @@
+import { defineDomain } from "../../../../domain.js";
+export const stylizedMaterialDomain = defineDomain({ id:"factory-material-stylized-domain", domainPath:"n:factory:material:stylized", parentDomainPath:"n:factory:material", requires:["factory:material"], provides:["factory:material:stylized"], owns:["stylized material generation semantics"], doesNotOwn:["renderer implementation"], services:["stylized-material-generation"] });

@@ -1,0 +1,23 @@
+export { createRegistry } from "./registry/registry.js";
+export { defineDomain, defineKit } from "./domain.js";
+export { createArtifact, validateArtifactShape, normalizeParameters } from "./contracts.js";
+export { createSeededRandom, deriveSeed } from "./foundation/random.js";
+export { exportArtifactGlb } from "./foundation/glb.js";
+
+export { factoryDomain } from "./domains/factory/index.js";
+export { objectDomain } from "./domains/factory/object/index.js";
+export { weaponDomain } from "./domains/factory/object/weapon/index.js";
+export { foliageDomain } from "./domains/factory/object/foliage/index.js";
+export { propDomain } from "./domains/factory/object/prop/index.js";
+export { structureDomain } from "./domains/factory/object/structure/index.js";
+export { vehicleDomain } from "./domains/factory/object/vehicle/index.js";
+export { materialDomain } from "./domains/factory/material/index.js";
+export { pbrMaterialDomain } from "./domains/factory/material/pbr/index.js";
+export { stylizedMaterialDomain } from "./domains/factory/material/stylized/index.js";
+export { proceduralMaterialDomain } from "./domains/factory/material/procedural/index.js";
+export { textureDomain } from "./domains/factory/texture/index.js";
+export { vfxDomain } from "./domains/factory/vfx/index.js";
+export { sceneDomain } from "./domains/factory/scene/index.js";
+export { animationDomain } from "./domains/factory/animation/index.js";
+export { kit as ballistaKit, manifest as ballistaManifest } from "./domains/factory/object/weapon/kits/ballista-kit/index.js";
+export { kit as treeKit, manifest as treeManifest } from "./domains/factory/object/foliage/kits/tree-kit/index.js";
