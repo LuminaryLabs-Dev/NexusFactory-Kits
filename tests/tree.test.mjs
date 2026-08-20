@@ -12,6 +12,18 @@ test("tree generation is deterministic and seed-sensitive", () => {
   assert.equal(kit.services.validate(a).valid, true);
 });
 
+test("tree emits exactly one wood submesh and one merged foliage crown", () => {
+  const artifact = kit.services.generate(base);
+  assert.deepEqual(artifact.meshes.map((mesh) => mesh.id), ["wood-structure", "foliage-crown"]);
+  assert.equal(artifact.meshes[0].material, "bark");
+  assert.equal(artifact.meshes[1].material, "leaf");
+  assert.ok(artifact.meshes[0].positions.length > 0);
+  assert.ok(artifact.meshes[1].positions.length > 0);
+  assert.ok(artifact.meshes[1].indices.length > 3);
+  assert.ok(!artifact.meshes.some((mesh) => mesh.id.includes("canopy-") || mesh.id.startsWith("crown-")));
+  assert.equal(artifact.metadata.submeshes.length, 2);
+});
+
 test("shape options change the generated geometry", () => {
   const rounded = kit.services.generate(base);
   const broad = kit.services.generate({ ...base, params: { ...base.params, shape: "broad" } });
@@ -20,10 +32,12 @@ test("shape options change the generated geometry", () => {
   assert.notEqual(rounded.deterministicHash, compact.deterministicHash);
 });
 
-test("branch range produces the requested sparse branch structure", () => {
+test("branch range is preserved inside the merged wood structure", () => {
   for (const branchCount of [4, 6]) {
     const artifact = kit.services.generate({ ...base, params: { ...base.params, branchCount } });
-    assert.equal(artifact.meshes.filter((mesh) => /^branch-\d+$/.test(mesh.id)).length, branchCount);
+    assert.equal(artifact.metadata.branchCount, branchCount);
+    assert.equal(artifact.meshes.filter((mesh) => mesh.id === "wood-structure").length, 1);
+    assert.equal(artifact.meshes.filter((mesh) => mesh.id === "foliage-crown").length, 1);
     assert.equal(kit.services.validate(artifact).valid, true);
   }
 });
@@ -40,9 +54,11 @@ test("unsupported foliage shapes are rejected", () => {
   assert.throws(() => kit.services.generate({ ...base, params: { ...base.params, shape: "diamond" } }), /must be one of/);
 });
 
-test("tree GLB export remains valid", () => {
-  const output = kit.services.export(kit.services.generate(base), "glb");
+test("tree GLB export remains valid and contains two meshes", () => {
+  const artifact = kit.services.generate(base);
+  const output = kit.services.export(artifact, "glb");
   const view = new DataView(output.buffer, output.byteOffset, output.byteLength);
   assert.equal(view.getUint32(0, true), 0x46546c67);
   assert.equal(view.getUint32(4, true), 2);
+  assert.equal(artifact.meshes.length, 2);
 });
