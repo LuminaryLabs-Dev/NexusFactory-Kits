@@ -11,8 +11,19 @@ export function normalizeNumber(value, descriptor) {
   return descriptor.type === "integer" ? Math.round(clamped) : clamped;
 }
 
+export function normalizeParameter(value, descriptor) {
+  if (descriptor.type === "enum" || descriptor.type === "select" || Array.isArray(descriptor.options)) {
+    const options = (descriptor.options ?? []).map((option) => typeof option === "object" ? String(option.value) : String(option));
+    const fallback = String(descriptor.default ?? options[0] ?? "");
+    const candidate = String(value ?? fallback);
+    if (!options.includes(candidate)) throw new RangeError(`Parameter ${descriptor.id} must be one of: ${options.join(", ")}.`);
+    return candidate;
+  }
+  return normalizeNumber(value, descriptor);
+}
+
 export function normalizeParameters(schema, input = {}) {
-  return Object.fromEntries(schema.map((descriptor) => [descriptor.id, normalizeNumber(input[descriptor.id], descriptor)]));
+  return Object.fromEntries(schema.map((descriptor) => [descriptor.id, normalizeParameter(input[descriptor.id], descriptor)]));
 }
 
 export function normalizeEditorDescriptor(editor = {}) {
