@@ -23,6 +23,7 @@ n:factory
 │   ├── n:factory:material:stylized
 │   └── n:factory:material:procedural
 ├── n:factory:texture
+│   └── factory-texture-coral
 ├── n:factory:vfx
 ├── n:factory:scene
 └── n:factory:animation
@@ -42,16 +43,20 @@ Executable kits expose the same service boundary:
 
 Generation is deterministic: the same kit version, seed, and normalized parameters produce the same artifact hash.
 
+Artifacts may be mesh or image artifacts. Image kits use an RGBA8 image descriptor so browser, Node, worker, validation, export, and Studio preview can consume the same deterministic payload without a DOM dependency.
+
 ## Included proof kits
 
 - **Windup Ballista Turret** — object-specific weapon geometry with a central launch rail, lateral torsion arms, winding drum, bowstring, bolt, ammunition rack, and wind/fire/reload tracks.
 - **Procedural Broadleaf Tree** — a separate foliage subdomain with seeded branching and canopy generation, proving the host architecture is not weapon-specific.
+- **Coral Generator** — one texture kit with two modes: isolated transparent coral assets and composed reef scenes. Seven real-species-inspired presets share reusable branching, frond, mound, column, plate, fan, rod, raster, shading, and seeded-noise foundations. PNG export uses nearest-neighbor scaling.
 
 ## Validate
 
 ```bash
 npm run validate
 npm run demo
+npm run coral:render
 ```
 
-`npm run registry:build` materializes `registry.json`, which is the Studio-facing discovery surface.
+`npm run registry:build` materializes `registry.json`, which is the Studio-facing discovery surface. `npm run coral:render` writes a fixed-seed visual validation matrix under `validation/` for deterministic art review.

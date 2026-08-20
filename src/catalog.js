@@ -15,10 +15,11 @@ import { sceneDomain } from "./domains/factory/scene/index.js";
 import { animationDomain } from "./domains/factory/animation/index.js";
 import { manifest as ballistaManifest } from "./domains/factory/object/weapon/kits/ballista-kit/index.js";
 import { manifest as treeManifest } from "./domains/factory/object/foliage/kits/tree-kit/index.js";
+import { manifest as coralManifest } from "./domains/factory/texture/kits/coral-kit/index.js";
 
 export const domains = Object.freeze([
   factoryDomain, objectDomain, weaponDomain, foliageDomain, propDomain, structureDomain, vehicleDomain,
   materialDomain, pbrMaterialDomain, stylizedMaterialDomain, proceduralMaterialDomain,
   textureDomain, vfxDomain, sceneDomain, animationDomain
 ]);
-export const kits = Object.freeze([ballistaManifest, treeManifest]);
+export const kits = Object.freeze([ballistaManifest, treeManifest, coralManifest]);

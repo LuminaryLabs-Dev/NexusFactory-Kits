@@ -11,7 +11,8 @@
     "registry:build": "node scripts/build-registry.mjs",
     "test": "node --test tests/*.test.mjs",
     "validate": "npm run registry:build && npm test",
-    "demo": "node scripts/demo.mjs"
+    "demo": "node scripts/demo.mjs",
+    "coral:render": "node scripts/render-coral-validation.mjs"
   },
   "engines": {
     "node": ">=20"

@@ -10,7 +10,6 @@ export function normalizeNumber(value, descriptor) {
   const clamped = Math.min(descriptor.maximum, Math.max(descriptor.minimum, numeric));
   return descriptor.type === "integer" ? Math.round(clamped) : clamped;
 }
-
 export function normalizeParameter(value, descriptor) {
   if (descriptor.type === "enum" || descriptor.type === "select" || Array.isArray(descriptor.options)) {
     const options = (descriptor.options ?? []).map((option) => typeof option === "object" ? String(option.value) : String(option));
@@ -21,51 +20,42 @@ export function normalizeParameter(value, descriptor) {
   }
   return normalizeNumber(value, descriptor);
 }
-
-export function normalizeParameters(schema, input = {}) {
-  return Object.fromEntries(schema.map((descriptor) => [descriptor.id, normalizeParameter(input[descriptor.id], descriptor)]));
-}
-
-export function normalizeEditorDescriptor(editor = {}) {
-  return Object.freeze({
-    preview: editor.preview ?? "none",
-    inspector: editor.inspector ?? "schema",
-    surfaces: Object.freeze([...(editor.surfaces ?? [])])
-  });
-}
+export function normalizeParameters(schema, input = {}) { return Object.fromEntries(schema.map((descriptor) => [descriptor.id, normalizeParameter(input[descriptor.id], descriptor)])); }
+export function normalizeEditorDescriptor(editor = {}) { return Object.freeze({ preview:editor.preview??"none", inspector:editor.inspector??"schema", surfaces:Object.freeze([...(editor.surfaces??[])]) }); }
 
 export function createArtifact({ kitId, domainPath, seed, params, meshes, materials, timeline = [], metadata = {} }) {
   const bounds = meshBounds(meshes);
-  const base = {
-    schemaVersion: ARTIFACT_SCHEMA,
-    kitId,
-    domainPath,
-    seed: String(seed),
-    params,
-    meshes,
-    materials,
-    timeline,
-    bounds,
-    statistics: { meshCount: meshes.length, triangleCount: triangleCount(meshes), animationTrackCount: timeline.length },
-    metadata
-  };
+  const base = { schemaVersion:ARTIFACT_SCHEMA, kitId, domainPath, seed:String(seed), params, meshes, materials, timeline, bounds, statistics:{ meshCount:meshes.length, triangleCount:triangleCount(meshes), animationTrackCount:timeline.length }, metadata };
+  return Object.freeze({ ...base, deterministicHash: sha256(base) });
+}
+
+export function createImageArtifact({ kitId, domainPath, seed, params, image, statistics = {}, metadata = {} }) {
+  if (!image || !Number.isInteger(image.width) || !Number.isInteger(image.height) || image.width <= 0 || image.height <= 0) throw new TypeError("Image artifact requires positive integer width and height.");
+  if (image.pixelFormat !== "rgba8" || typeof image.rgbaBase64 !== "string") throw new TypeError("Image artifact requires rgba8 base64 pixel data.");
+  const normalizedImage = Object.freeze({ width:image.width, height:image.height, channels:4, pixelFormat:"rgba8", rgbaBase64:image.rgbaBase64, transparent:image.transparent === true, sampling:image.sampling ?? "nearest" });
+  const base = { schemaVersion:ARTIFACT_SCHEMA, artifactKind:"image", kitId, domainPath, seed:String(seed), params, image:normalizedImage, statistics:{ pixelCount:image.width*image.height, ...statistics }, metadata };
   return Object.freeze({ ...base, deterministicHash: sha256(base) });
 }
 
 export function validateArtifactShape(artifact) {
-  const checks = [];
-  const add = (id, pass, detail = "") => checks.push({ id, pass: Boolean(pass), detail });
-  add("schema", artifact?.schemaVersion === ARTIFACT_SCHEMA, artifact?.schemaVersion ?? "missing");
-  add("kit", typeof artifact?.kitId === "string" && artifact.kitId.length > 0);
-  add("seed", typeof artifact?.seed === "string" && artifact.seed.length > 0);
-  add("meshes", Array.isArray(artifact?.meshes) && artifact.meshes.length > 0);
-  add("hash", typeof artifact?.deterministicHash === "string" && artifact.deterministicHash.startsWith("sha256:"));
-  if (Array.isArray(artifact?.meshes)) {
-    for (const mesh of artifact.meshes) {
-      add(`mesh:${mesh.id}:positions`, Array.isArray(mesh.positions) && mesh.positions.length % 3 === 0);
-      add(`mesh:${mesh.id}:indices`, Array.isArray(mesh.indices) && mesh.indices.length % 3 === 0);
-      add(`mesh:${mesh.id}:finite`, (mesh.positions ?? []).every(Number.isFinite));
+  const checks=[]; const add=(id,pass,detail="")=>checks.push({id,pass:Boolean(pass),detail});
+  add("schema",artifact?.schemaVersion===ARTIFACT_SCHEMA,artifact?.schemaVersion??"missing");
+  add("kit",typeof artifact?.kitId==="string"&&artifact.kitId.length>0);
+  add("seed",typeof artifact?.seed==="string"&&artifact.seed.length>0);
+  add("hash",typeof artifact?.deterministicHash==="string"&&artifact.deterministicHash.startsWith("sha256:"));
+  if (artifact?.artifactKind === "image") {
+    add("image:width",Number.isInteger(artifact?.image?.width)&&artifact.image.width>0);
+    add("image:height",Number.isInteger(artifact?.image?.height)&&artifact.image.height>0);
+    add("image:channels",artifact?.image?.channels===4);
+    add("image:format",artifact?.image?.pixelFormat==="rgba8");
+    add("image:data",typeof artifact?.image?.rgbaBase64==="string"&&artifact.image.rgbaBase64.length>0);
+  } else {
+    add("meshes",Array.isArray(artifact?.meshes)&&artifact.meshes.length>0);
+    if(Array.isArray(artifact?.meshes)) for(const mesh of artifact.meshes){
+      add(`mesh:${mesh.id}:positions`,Array.isArray(mesh.positions)&&mesh.positions.length%3===0);
+      add(`mesh:${mesh.id}:indices`,Array.isArray(mesh.indices)&&mesh.indices.length%3===0);
+      add(`mesh:${mesh.id}:finite`,(mesh.positions??[]).every(Number.isFinite));
     }
   }
-  return { valid: checks.every((check) => check.pass), checks };
+  return { valid:checks.every((check)=>check.pass), checks };
 }

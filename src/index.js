@@ -1,7 +1,7 @@
 export { createRegistry } from "./registry/registry.js";
 export { defineDomain, defineKit } from "./domain.js";
-export { createArtifact, validateArtifactShape, normalizeParameters } from "./contracts.js";
-export { createSeededRandom, deriveSeed } from "./foundation/random.js";
+export { createArtifact, createImageArtifact, validateArtifactShape, normalizeParameters } from "./contracts.js";
+export { createSeededRandom, createRandomStream, deriveSeed } from "./foundation/random.js";
 export { exportArtifactGlb } from "./foundation/glb.js";
 
 export { factoryDomain } from "./domains/factory/index.js";
@@ -21,3 +21,4 @@ export { sceneDomain } from "./domains/factory/scene/index.js";
 export { animationDomain } from "./domains/factory/animation/index.js";
 export { kit as ballistaKit, manifest as ballistaManifest } from "./domains/factory/object/weapon/kits/ballista-kit/index.js";
 export { kit as treeKit, manifest as treeManifest } from "./domains/factory/object/foliage/kits/tree-kit/index.js";
+export { kit as coralKit, manifest as coralManifest } from "./domains/factory/texture/kits/coral-kit/index.js";
