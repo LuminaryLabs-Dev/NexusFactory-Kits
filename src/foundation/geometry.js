@@ -120,6 +120,43 @@ export function createOctahedronMesh(id, center, radius, material) {
   return mesh;
 }
 
+export function createLowPolyClusterMesh(id, center, radius, material, options = {}) {
+  const mesh = createMesh(id, material);
+  const [cx, cy, cz] = center;
+  const [sx, sy, sz] = options.scale ?? [1, 1, 1];
+  const rotation = Number(options.rotation ?? 0);
+  const irregularity = Math.max(0, Number(options.irregularity ?? 0));
+  const random = typeof options.random === "function" ? options.random : null;
+  const ringSegments = 6;
+  const jitter = () => random ? 1 + (random() - 0.5) * 2 * irregularity : 1;
+  const top = [cx, cy + radius * sy, cz];
+  const bottom = [cx, cy - radius * sy, cz];
+  const upper = [];
+  const lower = [];
+  for (let i = 0; i < ringSegments; i += 1) {
+    const upperAngle = rotation + i * Math.PI * 2 / ringSegments;
+    const lowerAngle = upperAngle + Math.PI / ringSegments;
+    upper.push([
+      cx + Math.cos(upperAngle) * radius * 0.88 * sx * jitter(),
+      cy + radius * 0.35 * sy * jitter(),
+      cz + Math.sin(upperAngle) * radius * 0.88 * sz * jitter()
+    ]);
+    lower.push([
+      cx + Math.cos(lowerAngle) * radius * 0.82 * sx * jitter(),
+      cy - radius * 0.32 * sy * jitter(),
+      cz + Math.sin(lowerAngle) * radius * 0.82 * sz * jitter()
+    ]);
+  }
+  for (let i = 0; i < ringSegments; i += 1) {
+    const next = (i + 1) % ringSegments;
+    addTriangle(mesh, top, upper[i], upper[next]);
+    addTriangle(mesh, upper[i], lower[i], upper[next]);
+    addTriangle(mesh, upper[next], lower[i], lower[next]);
+    addTriangle(mesh, bottom, lower[next], lower[i]);
+  }
+  return mesh;
+}
+
 export function meshBounds(meshes) {
   const points = meshes.flatMap((mesh) => {
     const out = [];
