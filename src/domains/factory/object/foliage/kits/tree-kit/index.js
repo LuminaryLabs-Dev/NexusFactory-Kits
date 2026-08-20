@@ -38,7 +38,7 @@ export const manifest = defineKit({
   },
   runtime: { environments: ["node", "browser", "worker"], permissions: [] },
   source: { module: "src/domains/factory/object/foliage/kits/tree-kit/index.js", exportName: "kit" },
-  metadata: { deterministic: true, artifactType: "mesh", identity: "grounded trunk, sparse radial branches and cohesive rounded broadleaf canopy" }
+  metadata: { deterministic: true, artifactType: "mesh", identity: "merged wood structure with a unified low-poly broadleaf crown" }
 });
 
 const SHAPES = {
@@ -66,8 +66,17 @@ function foliageMesh(id, center, radius, profile, random) {
   });
 }
 
-function countBranches(meshes) { return meshes.filter((mesh) => /^branch-\d+$/.test(mesh.id)).length; }
-function foliageMeshes(meshes) { return meshes.filter((mesh) => mesh.id.includes("canopy") || mesh.id.startsWith("crown-")); }
+function mergeMeshParts(id, parts, material) {
+  if (!Array.isArray(parts) || parts.length === 0) throw new TypeError(`Cannot build ${id} without mesh parts.`);
+  const merged = { id, material, positions: [], indices: [] };
+  for (const part of parts) {
+    if (!part || !Array.isArray(part.positions) || !Array.isArray(part.indices)) throw new TypeError(`Invalid mesh part while building ${id}.`);
+    const vertexOffset = merged.positions.length / 3;
+    merged.positions.push(...part.positions);
+    merged.indices.push(...part.indices.map((index) => index + vertexOffset));
+  }
+  return merged;
+}
 
 export function generate(request = {}) {
   const seed = String(request.seed ?? "tree-default").trim();
@@ -77,7 +86,8 @@ export function generate(request = {}) {
   const profile = SHAPES[params.shape];
   const height = params.height * randomBetween(random, 0.985, 1.015);
   const trunkTop = height * 0.91;
-  const meshes = [createCylinderMesh("trunk", [0, 0, 0], [0, trunkTop, 0], params.trunkRadius, 14, "bark")];
+  const woodParts = [createCylinderMesh("trunk", [0, 0, 0], [0, trunkTop, 0], params.trunkRadius, 14, "bark")];
+  const foliageParts = [];
   const branchTips = [];
   const canopyCenters = [];
   const canopyBaseRadius = height * 0.175 * (0.92 + params.canopyDensity * 0.2);
@@ -90,7 +100,7 @@ export function generate(request = {}) {
     const lift = height * randomBetween(random, 0.055, 0.11);
     const tip = [Math.cos(angle) * reach, y + lift, Math.sin(angle) * reach];
     branchTips.push(tip);
-    meshes.push(createBeamMesh(`branch-${index + 1}`, [0, y, 0], tip, params.trunkRadius * randomBetween(random, 0.32, 0.46), params.trunkRadius * 0.30, "bark"));
+    woodParts.push(createBeamMesh(`branch-${index + 1}`, [0, y, 0], tip, params.trunkRadius * randomBetween(random, 0.32, 0.46), params.trunkRadius * 0.30, "bark"));
 
     const clusterCount = Math.max(2, Math.round(1.6 + params.canopyDensity * 1.45));
     for (let cluster = 0; cluster < clusterCount; cluster += 1) {
@@ -102,7 +112,7 @@ export function generate(request = {}) {
         tip[2] + randomBetween(random, -offsetScale, offsetScale)
       ];
       canopyCenters.push(center);
-      meshes.push(foliageMesh(`branch-${index + 1}-canopy-${cluster + 1}`, center, radius, profile, random));
+      foliageParts.push(foliageMesh(`branch-${index + 1}-canopy-${cluster + 1}`, center, radius, profile, random));
     }
   }
 
@@ -112,8 +122,13 @@ export function generate(request = {}) {
     const radial = height * randomBetween(random, 0.025, 0.075);
     const center = [Math.cos(angle) * radial, height * randomBetween(random, 0.75, 0.87), Math.sin(angle) * radial];
     canopyCenters.push(center);
-    meshes.push(foliageMesh(`crown-${index + 1}`, center, canopyBaseRadius * randomBetween(random, 1.02, 1.2), profile, random));
+    foliageParts.push(foliageMesh(`crown-${index + 1}`, center, canopyBaseRadius * randomBetween(random, 1.02, 1.2), profile, random));
   }
+
+  const meshes = [
+    mergeMeshParts("wood-structure", woodParts, "bark"),
+    mergeMeshParts("foliage-crown", foliageParts, "leaf")
+  ];
 
   return createArtifact({
     kitId: manifest.id,
@@ -122,25 +137,38 @@ export function generate(request = {}) {
     params,
     meshes,
     materials: palette(random),
-    metadata: { recognizableAs: "broadleaf tree", branchTips, canopyCenters, shape: params.shape }
+    metadata: {
+      recognizableAs: "broadleaf tree",
+      branchTips,
+      canopyCenters,
+      shape: params.shape,
+      branchCount: params.branchCount,
+      foliageClusterCount: foliageParts.length,
+      submeshes: ["wood-structure", "foliage-crown"]
+    }
   });
 }
 
 export function validate(artifact) {
   const shape = validateArtifactShape(artifact);
-  const branches = countBranches(artifact?.meshes ?? []);
-  const foliage = foliageMeshes(artifact?.meshes ?? []);
-  const ids = new Set((artifact?.meshes ?? []).map((mesh) => mesh.id));
-  const foliageBounds = meshBounds(foliage);
+  const meshes = artifact?.meshes ?? [];
+  const ids = new Set(meshes.map((mesh) => mesh.id));
+  const wood = meshes.find((mesh) => mesh.id === "wood-structure");
+  const foliage = meshes.find((mesh) => mesh.id === "foliage-crown");
+  const foliageBounds = meshBounds(foliage ? [foliage] : []);
   const treeHeight = artifact?.bounds?.size?.[1] ?? 0;
   const canopyWidth = Math.max(foliageBounds.size[0] ?? 0, foliageBounds.size[2] ?? 0);
   const canopyBottom = foliageBounds.min[1] ?? 0;
   const canopyTop = foliageBounds.max[1] ?? 0;
+  const branches = Number(artifact?.metadata?.branchCount ?? 0);
+  const foliageClusters = Number(artifact?.metadata?.foliageClusterCount ?? 0);
   const checks = [
     ...shape.checks,
-    { id: "identity:trunk", pass: ids.has("trunk"), detail: "grounded trunk" },
+    { id: "structure:two-submeshes", pass: meshes.length === 2 && ids.has("wood-structure") && ids.has("foliage-crown"), detail: `meshes=${meshes.map((mesh) => mesh.id).join(",")}` },
+    { id: "identity:wood", pass: Boolean(wood) && wood.material === "bark" && wood.positions.length > 0, detail: "merged trunk and branches" },
+    { id: "identity:canopy", pass: Boolean(foliage) && foliage.material === "leaf" && foliage.positions.length > 0, detail: "single merged foliage crown" },
     { id: "structure:branch-count", pass: branches >= 4 && branches <= 6, detail: `branches=${branches}` },
-    { id: "identity:canopy", pass: foliage.length >= branches * 2, detail: `foliage=${foliage.length}` },
+    { id: "structure:foliage-clusters", pass: foliageClusters >= branches * 2, detail: `sourceClusters=${foliageClusters}` },
     { id: "silhouette:canopy-width", pass: treeHeight > 0 && canopyWidth >= treeHeight * 0.32, detail: `width=${canopyWidth.toFixed(2)} height=${treeHeight.toFixed(2)}` },
     { id: "silhouette:canopy-zone", pass: treeHeight > 0 && canopyBottom >= treeHeight * 0.22 && canopyBottom <= treeHeight * 0.55 && canopyTop >= treeHeight * 0.76, detail: `bottom=${canopyBottom.toFixed(2)} top=${canopyTop.toFixed(2)}` },
     { id: "bounds:healthy", pass: (artifact?.bounds?.size ?? []).every((value) => Number.isFinite(value) && value > 0), detail: (artifact?.bounds?.size ?? []).map((value) => value.toFixed(2)).join("x") }
