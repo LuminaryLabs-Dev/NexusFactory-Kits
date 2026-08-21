@@ -1,0 +1,2 @@
+import { defineDomain } from "../../../../../domain.js";
+export const treeDomain=defineDomain({id:"factory-object-foliage-tree-domain",domainPath:"n:factory:object:foliage:tree",parentDomainPath:"n:factory:object:foliage",requires:["factory:object:foliage"],provides:["factory:object:foliage:tree"],owns:["tree family semantics","tree generation phases","tree structural state"],doesNotOwn:["viewport rendering","terrain placement","ecosystem simulation"],services:["tree-spec","tree-state","tree-orchestration"]});
