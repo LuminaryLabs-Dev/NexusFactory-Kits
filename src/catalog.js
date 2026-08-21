@@ -19,9 +19,9 @@ import { textureDomain } from "./domains/factory/texture/index.js";
 import { vfxDomain } from "./domains/factory/vfx/index.js";
 import { sceneDomain } from "./domains/factory/scene/index.js";
 import { animationDomain } from "./domains/factory/animation/index.js";
-import { manifest as ballistaManifest } from "./domains/factory/object/weapon/kits/ballista-kit/index.js";
+import { manifest as ballistaManifest } from "./domains/factory/object/weapon/kits/ballista-kit/runtime.js";
 import { manifest as treeManifest } from "./domains/factory/object/foliage/kits/tree-kit/index.js";
-import { manifest as coralManifest } from "./domains/factory/texture/kits/coral-kit/index.js";
+import { manifest as coralManifest } from "./domains/factory/texture/kits/coral-kit/runtime.js";
 
 export const domains = Object.freeze([
   factoryDomain, objectDomain, weaponDomain, foliageDomain,
