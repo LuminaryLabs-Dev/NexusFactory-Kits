@@ -1,95 +1,12 @@
 import test from "node:test";
 import assert from "node:assert/strict";
 import { kit } from "../src/domains/factory/object/foliage/kits/tree-kit/index.js";
+const base={seed:"storybook-007",params:{maturity:.65,gravityPull:.28,upwardGrowth:.72,branchSeparation:.60,branchSpread:.62,branchDensity:.58,leaderDominance:.48,foliageDensity:.72}};
 
-const base = { seed: "broadleaf-007", params: { shape: "rounded", height: 5.1, trunkRadius: 0.27, branchCount: 5, canopyDensity: 1 } };
-
-function crown(artifact) { return artifact.meshes.find((mesh) => mesh.id === "foliage-crown"); }
-
-test("tree generation is deterministic and seed-sensitive", () => {
-  const a = kit.services.generate(base);
-  const b = kit.services.generate(base);
-  assert.equal(a.deterministicHash, b.deterministicHash);
-  assert.notEqual(a.deterministicHash, kit.services.generate({ ...base, seed: "broadleaf-008" }).deterministicHash);
-  assert.equal(kit.services.validate(a).valid, true);
-});
-
-test("tree emits one welded crown and one wood submesh", () => {
-  const artifact = kit.services.generate(base);
-  assert.deepEqual(artifact.meshes.map((mesh) => mesh.id), ["wood-structure", "foliage-crown"]);
-  assert.equal(artifact.meshes.length, 2);
-  assert.equal(crown(artifact).material, "leaf");
-  assert.equal(artifact.metadata.crownTopology.type, "single-welded-radial-shell");
-  assert.equal(artifact.metadata.crownTopology.connectedComponents, 1);
-  assert.equal(artifact.metadata.crownTopology.boundaryEdges, 0);
-  assert.equal(artifact.metadata.crownTopology.nonManifoldEdges, 0);
-  assert.ok(artifact.metadata.crownTopology.vertexCount >= 50);
-  assert.ok(artifact.metadata.crownTopology.triangleCount >= 90);
-  assert.equal(artifact.meshes.some((mesh) => /canopy|crown-\d|branch-\d+-canopy/.test(mesh.id)), false);
-});
-
-test("crown stays in the upper tree and remains broad enough to read as a canopy", () => {
-  const artifact = kit.services.generate(base);
-  const foliage = crown(artifact);
-  const ys = [];
-  const xs = [];
-  const zs = [];
-  for (let index = 0; index < foliage.positions.length; index += 3) {
-    xs.push(foliage.positions[index]);
-    ys.push(foliage.positions[index + 1]);
-    zs.push(foliage.positions[index + 2]);
-  }
-  const canopyBottom = Math.min(...ys);
-  const canopyTop = Math.max(...ys);
-  const canopyWidth = Math.max(Math.max(...xs) - Math.min(...xs), Math.max(...zs) - Math.min(...zs));
-  const treeHeight = artifact.bounds.size[1];
-  assert.ok(canopyBottom / treeHeight >= 0.42 && canopyBottom / treeHeight <= 0.58);
-  assert.ok(canopyTop / treeHeight >= 0.94);
-  assert.ok(canopyWidth / treeHeight >= 0.45);
-});
-
-test("shape options change the connected crown without changing the asset contract", () => {
-  const rounded = kit.services.generate(base);
-  for (const shape of ["broad", "compact", "irregular"]) {
-    const variant = kit.services.generate({ ...base, params: { ...base.params, shape } });
-    assert.notEqual(rounded.deterministicHash, variant.deterministicHash);
-    assert.deepEqual(variant.meshes.map((mesh) => mesh.id), ["wood-structure", "foliage-crown"]);
-    assert.equal(variant.metadata.crownTopology.connectedComponents, 1);
-    assert.equal(kit.services.validate(variant).valid, true);
-  }
-});
-
-test("branch range stays sparse while the crown remains unified", () => {
-  for (const branchCount of [4, 6]) {
-    const artifact = kit.services.generate({ ...base, params: { ...base.params, branchCount } });
-    assert.equal(artifact.metadata.branchCount, branchCount);
-    assert.equal(artifact.metadata.crownTopology.connectedComponents, 1);
-    assert.equal(artifact.meshes.length, 2);
-    assert.equal(kit.services.validate(artifact).valid, true);
-  }
-});
-
-test("legal height and canopy density extremes remain valid", () => {
-  const extremes = [
-    { ...base.params, height: 3.8, canopyDensity: 0.7, branchCount: 4 },
-    { ...base.params, height: 7.5, canopyDensity: 1.25, branchCount: 6 }
-  ];
-  for (const params of extremes) {
-    const artifact = kit.services.generate({ ...base, params });
-    assert.equal(artifact.metadata.crownTopology.connectedComponents, 1);
-    assert.equal(kit.services.validate(artifact).valid, true);
-  }
-});
-
-test("unsupported foliage shapes are rejected", () => {
-  assert.throws(() => kit.services.generate({ ...base, params: { ...base.params, shape: "diamond" } }), /must be one of/);
-});
-
-test("tree GLB export remains valid and contains only the two logical tree meshes", () => {
-  const artifact = kit.services.generate(base);
-  const output = kit.services.export(artifact, "glb");
-  const view = new DataView(output.buffer, output.byteOffset, output.byteLength);
-  assert.equal(view.getUint32(0, true), 0x46546c67);
-  assert.equal(view.getUint32(4, true), 2);
-  assert.equal(artifact.meshes.length, 2);
-});
+test("tree generation is deterministic and seed-sensitive",()=>{const a=kit.services.generate(base),b=kit.services.generate(base),c=kit.services.generate({...base,seed:"storybook-008"});assert.equal(a.deterministicHash,b.deterministicHash);assert.notEqual(a.deterministicHash,c.deterministicHash);assert.equal(kit.services.validate(a).valid,true);});
+test("phase API is inspectable and preserves growth through bezier",()=>{let state=kit.services.createState(base);assert.deepEqual(state.completedPhases,["spec"]);state=kit.services.runPhase(state,"growth");const growth=structuredClone(state.outputs.growth);state=kit.services.runPhase(state,"bezier");assert.deepEqual(state.outputs.growth,growth);assert.equal(state.outputs.bezier.axes.length,growth.axes.length);const inspect=kit.services.inspectState(state);assert.deepEqual(inspect.completedPhases,["spec","growth","bezier"]);});
+test("wood and foliage are generated in Kits with normals",()=>{const artifact=kit.services.generate(base);assert.deepEqual(artifact.meshes.map(m=>m.id),["wood-structure","foliage-pods"]);for(const mesh of artifact.meshes){assert.equal(mesh.normals.length,mesh.positions.length);assert.ok(mesh.indices.length>0);}assert.ok(artifact.metadata.foliagePods.length>=3);assert.ok(artifact.metadata.foliagePods.every(p=>p.sourceAxisId));});
+test("partial foliage rerun preserves upstream state",()=>{let state=kit.services.createState(base);for(const phase of["growth","bezier","wood","foliage"])state=kit.services.runPhase(state,phase);const growth=structuredClone(state.outputs.growth),bezier=structuredClone(state.outputs.bezier),wood=structuredClone(state.outputs.wood);state=kit.services.runPhase(state,"foliage");assert.deepEqual(state.outputs.growth,growth);assert.deepEqual(state.outputs.bezier,bezier);assert.deepEqual(state.outputs.wood,wood);assert.equal(state.artifact,null);});
+test("range randomization and seed reroll are separate",()=>{const randomized=kit.services.randomize({...base,groupId:"growth",entropy:"fixed"});assert.equal(randomized.seed,base.seed);assert.notDeepEqual(randomized.params,base.params);const rerolled=kit.services.reroll({...base,entropy:"fixed"});assert.notEqual(rerolled.seed,base.seed);assert.deepEqual(rerolled.params,base.params);});
+test("export returns self-describing result and GLB includes normals",()=>{const artifact=kit.services.generate(base),result=kit.services.export(artifact,"glb");assert.equal(result.schemaVersion,"nexusfactory.export-result/1");assert.equal(result.mimeType,"model/gltf-binary");assert.ok(result.fileName.endsWith(".glb"));const view=new DataView(result.bytes.buffer,result.bytes.byteOffset,result.bytes.byteLength);assert.equal(view.getUint32(0,true),0x46546c67);const jsonLength=view.getUint32(12,true);const text=new TextDecoder().decode(result.bytes.slice(20,20+jsonLength)).trim();const gltf=JSON.parse(text);assert.ok(gltf.meshes.every(m=>m.primitives[0].attributes.NORMAL!==undefined));});
+test("phase prerequisites are enforced",()=>{const state=kit.services.createState(base);assert.throws(()=>kit.services.runPhase(state,"bezier"),/growth is required/);});
