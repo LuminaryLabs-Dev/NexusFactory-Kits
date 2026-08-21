@@ -1,6 +1,7 @@
 import { defineDomain } from "../../../../../../domain.js";
 import { createRandomStream } from "../../../../../../foundation/random.js";
 import { add, normalize, scale } from "../../../../../../foundation/geometry.js";
+export const TREE_GROWTH_SCHEMA="nexusfactory.tree-growth/1";
 export const treeGrowthDomain=defineDomain({id:"factory-object-foliage-tree-growth-domain",domainPath:"n:factory:object:foliage:tree:growth",parentDomainPath:"n:factory:object:foliage:tree",requires:["factory:object:foliage:tree"],provides:["tree:growth"],owns:["growth axes","leader competition abstraction","maturity posture","terminal regions"],doesNotOwn:["curve fitting","mesh construction","foliage geometry"],services:["tree-growth"]});
 function clamp(v,a,b){return Math.max(a,Math.min(b,v));}
 function pointAt(points,t){const i=clamp(Math.round(t*(points.length-1)),0,points.length-1);return points[i];}
@@ -18,5 +19,5 @@ export function generateTreeGrowth({seed,params}){
     for(let b=0;b<secondaryCount;b++){const attach=pointAt(points,.5+b*.16),baseDirection=normalize([outward[0]*(1.05+b*.18),.22+params.upwardGrowth*.25-params.gravityPull*.18,outward[2]*(1.05+b*.18)]),branchLength=axisLength*(.34+.12*params.branchDensity)*rng.range(.86,1.08),branchPoints=[[...attach]];let bp=[...attach],bd=baseDirection;for(let s=1;s<=3;s++){const st=s/3;bd=normalize([bd[0]+rng.range(-.08,.08),bd[1]+.04*params.upwardGrowth-.17*params.gravityPull*st,bd[2]+rng.range(-.08,.08)]);bp=add(bp,scale(bd,branchLength/3));branchPoints.push([...bp]);}axes.push({id:`branch-${i+1}-${b+1}`,kind:"branch",parentId:id,points:branchPoints,radiusStart:trunkRadius*.18,radiusEnd:trunkRadius*.035,importance:.35});}
   }
   const terminalRegions=[{axisId:"trunk",kind:"apical",weight:1.18},...axes.filter(a=>a.kind==="leader").map(a=>({axisId:a.id,kind:"leader",weight:1}))];
-  return {height,trunkRadius,axes,leaderCount:sideLeaderCount,branchCount:axes.filter(a=>a.kind==="branch").length,terminalRegions,hierarchy:axes.map(a=>({id:a.id,parentId:a.parentId,kind:a.kind})),provenance:{seed:String(seed),algorithm:"tree-growth-v1"}};
+  return {schemaVersion:TREE_GROWTH_SCHEMA,height,trunkRadius,axes,leaderCount:sideLeaderCount,branchCount:axes.filter(a=>a.kind==="branch").length,terminalRegions,hierarchy:axes.map(a=>({id:a.id,parentId:a.parentId,kind:a.kind})),provenance:{seed:String(seed),algorithm:"tree-growth-v1"}};
 }
