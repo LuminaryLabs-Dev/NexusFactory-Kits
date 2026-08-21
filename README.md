@@ -4,7 +4,7 @@ Registry-driven procedural generation domains and kits for NexusFactory.
 
 ## Architectural boundary
 
-**This repository owns factory-generation meaning and capability.** It contains domain/subdomain contracts, deterministic seed behavior, generator kits, validation, artifact descriptors, variation, and export. It does **not** own editor UI, viewport rendering, workspace UX, or cloud-routing UI; those belong to `NexusFactory-Studio`.
+**This repository owns factory-generation meaning and capability.** It contains domain/subdomain contracts, deterministic seed behavior, parameter/randomization policy, generation math, mesh/image construction, normals, validation, artifact descriptors, variation, and export. It does **not** own editor UI, viewport rendering, workspace UX, snapshots, or cloud-routing UI; those belong to `NexusFactory-Studio`.
 
 The hierarchy follows the Nexus Engine domain model:
 
@@ -14,7 +14,13 @@ n:factory
 │   ├── n:factory:object:weapon
 │   │   └── factory-object-weapon-ballista
 │   ├── n:factory:object:foliage
-│   │   └── factory-object-foliage-tree
+│   │   └── n:factory:object:foliage:tree
+│   │       ├── growth
+│   │       ├── curve
+│   │       │   └── bezier
+│   │       ├── wood
+│   │       ├── crown
+│   │       └── factory-object-foliage-tree
 │   ├── n:factory:object:prop
 │   ├── n:factory:object:structure
 │   └── n:factory:object:vehicle
@@ -29,27 +35,48 @@ n:factory
 └── n:factory:animation
 ```
 
-A **domain** owns vocabulary/rules, a **subdomain** specializes them, and a **kit** provides executable services. Kits declare `requires`, `provides`, a parameter schema, runtime environments, and an editor descriptor that a host can render without knowing generator-specific code.
+A **domain** owns vocabulary/rules, a **subdomain** specializes them, and a **kit** composes executable services. Kits declare `requires`, `provides`, a parameter schema, runtime environments, and an editor descriptor that a host can render without knowing generator-specific code.
 
-## Services
+## Runtime services
 
-Executable kits expose the same service boundary:
+All Studio-facing kits expose the standard service boundary:
 
 - `describe()`
 - `generate({ seed, params })`
+- `randomize({ seed, params, groupId })`
 - `reroll({ seed, params })`
 - `validate(artifact)`
-- `export(artifact, format)`
+- `export(artifact, format)` → `nexusfactory.export-result/1`
 
-Generation is deterministic: the same kit version, seed, and normalized parameters produce the same artifact hash.
+Kits that support inspectable generation may additionally expose:
 
-Artifacts may be mesh or image artifacts. Image kits use an RGBA8 image descriptor so browser, Node, worker, validation, export, and Studio preview can consume the same deterministic payload without a DOM dependency.
+- `createState({ seed, params })`
+- `inspectState(state)`
+- `runPhase(state, phase)`
+
+The current Tree pipeline declares:
+
+```text
+spec
+  → growth
+  → bezier
+  → wood
+  → foliage
+  → artifact
+  → validate
+```
+
+`generate()` remains the convenience path across all phases. Growth owns the structural intent; cubic Bézier interprets those axes without mutating growth; Wood converts curves into tapered meshes; Crown derives storybook/clay foliage pods from leader terminal regions.
+
+Generation is deterministic: the same kit version, seed, and normalized parameters produce the same artifact hash. Parameter randomization and seed reroll are separate Kit-owned operations.
+
+Mesh artifacts include Kit-generated normals. GLB export consumes those normals directly. Snapshot rendering is deliberately not part of the Kit contract.
 
 ## Included proof kits
 
 - **Windup Ballista Turret** — object-specific weapon geometry with a central launch rail, lateral torsion arms, winding drum, bowstring, bolt, ammunition rack, and wind/fire/reload tracks.
-- **Procedural Broadleaf Tree** — a separate foliage subdomain with seeded branching and canopy generation, proving the host architecture is not weapon-specific.
-- **Coral Generator** — one texture kit with two modes: isolated transparent coral assets and composed reef scenes. Seven real-species-inspired presets share reusable branching, frond, mound, column, plate, fan, rod, raster, shading, and seeded-noise foundations. PNG export uses nearest-neighbor scaling.
+- **Procedural Broadleaf Tree** — phased growth-driven broadleaf generation with cubic Bézier wood and leader-derived storybook/clay foliage pods.
+- **Coral Generator** — isolated transparent coral assets and composed reef scenes from shared morphology grammars, with deterministic PNG export.
 
 ## Validate
 
@@ -59,4 +86,4 @@ npm run demo
 npm run coral:render
 ```
 
-`npm run registry:build` materializes `registry.json`, which is the Studio-facing discovery surface. `npm run coral:render` writes a fixed-seed visual validation matrix under `validation/` for deterministic art review.
+`npm run registry:build` materializes `registry.json`, the Studio-facing discovery surface. `.github/workflows/validate-registry.yml` validates source changes and commits the regenerated registry only after the full validation command succeeds.
