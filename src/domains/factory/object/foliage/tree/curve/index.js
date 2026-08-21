@@ -1,0 +1,2 @@
+import { defineDomain } from "../../../../../../domain.js";
+export const treeCurveDomain=defineDomain({id:"factory-object-foliage-tree-curve-domain",domainPath:"n:factory:object:foliage:tree:curve",parentDomainPath:"n:factory:object:foliage:tree",requires:["factory:object:foliage:tree","tree:growth"],provides:["tree:curve"],owns:["structural curve interpretation"],doesNotOwn:["growth semantics","mesh construction"],services:["tree-curve"]});
