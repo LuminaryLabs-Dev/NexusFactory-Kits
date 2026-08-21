@@ -1,0 +1,1 @@
+export const storybookClayProfile=Object.freeze({id:"storybook-clay-v1",materials:{bark:{baseColor:[.38,.20,.08,1],metallic:0,roughness:.9,emissive:[0,0,0]},leaf:{baseColor:[.34,.64,.12,1],metallic:0,roughness:.86,emissive:[0,0,0]}},renderHints:{shading:"smooth",silhouette:"rounded-handcrafted",foliage:"leader-derived-pods"}});
