@@ -61,3 +61,5 @@ export const domains = Object.freeze([
   animationDomain
 ]);
 export const kits = Object.freeze([ballistaManifest, treeManifest, coralManifest, fishManifest, aquaticFloraManifest, reefManifest, aquariumManifest]);
+
+// main is the live NexusFactory-Kits registry channel.
