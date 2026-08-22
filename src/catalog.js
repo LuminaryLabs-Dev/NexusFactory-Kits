@@ -16,18 +16,48 @@ import { pbrMaterialDomain } from "./domains/factory/material/pbr/index.js";
 import { stylizedMaterialDomain } from "./domains/factory/material/stylized/index.js";
 import { proceduralMaterialDomain } from "./domains/factory/material/procedural/index.js";
 import { textureDomain } from "./domains/factory/texture/index.js";
+import { textureSubjectDomain } from "./domains/factory/texture/subject/index.js";
+import { coralDomain } from "./domains/factory/texture/subject/coral/index.js";
+import { fishDomain } from "./domains/factory/texture/subject/fish/index.js";
+import { aquaticFloraDomain } from "./domains/factory/texture/subject/aquatic-flora/index.js";
+import { textureEnvironmentDomain } from "./domains/factory/texture/environment/index.js";
+import { waterDomain } from "./domains/factory/texture/environment/water/index.js";
+import { substrateDomain } from "./domains/factory/texture/environment/substrate/index.js";
+import { rockDomain } from "./domains/factory/texture/environment/rock/index.js";
 import { vfxDomain } from "./domains/factory/vfx/index.js";
+import { aquaticVfxDomain } from "./domains/factory/vfx/aquatic/index.js";
+import { bubblesDomain } from "./domains/factory/vfx/aquatic/bubbles/index.js";
+import { particlesDomain } from "./domains/factory/vfx/aquatic/particles/index.js";
+import { lightShaftsDomain } from "./domains/factory/vfx/aquatic/light-shafts/index.js";
 import { sceneDomain } from "./domains/factory/scene/index.js";
+import { sceneLayerDomain } from "./domains/factory/scene/layer/index.js";
+import { layerStackDomain } from "./domains/factory/scene/layer/stack/index.js";
+import { layerPlacementDomain } from "./domains/factory/scene/layer/placement/index.js";
+import { sceneTerrainDomain } from "./domains/factory/scene/terrain/index.js";
+import { terrainProfileDomain } from "./domains/factory/scene/terrain/profile/index.js";
+import { aquaticSceneDomain } from "./domains/factory/scene/aquatic/index.js";
+import { aquaticPopulationDomain } from "./domains/factory/scene/aquatic/population/index.js";
+import { reefDomain } from "./domains/factory/scene/aquatic/reef/index.js";
+import { aquariumDomain } from "./domains/factory/scene/aquatic/aquarium/index.js";
 import { animationDomain } from "./domains/factory/animation/index.js";
 import { manifest as ballistaManifest } from "./domains/factory/object/weapon/kits/ballista-kit/runtime.js";
 import { manifest as treeManifest } from "./domains/factory/object/foliage/kits/tree-kit/index.js";
-import { manifest as coralManifest } from "./domains/factory/texture/kits/coral-kit/runtime.js";
+import { manifest as coralManifest } from "./domains/factory/texture/kits/coral-kit/index.js";
+import { manifest as fishManifest } from "./domains/factory/texture/kits/fish-kit/index.js";
+import { manifest as aquaticFloraManifest } from "./domains/factory/texture/kits/aquatic-flora-kit/index.js";
+import { manifest as reefManifest } from "./domains/factory/scene/kits/reef-kit/index.js";
+import { manifest as aquariumManifest } from "./domains/factory/scene/kits/aquarium-kit/index.js";
 
 export const domains = Object.freeze([
   factoryDomain, objectDomain, weaponDomain, foliageDomain,
   treeDomain, treeGrowthDomain, treeCurveDomain, treeBezierDomain, treeWoodDomain, treeCrownDomain,
   propDomain, structureDomain, vehicleDomain,
   materialDomain, pbrMaterialDomain, stylizedMaterialDomain, proceduralMaterialDomain,
-  textureDomain, vfxDomain, sceneDomain, animationDomain
+  textureDomain, textureSubjectDomain, coralDomain, fishDomain, aquaticFloraDomain,
+  textureEnvironmentDomain, waterDomain, substrateDomain, rockDomain,
+  vfxDomain, aquaticVfxDomain, bubblesDomain, particlesDomain, lightShaftsDomain,
+  sceneDomain, sceneLayerDomain, layerStackDomain, layerPlacementDomain, sceneTerrainDomain, terrainProfileDomain,
+  aquaticSceneDomain, aquaticPopulationDomain, reefDomain, aquariumDomain,
+  animationDomain
 ]);
-export const kits = Object.freeze([ballistaManifest, treeManifest, coralManifest]);
+export const kits = Object.freeze([ballistaManifest, treeManifest, coralManifest, fishManifest, aquaticFloraManifest, reefManifest, aquariumManifest]);

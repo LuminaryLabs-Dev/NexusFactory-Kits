@@ -1,0 +1,5 @@
+import { defineDomain } from "../../../../../domain.js";
+import { octaveNoise1D } from "../../../../../foundation/noise.js";
+export const TERRAIN_PROFILE_SCHEMA="nexusfactory.scene-terrain-profile/1";
+export const terrainProfileDomain=defineDomain({id:"factory-scene-terrain-profile-domain",domainPath:"n:factory:scene:terrain:profile",parentDomainPath:"n:factory:scene:terrain",requires:["factory:scene:terrain"],provides:["scene:terrain:profile"],owns:["height profile","noise contour","surface anchors","terrain bounds"],doesNotOwn:["substrate appearance","rock rendering","subject placement"],services:["terrain-profile"]});
+export function generateTerrainProfile({width,seed,baseY=103,lift=0,noiseScale=0.055,noiseAmplitude=4.2,waveScale=0.09,waveAmplitude=1.5}){const heights=[];for(let x=0;x<width;x++)heights.push(Math.round(baseY+lift+octaveNoise1D(seed,x*noiseScale,{octaves:4})*noiseAmplitude+Math.sin(x*waveScale)*waveAmplitude));return Object.freeze({schemaVersion:TERRAIN_PROFILE_SCHEMA,width,heights,minY:Math.min(...heights),maxY:Math.max(...heights),provenance:{seed:String(seed),algorithm:"terrain-profile-v1"}});}

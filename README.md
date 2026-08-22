@@ -4,79 +4,68 @@ Registry-driven procedural generation domains and kits for NexusFactory.
 
 ## Architectural boundary
 
-**This repository owns factory-generation meaning and capability.** It contains domain/subdomain contracts, deterministic seed behavior, parameter/randomization policy, generation math, mesh/image construction, normals, validation, artifact descriptors, variation, and export. It does **not** own editor UI, viewport rendering, workspace UX, snapshots, or cloud-routing UI; those belong to `NexusFactory-Studio`.
-
-The hierarchy follows the Nexus Engine domain model:
+**This repository owns factory-generation meaning and capability.** Domains own semantic responsibilities; specialist subdomains provide composable capabilities; public Kits turn those capabilities into independently useful generators. Studio owns hosting and UI, not generator-specific behavior.
 
 ```text
 n:factory
-├── n:factory:object
-│   ├── n:factory:object:weapon
-│   │   └── factory-object-weapon-ballista
-│   ├── n:factory:object:foliage
-│   │   └── n:factory:object:foliage:tree
-│   │       ├── growth
-│   │       ├── curve
-│   │       │   └── bezier
-│   │       ├── wood
-│   │       ├── crown
-│   │       └── factory-object-foliage-tree
-│   ├── n:factory:object:prop
-│   ├── n:factory:object:structure
-│   └── n:factory:object:vehicle
-├── n:factory:material
-│   ├── n:factory:material:pbr
-│   ├── n:factory:material:stylized
-│   └── n:factory:material:procedural
-├── n:factory:texture
-│   └── factory-texture-coral
-├── n:factory:vfx
-├── n:factory:scene
-└── n:factory:animation
+├── object
+│   ├── weapon → Ballista
+│   └── foliage
+│       └── tree
+│           ├── growth
+│           ├── curve → bezier
+│           ├── wood
+│           ├── crown
+│           └── Broadleaf Tree
+├── texture
+│   ├── subject
+│   │   ├── coral → Coral Generator
+│   │   ├── fish → Fish Generator
+│   │   └── aquatic-flora → Aquatic Flora Generator
+│   └── environment
+│       ├── water
+│       ├── substrate
+│       └── rock
+├── vfx
+│   └── aquatic
+│       ├── bubbles
+│       ├── particles
+│       └── light-shafts
+└── scene
+    ├── layer
+    │   ├── stack
+    │   └── placement
+    ├── terrain
+    │   └── profile
+    └── aquatic
+        ├── population
+        ├── reef → Reef Generator
+        └── aquarium → Aquarium Generator
 ```
 
-A **domain** owns vocabulary/rules, a **subdomain** specializes them, and a **kit** composes executable services. Kits declare `requires`, `provides`, a parameter schema, runtime environments, and an editor descriptor that a host can render without knowing generator-specific code.
+A Domain is a semantic owner, not a filesystem alias. Every immediate parent is registered and every Kit declares explicit `requires` / `provides` capabilities. Infrastructure subdomains are reusable services; they are not exposed as generators unless they are independently useful outputs.
 
 ## Runtime services
 
-All Studio-facing kits expose the standard service boundary:
+All Studio-facing Kits expose `describe`, `generate`, `randomize`, `reroll`, `validate`, and `export`. Phased Kits additionally expose `createState`, `inspectState`, and `runPhase`.
 
-- `describe()`
-- `generate({ seed, params })`
-- `randomize({ seed, params, groupId })`
-- `reroll({ seed, params })`
-- `validate(artifact)`
-- `export(artifact, format)` → `nexusfactory.export-result/1`
+Tree phases are `growth → bezier → wood → foliage → artifact → validate`.
 
-Kits that support inspectable generation may additionally expose:
+Reef and Aquarium phases are `terrain → environment → population → placement → subjects → effects → compose → artifact → validate`.
 
-- `createState({ seed, params })`
-- `inspectState(state)`
-- `runPhase(state, phase)`
+## Public generators
 
-The current Tree pipeline declares:
+- **Windup Ballista Turret** — deterministic weapon mesh + animation export.
+- **Procedural Broadleaf Tree** — phased tree generation.
+- **Coral Generator** — standalone transparent coral assets; seven coral species remain variants of one Kit.
+- **Fish Generator** — standalone transparent pixel-art fish assets.
+- **Aquatic Flora Generator** — standalone aquatic vegetation assets.
+- **Reef Generator** — natural open-water reef scenes assembled from shared aquatic capabilities.
+- **Aquarium Generator** — contained fish-tank scenes using the same shared capabilities with aquarium-specific composition.
 
-```text
-spec
-  → growth
-  → bezier
-  → wood
-  → foliage
-  → artifact
-  → validate
-```
+## Live registry
 
-`generate()` remains the convenience path across all phases. Growth owns the structural intent; cubic Bézier interprets those axes without mutating growth; Wood converts curves into tapered meshes; Crown derives storybook/clay foliage pods from leader terminal regions.
-
-Generation is deterministic: the same kit version, seed, and normalized parameters produce the same artifact hash. Parameter randomization and seed reroll are separate Kit-owned operations.
-
-Mesh artifacts include Kit-generated normals. GLB export consumes those normals directly. Snapshot rendering is deliberately not part of the Kit contract.
-
-## Included proof kits
-
-- **Windup Ballista Turret** — object-specific weapon geometry with a central launch rail, lateral torsion arms, winding drum, bowstring, bolt, ammunition rack, and wind/fire/reload tracks.
-- **Procedural Broadleaf Tree** — phased growth-driven broadleaf generation with cubic Bézier wood and leader-derived storybook/clay foliage pods.
-- **Coral Generator** — isolated transparent coral assets and composed reef scenes from shared morphology grammars, with deterministic PNG export.
+`main` is the live NexusFactory-Kits channel. `registry.json` is generated from source and consumed by Studio from `NexusFactory-Kits@main`. Fixes move `main` forward; consumers are not normally pinned backward to old commits.
 
 ## Validate
 
@@ -86,4 +75,4 @@ npm run demo
 npm run coral:render
 ```
 
-`npm run registry:build` materializes `registry.json`, the Studio-facing discovery surface. `.github/workflows/validate-registry.yml` validates source changes and commits the regenerated registry only after the full validation command succeeds.
+`npm run registry:build` materializes `registry.json`. The `Validate Kits and Registry` workflow runs full validation on `main` changes and commits a rebuilt registry only after validation succeeds.

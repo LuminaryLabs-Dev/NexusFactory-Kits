@@ -1,0 +1,3 @@
+import { defineDomain } from "../../../../../domain.js";
+export const layerStackDomain=defineDomain({id:"factory-scene-layer-stack-domain",domainPath:"n:factory:scene:layer:stack",parentDomainPath:"n:factory:scene:layer",requires:["factory:scene:layer"],provides:["scene:layer:stack"],owns:["layer order","layer opacity","layer depth descriptors"],doesNotOwn:["subject generation","placement sampling"],services:["layer-stack"]});
+export function createLayerStack({complexity,density,layers}){return layers.map(layer=>Object.freeze({...layer,count:Math.max(layer.minimum??1,Math.round(layer.baseCount*complexity*density))}));}

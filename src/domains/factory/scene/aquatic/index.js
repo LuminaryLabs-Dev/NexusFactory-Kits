@@ -1,0 +1,2 @@
+import { defineDomain } from "../../../../domain.js";
+export const aquaticSceneDomain=defineDomain({id:"factory-scene-aquatic-domain",domainPath:"n:factory:scene:aquatic",parentDomainPath:"n:factory:scene",requires:["factory:scene"],provides:["factory:scene:aquatic"],owns:["aquatic scene composition semantics"],doesNotOwn:["standalone subject generation","viewport rendering"],services:["aquatic-scene"]});

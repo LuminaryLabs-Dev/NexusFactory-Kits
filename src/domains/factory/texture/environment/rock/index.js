@@ -1,0 +1,4 @@
+import { defineDomain } from "../../../../../domain.js";
+import { fillRect } from "../../../../../foundation/raster/primitives.js";
+export const rockDomain=defineDomain({id:"factory-texture-environment-rock-domain",domainPath:"n:factory:texture:environment:rock",parentDomainPath:"n:factory:texture:environment",requires:["factory:texture:environment"],provides:["aquatic:rock"],owns:["rock silhouettes","rock clusters","rock palette variation"],doesNotOwn:["terrain profile","scene population"],services:["rock-render"]});
+export function drawRocks(surface,style,profile,rng,count=11){const rocks=rng.fork("rocks");for(let i=0;i<count;i++){const x=rocks.int(2,surface.width-10),y=profile.heights[x]-rocks.int(0,3),w=rocks.int(3,8),h=rocks.int(2,4);fillRect(surface,x,y,w,h,style.rock[0]);fillRect(surface,x+1,y,Math.max(1,w-2),1,style.rock[2]);}return surface;}

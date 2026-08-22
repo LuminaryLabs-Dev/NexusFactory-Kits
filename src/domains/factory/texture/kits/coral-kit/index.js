@@ -1,70 +1,19 @@
 import { defineKit } from "../../../../../domain.js";
-import { createImageArtifact, normalizeParameters, validateArtifactShape } from "../../../../../contracts.js";
-import { createRandomStream, deriveSeed } from "../../../../../foundation/random.js";
+import { createExportResult, createImageArtifact, normalizeParameters, randomizeParameters, validateArtifactShape } from "../../../../../contracts.js";
+import { createRandomStream, createSeededRandom, deriveSeed } from "../../../../../foundation/random.js";
 import { imageFromSurface, surfaceFromImage } from "../../../../../foundation/raster/surface.js";
 import { encodePngRgba } from "../../../../../foundation/raster/png.js";
 import { rasterMetrics, connectedComponentsAlpha } from "../../../../../foundation/raster/metrics.js";
-import { generateCoralAsset } from "./asset.js";
-import { generateReefScene } from "./reef.js";
-import { SPECIES, PALETTES, WATER_STYLES } from "./presets.js";
-
-export const KIT_ID = "factory-texture-coral";
-export const DOMAIN_PATH = "n:factory:texture";
-
-export const manifest = defineKit({
-  id:KIT_ID,
-  displayName:"Coral Generator",
-  version:"0.1.0",
-  domainPath:DOMAIN_PATH,
-  requires:["factory:texture","factory:seed","factory:artifact"],
-  provides:["factory:generate","factory:validate","factory:variation","factory:export","artifact:image","seed:deterministic","editor:parameters","export:png"],
-  services:["describe","generate","reroll","validate","export"],
-  parameterSchema:[
-    {id:"mode",label:"Mode",type:"select",options:["asset","reef"],default:"asset"},
-    {id:"species",label:"Species",type:"select",options:[...SPECIES.map((entry)=>entry.id),"mixed"],default:"staghorn"},
-    {id:"palette",label:"Coral Palette",type:"select",options:Object.keys(PALETTES),default:"pink"},
-    {id:"size",label:"Size",type:"number",minimum:0,maximum:1,default:0.55,step:0.01},
-    {id:"density",label:"Density",type:"number",minimum:0,maximum:1,default:0.58,step:0.01},
-    {id:"asymmetry",label:"Asymmetry",type:"number",minimum:0,maximum:1,default:0.28,step:0.01},
-    {id:"highlight",label:"Highlight",type:"number",minimum:0,maximum:1,default:0.55,step:0.01},
-    {id:"reefComplexity",label:"Reef Complexity",type:"number",minimum:0,maximum:1,default:0.62,step:0.01},
-    {id:"fishDensity",label:"Fish Density",type:"number",minimum:0,maximum:1,default:0.48,step:0.01},
-    {id:"waterStyle",label:"Water Style",type:"select",options:Object.keys(WATER_STYLES),default:"tropical"}
-  ],
-  editor:{
-    title:"Coral Generator",category:"Textures",tags:["coral","pixel-art","reef","procedural"],preview:"image-2d",inspector:"schema",surfaces:["seed","parameters","export","diagnostics"],
-    primary:["mode","species","palette","size","density","asymmetry"],advanced:["highlight","reefComplexity","fishDensity","waterStyle","seed"],internal:[],
-    randomizationGroups:[
-      {id:"everything",label:"Everything",parameters:["mode","species","palette","size","density","asymmetry","highlight","reefComplexity","fishDensity","waterStyle"],rerollSeed:true},
-      {id:"form",label:"Form",parameters:["species","size","density","asymmetry"],rerollSeed:false},
-      {id:"color",label:"Color",parameters:["palette","highlight","waterStyle"],rerollSeed:false},
-      {id:"scene",label:"Scene",parameters:["reefComplexity","fishDensity"],rerollSeed:false}
-    ]
-  },
-  runtime:{environments:["node","browser","worker"],permissions:[]},
-  source:{module:"src/domains/factory/texture/kits/coral-kit/index.js",exportName:"kit"},
-  metadata:{deterministic:true,artifactType:"image",identity:"pixel-art coral assets and composed reef scenes generated from shared morphology grammars",modes:["asset","reef"],species:SPECIES.map((entry)=>({id:entry.id,common:entry.common,scientific:entry.scientific,form:entry.form}))}
-});
-
-export function describe(){return manifest;}
-export function generate({seed=`${KIT_ID}:001`,params={}}={}){
-  const normalized=normalizeParameters(manifest.parameterSchema,params),rng=createRandomStream(seed);
-  const result=normalized.mode==="reef"?generateReefScene({rng:rng.fork("reef"),seed:String(seed),params:normalized}):generateCoralAsset({rng:rng.fork("asset"),seed:String(seed),params:normalized});
-  return createImageArtifact({kitId:KIT_ID,domainPath:DOMAIN_PATH,seed,params:normalized,image:imageFromSurface(result.surface),statistics:result.metrics,metadata:{mode:normalized.mode,resolvedSpecies:result.resolvedSpecies??(normalized.species==="mixed"?"mixed":normalized.species),generator:"coral-shared-morphology-v1"}});
-}
-export function reroll({seed=`${KIT_ID}:001`,params={}}={}){const nextSeed=deriveSeed(seed,"reroll");return {seed:nextSeed,artifact:generate({seed:nextSeed,params})};}
-export function validate(artifact){
-  const base=validateArtifactShape(artifact),checks=[...base.checks];const add=(id,pass,detail="")=>checks.push({id,pass:Boolean(pass),detail});
-  if(artifact?.artifactKind==="image"){
-    try{const surface=surfaceFromImage(artifact.image),metrics=rasterMetrics(surface),mode=artifact.params?.mode;add("image:payload-length",surface.pixels.length===surface.width*surface.height*4);add("image:dimensions",mode==="reef"?surface.width===128&&surface.height===128:surface.width===96&&surface.height===96,`${surface.width}x${surface.height}`);if(mode==="asset"){add("asset:transparent",artifact.image.transparent===true);add("asset:occupied",metrics.occupiedRatio>0.015&&metrics.occupiedRatio<0.55,metrics.occupiedRatio.toFixed(4));add("asset:connected",connectedComponentsAlpha(surface)<=6,String(connectedComponentsAlpha(surface)));}else{add("reef:opaque",artifact.image.transparent===false);add("reef:corals",Number(artifact.statistics?.coralCount)>0,String(artifact.statistics?.coralCount??0));}}
-    catch(error){add("image:decode",false,error.message);}
-  }
-  return {valid:checks.every((check)=>check.pass),checks};
-}
-export function exportArtifact(artifact,format="png"){
-  const validation=validate(artifact);if(!validation.valid)throw new TypeError(`Cannot export invalid coral artifact: ${validation.checks.filter((c)=>!c.pass).map((c)=>c.id).join(", ")}`);
-  if(format==="png")return encodePngRgba(surfaceFromImage(artifact.image),{scale:8});
-  if(format==="json")return JSON.stringify(artifact,null,2);
-  throw new RangeError(`Unsupported coral export format: ${format}`);
-}
-export const kit=Object.freeze({manifest,describe,generate,reroll,validate,export:exportArtifact});
+import { renderCoralMorphology, SPECIES, PALETTES } from "../../subject/coral/index.js";
+export const KIT_ID="factory-texture-coral",DOMAIN_PATH="n:factory:texture:subject:coral";
+export const parameterSchema=Object.freeze([
+{id:"species",label:"Species",type:"select",options:SPECIES.map(e=>e.id),default:"staghorn"},{id:"palette",label:"Coral Palette",type:"select",options:Object.keys(PALETTES),default:"pink"},{id:"size",label:"Size",type:"number",minimum:0,maximum:1,default:0.55,step:0.01},{id:"density",label:"Density",type:"number",minimum:0,maximum:1,default:0.58,step:0.01},{id:"asymmetry",label:"Asymmetry",type:"number",minimum:0,maximum:1,default:0.28,step:0.01},{id:"highlight",label:"Highlight",type:"number",minimum:0,maximum:1,default:0.55,step:0.01}
+]);
+export const manifest=defineKit({id:KIT_ID,displayName:"Coral Generator",version:"0.2.0",domainPath:DOMAIN_PATH,requires:["aquatic:coral","factory:seed","factory:artifact"],provides:["factory:generate","factory:validate","factory:variation","factory:export","artifact:image","seed:deterministic","editor:parameters","export:png","export:json"],services:["describe","generate","randomize","reroll","validate","export"],parameterSchema,editor:{title:"Coral Generator",category:"Textures",tags:["coral","pixel-art","procedural"],preview:"image-2d",inspector:"schema",surfaces:["seed","parameters","export","diagnostics"],primary:["species","palette","size","density","asymmetry"],advanced:["highlight","seed"],internal:[],randomizationGroups:[{id:"everything",label:"Everything",parameters:["species","palette","size","density","asymmetry","highlight"],rerollSeed:true},{id:"form",label:"Form",parameters:["species","size","density","asymmetry"],rerollSeed:false},{id:"color",label:"Color",parameters:["palette","highlight"],rerollSeed:false}]},runtime:{environments:["node","browser","worker"],permissions:[]},source:{module:"src/domains/factory/texture/kits/coral-kit/index.js",exportName:"kit"},metadata:{deterministic:true,artifactType:"image",identity:"standalone pixel-art coral generated from shared coral morphology",species:SPECIES.map(({id,common,scientific,form})=>({id,common,scientific,form})),serviceContract:"standard-runtime-v1"}});
+function entropy(){if(globalThis.crypto?.getRandomValues){const a=new Uint32Array(2);globalThis.crypto.getRandomValues(a);return`${a[0]}:${a[1]}`;}return`${Date.now()}:${Math.random()}`;}
+export function generate({seed=`${KIT_ID}:001`,params={}}={}){const normalized=normalizeParameters(parameterSchema,params),rng=createRandomStream(seed),palette=PALETTES[normalized.palette]??PALETTES.gold,result=renderCoralMorphology({rng:rng.fork("asset").fork("morphology"),width:96,height:96,speciesId:normalized.species,size:normalized.size,density:normalized.density,asymmetry:normalized.asymmetry,palette,highlight:normalized.highlight,seed:String(seed),withBase:true}),metrics=rasterMetrics(result.surface);return createImageArtifact({kitId:KIT_ID,domainPath:DOMAIN_PATH,seed,params:normalized,image:imageFromSurface(result.surface),statistics:{...metrics,connectedComponents:connectedComponentsAlpha(result.surface)},metadata:{resolvedSpecies:normalized.species,generator:"coral-morphology-v2"}});}
+export function validate(artifact){const base=validateArtifactShape(artifact),checks=[...base.checks],add=(id,pass,detail="")=>checks.push({id,pass:Boolean(pass),detail});try{const s=surfaceFromImage(artifact.image),m=rasterMetrics(s);add("image:dimensions",s.width===96&&s.height===96,`${s.width}x${s.height}`);add("asset:transparent",artifact.image.transparent===true);add("asset:occupied",m.occupiedRatio>0.015&&m.occupiedRatio<0.55,m.occupiedRatio.toFixed(4));add("asset:connected",connectedComponentsAlpha(s)<=6,String(connectedComponentsAlpha(s)));}catch(error){add("image:decode",false,error.message);}return{schemaVersion:"nexusfactory.validation-report/1",valid:checks.every(c=>c.pass),checks,deterministicHash:artifact?.deterministicHash??null};}
+export function randomize(request={}){const seed=String(request.seed??`${KIT_ID}:001`),groupId=String(request.groupId??"everything"),group=manifest.editor.randomizationGroups.find(g=>g.id===groupId);if(!group)throw new RangeError(`Unknown randomization group: ${groupId}`);const token=request.entropy??entropy(),random=createSeededRandom(deriveSeed(seed,`range:${groupId}:${token}`)),params=randomizeParameters({schema:parameterSchema,input:request.params,parameterIds:group.parameters,random}),nextSeed=group.rerollSeed?deriveSeed(seed,`reroll:${token}`):seed;return{seed:nextSeed,params,artifact:generate({seed:nextSeed,params})};}
+export function reroll(request={}){const seed=String(request.seed??`${KIT_ID}:001`),token=request.entropy??entropy(),nextSeed=deriveSeed(seed,`individual:${token}`),params=normalizeParameters(parameterSchema,request.params);return{seed:nextSeed,params,artifact:generate({seed:nextSeed,params})};}
+export function exportArtifact(artifact,format="png"){const result=validate(artifact);if(!result.valid)throw new TypeError("Cannot export invalid coral artifact.");const suffix=artifact.deterministicHash.slice(-8);if(format==="png")return createExportResult({format,mimeType:"image/png",fileName:`coral-${suffix}.png`,bytes:encodePngRgba(surfaceFromImage(artifact.image),{scale:8})});if(format==="json")return createExportResult({format,mimeType:"application/json",fileName:`coral-${suffix}.json`,text:JSON.stringify(artifact,null,2)});throw new RangeError(`Unsupported coral export format: ${format}`);}
+export const kit=Object.freeze({manifest,services:Object.freeze({describe:()=>structuredClone(manifest),generate,randomize,reroll,validate,export:exportArtifact})});export default kit;

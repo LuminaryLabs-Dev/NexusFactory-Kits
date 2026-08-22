@@ -1,0 +1,3 @@
+import { defineDomain } from "../../../../../domain.js";
+export const particlesDomain=defineDomain({id:"factory-vfx-aquatic-particles-domain",domainPath:"n:factory:vfx:aquatic:particles",parentDomainPath:"n:factory:vfx:aquatic",requires:["factory:vfx:aquatic"],provides:["aquatic:particles"],owns:["suspended underwater particle placement"],doesNotOwn:["bubbles","water coloration"],services:["aquatic-particles"]});
+export function drawAquaticParticles(surface,style,rng,count=65){const particles=rng.fork("particles");for(let i=0;i<count;i++){const x=particles.int(0,surface.width-1),y=particles.int(6,Math.min(94,surface.height-1));surface.setPixel(x,y,particles.chance(0.5)?style.water[2]:style.water[3]);}return surface;}

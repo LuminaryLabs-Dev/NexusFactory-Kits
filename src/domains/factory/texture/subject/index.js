@@ -1,0 +1,2 @@
+import { defineDomain } from "../../../../domain.js";
+export const textureSubjectDomain=defineDomain({id:"factory-texture-subject-domain",domainPath:"n:factory:texture:subject",parentDomainPath:"n:factory:texture",requires:["factory:texture"],provides:["factory:texture:subject"],owns:["standalone raster subject generation semantics"],doesNotOwn:["scene composition","environment backgrounds","viewport rendering"],services:["subject-generation"]});

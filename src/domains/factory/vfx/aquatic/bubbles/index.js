@@ -1,0 +1,3 @@
+import { defineDomain } from "../../../../../domain.js";
+export const bubblesDomain=defineDomain({id:"factory-vfx-aquatic-bubbles-domain",domainPath:"n:factory:vfx:aquatic:bubbles",parentDomainPath:"n:factory:vfx:aquatic",requires:["factory:vfx:aquatic"],provides:["aquatic:bubbles"],owns:["bubble placement and rasterization"],doesNotOwn:["particles","water coloration","scene population"],services:["aquatic-bubbles"]});
+export function drawBubbles(surface,rng,count){const r=rng.fork("bubbles");for(let i=0;i<count;i++){const x=r.int(5,surface.width-6),y=r.int(8,Math.min(86,surface.height-1)),rr=r.int(1,2),c="#d9f7f5";surface.setPixel(x-rr,y,c);surface.setPixel(x+rr,y,c);surface.setPixel(x,y-rr,c);surface.setPixel(x,y+rr,c);}return surface;}

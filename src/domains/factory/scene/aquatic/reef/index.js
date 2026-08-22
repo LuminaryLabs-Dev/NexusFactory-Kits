@@ -1,0 +1,3 @@
+import { defineDomain } from "../../../../../domain.js";
+export const reefDomain=defineDomain({id:"factory-scene-aquatic-reef-domain",domainPath:"n:factory:scene:aquatic:reef",parentDomainPath:"n:factory:scene:aquatic",requires:["factory:scene:aquatic"],provides:["factory:scene:aquatic:reef"],owns:["natural reef composition","open-water layout","organic reef density"],doesNotOwn:["standalone subjects","aquarium framing","viewport rendering"],services:["reef-composition"]});
+export const REEF_LAYER_DESCRIPTORS=Object.freeze([{id:"back",depth:0.2,baseCount:3,minimum:2,scale:[0.34,0.5],opacity:0.5},{id:"mid",depth:0.55,baseCount:4,minimum:3,scale:[0.5,0.7],opacity:0.78},{id:"front",depth:0.9,baseCount:4,minimum:3,scale:[0.66,0.94],opacity:1}]);

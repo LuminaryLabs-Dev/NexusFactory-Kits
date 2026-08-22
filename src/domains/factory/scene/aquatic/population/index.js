@@ -1,0 +1,4 @@
+import { defineDomain } from "../../../../../domain.js";
+export const AQUATIC_POPULATION_SCHEMA="nexusfactory.aquatic-population/1";
+export const aquaticPopulationDomain=defineDomain({id:"factory-scene-aquatic-population-domain",domainPath:"n:factory:scene:aquatic:population",parentDomainPath:"n:factory:scene:aquatic",requires:["factory:scene:aquatic"],provides:["scene:aquatic:population"],owns:["coral count","fish count","flora count","population density policy"],doesNotOwn:["subject rasterization","placement anchors"],services:["aquatic-population"]});
+export function planAquaticPopulation({reefComplexity,density,fishDensity,floraDensity=0.5}){const complexity=0.55+reefComplexity*0.9,densityFactor=0.6+density*0.75;return Object.freeze({schemaVersion:AQUATIC_POPULATION_SCHEMA,complexity,densityFactor,fishCount:Math.round(3+fishDensity*13),floraCount:Math.round(8+floraDensity*12),bubbleCount:Math.round(3+reefComplexity*10)});}
