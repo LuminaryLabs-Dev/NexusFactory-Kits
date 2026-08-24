@@ -25,16 +25,72 @@ export function normalizeParameter(value, descriptor) {
 export function normalizeParameters(schema, input = {}) { return Object.fromEntries(schema.map((descriptor) => [descriptor.id, normalizeParameter(input[descriptor.id], descriptor)])); }
 export function normalizeEditorDescriptor(editor = {}) { return Object.freeze({ preview:editor.preview??"none", inspector:editor.inspector??"schema", surfaces:Object.freeze([...(editor.surfaces??[])]) }); }
 
+function copyNumberArray(value) { return Array.isArray(value) || ArrayBuffer.isView(value) ? Array.from(value, Number) : []; }
+function clonePlain(value) { return value == null ? value : structuredClone(value); }
 function normalizeMesh(source) {
-  const mesh = { ...source, positions: [...(source.positions ?? [])], indices: [...(source.indices ?? [])] };
-  mesh.normals = Array.isArray(source.normals) && source.normals.length === mesh.positions.length ? [...source.normals] : computeMeshNormals(mesh);
+  const mesh = {
+    ...source,
+    id: String(source.id ?? source.name ?? "mesh"),
+    positions: copyNumberArray(source.positions),
+    indices: copyNumberArray(source.indices),
+  };
+  mesh.normals = copyNumberArray(source.normals).length === mesh.positions.length ? copyNumberArray(source.normals) : computeMeshNormals(mesh);
+  for (const field of ["uvs", "tangents", "colors"]) if (source[field] != null) mesh[field] = copyNumberArray(source[field]);
+  if (source.material != null) mesh.material = String(source.material);
+  if (source.transparent != null) mesh.transparent = source.transparent === true;
+  if (source.doubleSided != null) mesh.doubleSided = source.doubleSided === true;
+  if (source.extras != null) mesh.extras = clonePlain(source.extras);
   return Object.freeze(mesh);
 }
+function normalizeTexture(source, id) {
+  if (!source || !Number.isInteger(source.width) || source.width <= 0 || !Number.isInteger(source.height) || source.height <= 0) throw new TypeError(`Texture ${id} requires positive integer dimensions.`);
+  if (source.pixelFormat !== "rgba8" || typeof source.rgbaBase64 !== "string") throw new TypeError(`Texture ${id} requires rgba8 base64 data.`);
+  return Object.freeze({
+    width: source.width,
+    height: source.height,
+    channels: 4,
+    pixelFormat: "rgba8",
+    rgbaBase64: source.rgbaBase64,
+    colorSpace: source.colorSpace ?? "linear",
+    sampling: source.sampling ?? "linear",
+    wrapS: source.wrapS ?? "repeat",
+    wrapT: source.wrapT ?? "repeat",
+    contentHash: source.contentHash ?? sha256(source.rgbaBase64),
+  });
+}
+function normalizeMaterials(materials = {}) { return Object.freeze(Object.fromEntries(Object.entries(materials).map(([id, material]) => [id, Object.freeze(clonePlain(material))]))); }
+function normalizeTextures(textures = {}) { return Object.freeze(Object.fromEntries(Object.entries(textures).map(([id, texture]) => [id, normalizeTexture(texture, id)]))); }
 
-export function createArtifact({ kitId, domainPath, seed, params, meshes, materials, timeline = [], metadata = {} }) {
+export function createArtifact({ kitId, domainPath, seed, params, meshes, materials = {}, textures = {}, timeline = [], metadata = {} }) {
   const normalizedMeshes = (meshes ?? []).map(normalizeMesh);
+  const normalizedMaterials = normalizeMaterials(materials);
+  const normalizedTextures = normalizeTextures(textures);
   const bounds = meshBounds(normalizedMeshes);
-  const base = { schemaVersion:ARTIFACT_SCHEMA, kitId, domainPath, seed:String(seed), params, meshes:normalizedMeshes, materials, timeline, bounds, statistics:{ meshCount:normalizedMeshes.length, triangleCount:triangleCount(normalizedMeshes), animationTrackCount:timeline.length }, metadata };
+  const vertexCount = normalizedMeshes.reduce((sum, mesh) => sum + mesh.positions.length / 3, 0);
+  const textureBytes = Object.values(normalizedTextures).reduce((sum, texture) => sum + texture.width * texture.height * 4, 0);
+  const base = {
+    schemaVersion:ARTIFACT_SCHEMA,
+    kitId,
+    domainPath,
+    seed:String(seed),
+    params:clonePlain(params),
+    meshes:normalizedMeshes,
+    materials:normalizedMaterials,
+    ...(Object.keys(normalizedTextures).length ? { textures:normalizedTextures } : {}),
+    timeline:clonePlain(timeline),
+    bounds,
+    statistics:{
+      meshCount:normalizedMeshes.length,
+      vertexCount,
+      triangleCount:triangleCount(normalizedMeshes),
+      materialCount:Object.keys(normalizedMaterials).length,
+      textureCount:Object.keys(normalizedTextures).length,
+      textureBytes,
+      transparentMeshCount:normalizedMeshes.filter((mesh)=>mesh.transparent).length,
+      animationTrackCount:timeline.length,
+    },
+    metadata:clonePlain(metadata),
+  };
   return Object.freeze({ ...base, deterministicHash: sha256(base) });
 }
 
@@ -96,11 +152,20 @@ export function validateArtifactShape(artifact) {
   } else {
     add("meshes",Array.isArray(artifact?.meshes)&&artifact.meshes.length>0);
     if(Array.isArray(artifact?.meshes)) for(const mesh of artifact.meshes){
+      const vertices=(mesh.positions?.length??0)/3;
       add(`mesh:${mesh.id}:positions`,Array.isArray(mesh.positions)&&mesh.positions.length%3===0);
       add(`mesh:${mesh.id}:indices`,Array.isArray(mesh.indices)&&mesh.indices.length%3===0);
       add(`mesh:${mesh.id}:finite`,(mesh.positions??[]).every(Number.isFinite));
       add(`mesh:${mesh.id}:normals`,Array.isArray(mesh.normals)&&mesh.normals.length===mesh.positions.length);
       add(`mesh:${mesh.id}:normal-finite`,(mesh.normals??[]).every(Number.isFinite));
+      if(mesh.uvs!=null)add(`mesh:${mesh.id}:uvs`,Array.isArray(mesh.uvs)&&mesh.uvs.length===vertices*2&&(mesh.uvs??[]).every(Number.isFinite));
+      if(mesh.tangents!=null)add(`mesh:${mesh.id}:tangents`,Array.isArray(mesh.tangents)&&mesh.tangents.length===vertices*4&&(mesh.tangents??[]).every(Number.isFinite));
+      if(mesh.colors?.length)add(`mesh:${mesh.id}:colors`,[vertices*3,vertices*4].includes(mesh.colors.length)&&(mesh.colors??[]).every(Number.isFinite));
+    }
+    for(const [id,texture] of Object.entries(artifact?.textures??{})){
+      add(`texture:${id}:dimensions`,Number.isInteger(texture.width)&&texture.width>0&&Number.isInteger(texture.height)&&texture.height>0);
+      add(`texture:${id}:format`,texture.pixelFormat==="rgba8"&&texture.channels===4);
+      add(`texture:${id}:data`,typeof texture.rgbaBase64==="string"&&texture.rgbaBase64.length>0);
     }
   }
   return { valid:checks.every((check)=>check.pass), checks };

@@ -12,7 +12,12 @@
     "test": "node --test tests/*.test.mjs",
     "validate": "npm run registry:build && npm test",
     "demo": "node scripts/demo.mjs",
-    "coral:render": "node scripts/render-coral-validation.mjs"
+    "coral:render": "node scripts/render-coral-validation.mjs",
+    "fish:generate": "node tools/fish/generate.mjs",
+    "fish:validate": "node tools/fish/validate.mjs",
+    "fish:inspect": "node tools/fish/inspect-glb.mjs",
+    "fish:batch": "node tools/fish/batch-generate.mjs",
+    "fish:review": "node tools/fish/run-review-pipeline.mjs"
   },
   "engines": {
     "node": ">=20"

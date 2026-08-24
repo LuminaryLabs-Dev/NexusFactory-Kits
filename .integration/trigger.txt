@@ -1,2 +1,0 @@
-Trigger the validated Procedural Reef Fish integration workflow.
-Bootstrap commit: 19b7fa5d1a386c54c5ae4ddc7abf805b95598418

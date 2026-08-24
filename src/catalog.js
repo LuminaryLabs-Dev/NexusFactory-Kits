@@ -8,6 +8,9 @@ import { treeCurveDomain } from "./domains/factory/object/foliage/tree/curve/ind
 import { treeBezierDomain } from "./domains/factory/object/foliage/tree/curve/bezier/index.js";
 import { treeWoodDomain } from "./domains/factory/object/foliage/tree/wood/index.js";
 import { treeCrownDomain } from "./domains/factory/object/foliage/tree/crown/index.js";
+import { creatureDomain } from "./domains/factory/object/creature/index.js";
+import { aquaticCreatureDomain } from "./domains/factory/object/creature/aquatic/index.js";
+import { fishObjectDomain } from "./domains/factory/object/creature/aquatic/fish/index.js";
 import { propDomain } from "./domains/factory/object/prop/index.js";
 import { structureDomain } from "./domains/factory/object/structure/index.js";
 import { vehicleDomain } from "./domains/factory/object/vehicle/index.js";
@@ -42,6 +45,7 @@ import { aquariumDomain } from "./domains/factory/scene/aquatic/aquarium/index.j
 import { animationDomain } from "./domains/factory/animation/index.js";
 import { manifest as ballistaManifest } from "./domains/factory/object/weapon/kits/ballista-kit/runtime.js";
 import { manifest as treeManifest } from "./domains/factory/object/foliage/kits/tree-kit/index.js";
+import { manifest as fishObjectManifest } from "./domains/factory/object/creature/aquatic/kits/fish-kit/index.js";
 import { manifest as coralManifest } from "./domains/factory/texture/kits/coral-kit/index.js";
 import { manifest as fishManifest } from "./domains/factory/texture/kits/fish-kit/index.js";
 import { manifest as aquaticFloraManifest } from "./domains/factory/texture/kits/aquatic-flora-kit/index.js";
@@ -51,6 +55,7 @@ import { manifest as aquariumManifest } from "./domains/factory/scene/kits/aquar
 export const domains = Object.freeze([
   factoryDomain, objectDomain, weaponDomain, foliageDomain,
   treeDomain, treeGrowthDomain, treeCurveDomain, treeBezierDomain, treeWoodDomain, treeCrownDomain,
+  creatureDomain, aquaticCreatureDomain, fishObjectDomain,
   propDomain, structureDomain, vehicleDomain,
   materialDomain, pbrMaterialDomain, stylizedMaterialDomain, proceduralMaterialDomain,
   textureDomain, textureSubjectDomain, coralDomain, fishDomain, aquaticFloraDomain,
@@ -60,6 +65,6 @@ export const domains = Object.freeze([
   aquaticSceneDomain, aquaticPopulationDomain, reefDomain, aquariumDomain,
   animationDomain
 ]);
-export const kits = Object.freeze([ballistaManifest, treeManifest, coralManifest, fishManifest, aquaticFloraManifest, reefManifest, aquariumManifest]);
+export const kits = Object.freeze([ballistaManifest, treeManifest, fishObjectManifest, coralManifest, fishManifest, aquaticFloraManifest, reefManifest, aquariumManifest]);
 
 // main is the live NexusFactory-Kits registry channel.

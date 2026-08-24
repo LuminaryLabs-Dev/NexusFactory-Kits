@@ -11,6 +11,9 @@ export { foliageDomain } from "./domains/factory/object/foliage/index.js";
 export { propDomain } from "./domains/factory/object/prop/index.js";
 export { structureDomain } from "./domains/factory/object/structure/index.js";
 export { vehicleDomain } from "./domains/factory/object/vehicle/index.js";
+export { creatureDomain } from "./domains/factory/object/creature/index.js";
+export { aquaticCreatureDomain } from "./domains/factory/object/creature/aquatic/index.js";
+export { fishObjectDomain } from "./domains/factory/object/creature/aquatic/fish/index.js";
 export { materialDomain } from "./domains/factory/material/index.js";
 export { pbrMaterialDomain } from "./domains/factory/material/pbr/index.js";
 export { stylizedMaterialDomain } from "./domains/factory/material/stylized/index.js";
@@ -42,6 +45,7 @@ export { aquariumDomain } from "./domains/factory/scene/aquatic/aquarium/index.j
 export { animationDomain } from "./domains/factory/animation/index.js";
 export { kit as ballistaKit, manifest as ballistaManifest } from "./domains/factory/object/weapon/kits/ballista-kit/index.js";
 export { kit as treeKit, manifest as treeManifest } from "./domains/factory/object/foliage/kits/tree-kit/index.js";
+export { kit as creatureFishKit, kit as fishObjectKit, manifest as creatureFishManifest, manifest as fishObjectManifest } from "./domains/factory/object/creature/aquatic/kits/fish-kit/index.js";
 export { kit as coralKit, manifest as coralManifest } from "./domains/factory/texture/kits/coral-kit/index.js";
 export { kit as fishKit, manifest as fishManifest } from "./domains/factory/texture/kits/fish-kit/index.js";
 export { kit as aquaticFloraKit, manifest as aquaticFloraManifest } from "./domains/factory/texture/kits/aquatic-flora-kit/index.js";

@@ -1,108 +1,127 @@
 # Kit Contract
 
-This document describes the implemented contracts at the audited baseline. Manifests declare intended services and environments; the callable module remains the final evidence for actual behavior.
-
 ## Terms
 
 - **Domain:** semantic owner of capabilities and responsibilities.
-- **Capability:** a string token in `requires` or `provides`.
 - **Kit:** independently callable generator with a manifest and services.
-- **Runtime:** the module and service object loaded by a consumer.
 - **Artifact:** immutable generated mesh or image data.
-- **Generation state:** inspectable phased-work state for Tree, Reef, and Aquarium.
-- **Validation report:** evidence-backed checks for an artifact.
-- **Export result:** self-describing file output with format, MIME type, filename, and bytes or text.
+- **Generation state:** inspectable phased-work state.
+- **Validation report:** individual evidence-backed checks plus aggregate validity.
+- **Export result:** self-describing file output containing MIME type, filename, and bytes or text.
 
 ## Manifest
 
-`defineKit()` returns a frozen manifest containing:
+`defineKit()` produces a frozen manifest containing:
 
 ```text
 kind, id, displayName, version, domainPath
 requires[], provides[], services[]
 parameterSchema[]
-editor { preview, controls, randomizationGroups, surfaces }
+editor {
+  preview, inspector, surfaces,
+  primary, advanced, internal,
+  sections[], generation,
+  randomizationGroups[]
+}
 runtime { environments[], permissions[] }
 source { module, exportName }
 metadata
 contentFingerprint
 ```
 
-Numeric parameters are converted, checked for finiteness, clamped to minimum/maximum, and rounded when integer. Choice parameters must match a declared option or throw `RangeError`.
-
-`contentFingerprint` hashes the normalized manifest. It does not hash the kit's source files.
+Numeric parameters are finite, clamped, and rounded when integer. Choice parameters must match a declared option.
 
 ## Services
 
-| Service | Implemented outcome |
+| Service | Outcome |
 | --- | --- |
-| `describe()` | Structured clone of the manifest |
+| `describe()` | Clone of the manifest |
 | `generate({ seed, params })` | Deterministic artifact for normalized inputs |
-| `randomize({ seed, params, groupId, entropy })` | Varies parameters in one declared group; may also reroll the seed when the group requests it |
-| `reroll({ seed, params, entropy })` | Derives a new seed while preserving normalized parameters |
-| `validate(artifact)` | Validation report with `valid`, individual checks, and artifact hash |
-| `export(artifact, format)` | Kit-owned GLB, PNG, or JSON representation |
-| `createState(request)` | Initial typed state for phased kits |
-| `inspectState(state)` | Clone-safe summary of completed phases and available outputs |
-| `runPhase(state, phase)` | Runs one phase, enforces prerequisites, and invalidates downstream state |
+| `randomize(...)` | Varies one declared parameter group and may reroll the seed |
+| `reroll(...)` | Derives a new individual seed while preserving parameters |
+| `validate(artifact)` | Validation report |
+| `export(artifact, format)` | GLB, PNG, or JSON export result |
+| `createState(request)` | Initial phased state |
+| `inspectState(state)` | Clone-safe phase summary |
+| `runPhase(state, phase)` | Executes one phase and invalidates stale downstream outputs |
 
-Tree, Coral, Fish, Aquatic Flora, Reef, and Aquarium expose the standard service shape directly. Ballista has the exception described below.
+## Artifact schema
 
-## Artifact schemas
+All artifacts retain schema `nexusfactory.artifact/1` and identify Kit, domain, seed, normalized parameters, metadata, and deterministic hash.
 
-All artifacts use `nexusfactory.artifact/1`, include `kitId`, `domainPath`, string seed, normalized parameters, metadata, and `deterministicHash`.
+### Mesh fields
 
-Mesh artifacts add:
+Required:
 
-- normalized meshes with positions, indices, and computed or provided normals;
-- materials and optional timeline tracks;
-- bounds;
-- mesh, triangle, and timeline-track statistics.
+```text
+id, positions, normals, indices, material
+```
 
-Image artifacts add:
+Optional:
 
-- `artifactKind: "image"`;
-- width, height, four channels, `rgba8`, base64 pixels, transparency, and sampling;
-- pixel count and kit-specific statistics.
+```text
+uvs, tangents, colors, transparent, doubleSided, extras
+```
 
-Artifacts do not carry a dedicated kit version, registry integrity, source commit, or implementation fingerprint.
+### Texture fields
 
-## Generation state
+```text
+width, height, channels, pixelFormat, rgbaBase64
+colorSpace, sampling, wrapS, wrapT, contentHash
+```
 
-Phased states use `nexusfactory.generation-state/1` and contain kit identity, seed, normalized parameters, phase order, completed phases, outputs, artifact, and validation. They begin with `completedPhases: ["spec"]`.
+### Material fields
 
-Running an earlier phase removes downstream outputs so stale artifacts and validation cannot survive a partial rerun.
+Materials support both legacy aliases and the textured PBR contract:
+
+```text
+baseColorFactor, baseColorTexture
+normalTexture, normalScale
+metallicFactor, roughnessFactor, metallicRoughnessTexture
+occlusionTexture, occlusionStrength
+emissiveFactor, emissiveTexture
+alphaMode, alphaCutoff, doubleSided
+clearcoat, clearcoatRoughness
+iridescence, transmission, thickness, ior
+```
+
+These fields are optional, preserving older untextured mesh artifacts.
+
+### Statistics
+
+Mesh artifacts report mesh, vertex, triangle, material, texture, texture-byte, transparent-mesh, and animation-track counts.
+
+## Determinism
+
+The same implementation, seed, and normalized parameters must produce the same artifact hash. Seed changes must produce a new individual. Fixed randomization entropy makes group variation reproducible.
+
+A matching seed does not guarantee identical output after the implementation changes. Current provenance does not identify the exact source commit automatically.
 
 ## Validation
 
-`validateArtifactShape()` verifies common schema, identity, seed, hash, and mesh/image structure. Each kit adds subject-specific checks such as required Ballista parts, Tree submeshes and normals, image dimensions, transparency, occupancy, connectedness, or scene population.
+`validateArtifactShape()` checks shared structure. Subject validators add stronger rules. Procedural Reef Fish validates:
 
-Validation reports demonstrate only the encoded checks. They do not prove visual quality, browser support, performance, production readiness, or Studio integration.
+- finite geometry and valid indices;
+- UV and tangent dimensions;
+- non-zero triangles and healthy bounds;
+- expected anatomy, appendages, face, material, and texture roles;
+- texture references and payload hashes;
+- bounded eye and body proportions;
+- transparent fin material behavior.
+
+Validation proves encoded checks, not subjective visual quality or deployed browser support.
 
 ## Exports
 
-- Ballista: GLB or JSON.
-- Tree: GLB or JSON.
-- Coral, Fish, Aquatic Flora, Reef, Aquarium: PNG or JSON.
+- Mesh kits: GLB or JSON.
+- Image kits: PNG or JSON.
 
-Standard exports use `nexusfactory.export-result/1` with `format`, `mimeType`, `fileName`, and either `bytes` or `text`. Mesh export validates Tree before encoding; image exports validate their artifacts before encoding.
+Exports use `nexusfactory.export-result/1`. The fish GLB embeds generated texture maps and supported standard material extensions. The exporter uses the artifact it receives; it does not regenerate a separate asset.
 
-The GLB encoder writes glTF 2.0 mesh, normal, index, material, node, and artifact identity data. It does not convert artifact timeline tracks to glTF animations.
+## Browser compatibility
 
-## Determinism and variation
-
-Generation is deterministic for the same implementation, seed, and normalized parameters. Seed derivation and named random streams separate stages. Randomization and reroll operations are intentionally nondeterministic when callers omit `entropy`; callers can provide fixed entropy for reproducible variation tests.
-
-A matching seed does not guarantee matching output after source, manifest, or algorithm changes. Current artifact provenance does not encode enough information to reconstruct the exact implementation automatically.
-
-## Ballista surface divergence
-
-`src/index.js` exports `ballista-kit/index.js`. Its manifest omits `randomize`; its GLB export returns raw `Uint8Array` and JSON export returns a raw string.
-
-`src/catalog.js` registers `ballista-kit/runtime.js`. That adapter adds `randomize`, changes `source.module` to itself, and wraps exports in `nexusfactory.export-result/1`. NexusFactory-Studio follows the registry and therefore receives the adapter surface.
-
-Consumers importing the package root must not assume the registry adapter contract until this divergence is intentionally resolved.
+Registered browser runtimes must have a browser-safe transitive import graph. Node-only tools can import the public core, but public Kit modules must not import filesystem, process, compression, or child-process built-ins.
 
 ## Errors
 
-Invalid parameters, empty required seeds, unknown groups, unsupported phases, missing phase prerequisites, invalid artifacts, and unsupported formats throw typed errors. Callers should surface the error and preserve the request context rather than substituting generator-specific fallback behavior.
+Invalid parameters, empty seeds, unknown groups, unsupported phases, missing prerequisites, invalid artifacts, broken texture references, and unsupported formats throw typed errors. Consumers should expose those failures rather than substituting generator-specific fallbacks.

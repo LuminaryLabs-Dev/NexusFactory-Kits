@@ -1,6 +1,6 @@
 # Architecture
 
-NexusFactory-Kits is a procedural generation platform organized around semantic domains, reusable capabilities, and independently callable kits. It produces data artifacts; it does not provide the Studio interface or a game runtime.
+NexusFactory-Kits is a procedural generation platform organized around semantic domains, reusable capabilities, independently callable kits, and registry-discovered runtimes. It produces data artifacts; it does not own the Studio interface or a game runtime.
 
 ## System flow
 
@@ -20,14 +20,14 @@ registry.json
 NexusFactory-Studio RegistryHost → RuntimeHost → viewer/export UI
 ```
 
-The runtime generation path is separate:
+Runtime generation follows:
 
 ```text
 request { seed, params }
         ↓
-parameter normalization + deterministic random streams
+normalization + deterministic random streams
         ↓
-kit-specific generation or phased generation
+kit generation or inspectable phases
         ↓
 mesh or RGBA image artifact
         ↓
@@ -40,79 +40,103 @@ GLB, PNG, or JSON export
 
 | Path | Responsibility |
 | --- | --- |
-| `src/contracts.js` | Artifact, registry, generation-state, export-result, parameter-normalization, randomization, and artifact-shape contracts |
-| `src/domain.js` | `defineDomain()` and `defineKit()`, editor metadata, runtime declarations, and manifest fingerprints |
-| `src/catalog.js` | Canonical in-memory list of all registered domains and public kit manifests |
-| `src/registry/registry.js` | Identity checks, domain-parent checks, capability provider graph, registry snapshot, search, and integrity hash |
-| `src/foundation/` | Deterministic random, hashing, geometry, normals, GLB encoding, noise, and software raster/PNG utilities |
-| `src/domains/factory/` | Semantic domains, domain services, and public kit implementations |
-| `src/index.js` | Package-root exports for contracts, helpers, domains, and seven public kits |
-| `scripts/build-registry.mjs` | Materializes `registry.json` from `src/catalog.js` |
+| `src/contracts.js` | Artifact, textured-mesh, image, generation-state, validation, export-result, parameter, and randomization contracts |
+| `src/domain.js` | Domain and Kit definitions, editor metadata, runtime declarations, and manifest fingerprints |
+| `src/catalog.js` | Canonical in-memory list of registered domains and public Kit manifests |
+| `src/registry/registry.js` | Identity, parent, capability-provider, graph, search, snapshot, and integrity validation |
+| `src/foundation/` | Deterministic random, hashing, geometry, noise, raster/PNG, and GLB encoding |
+| `src/domains/factory/` | Semantic domains, reusable subject logic, and public kits |
+| `tools/fish/` | Node-only review and delivery tooling that imports the registered fish core |
+| `scripts/build-registry.mjs` | Materializes `registry.json` from source |
 
 ## Domain model
 
-Every domain has an ID, `n:factory` path, optional parent, version, stability, `requires`, `provides`, owned responsibilities, non-responsibilities, and services. Immediate parents must exist. A domain is a semantic owner rather than a filesystem alias or proof of an independently usable generator.
+A domain is a semantic owner, not merely a directory. The major branches are:
 
-The audited catalog contains 42 domains under these major branches:
-
-- `n:factory:object`: weapon, foliage/tree, prop, structure, and vehicle semantics.
+- `n:factory:object`: weapons, foliage, props, structures, vehicles, and creatures.
 - `n:factory:material`: PBR, stylized, and procedural material semantics.
-- `n:factory:texture`: coral, fish, aquatic flora, water, substrate, and rock capabilities.
+- `n:factory:texture`: raster subjects and environmental textures.
 - `n:factory:vfx`: aquatic bubbles, particles, and light shafts.
-- `n:factory:scene`: layers, placement, terrain profiles, aquatic population, reef, and aquarium composition.
+- `n:factory:scene`: layers, terrain, populations, reefs, and aquariums.
 - `n:factory:animation`: animation ownership boundary.
 
-`src/registry/registry.js` builds capability providers from every domain and kit. At the audited baseline the graph is valid and has no missing providers.
+The creature hierarchy adds:
+
+```text
+n:factory:object:creature
+└── n:factory:object:creature:aquatic
+    └── n:factory:object:creature:aquatic:fish
+```
+
+`aquatic:fish:mesh` is distinct from the existing `aquatic:fish` raster capability.
 
 ## Kit model
 
-A kit combines:
+Each Kit combines:
 
-- a manifest produced by `defineKit()`;
-- a parameter schema and editor presentation metadata;
+- a frozen manifest;
+- parameter, section, and randomization metadata;
 - declared capabilities and runtime environments;
-- a `source.module` and `source.exportName` for registry consumers;
-- callable services that generate, validate, vary, and export artifacts.
+- a resolvable source module;
+- callable generation, variation, validation, phase, and export services.
 
-There are seven public kits. The package root and generated registry expose the same subjects, but Ballista has two runtime surfaces: `src/index.js` exports `ballista-kit/index.js`, while `src/catalog.js` registers `ballista-kit/runtime.js`. The runtime adapter adds `randomize` and wraps exports in `nexusfactory.export-result/1`.
+The public catalog contains eight kits. The raster Fish Generator remains independent from the Procedural Reef Fish mesh kit.
 
 ## Phased generation
 
-Tree creates a typed mutable generation state and executes:
+Tree executes:
 
 ```text
 growth → bezier → wood → foliage → artifact → validate
 ```
 
-`runPhase()` enforces prerequisites and invalidates later outputs when a phase is rerun. Growth, Bezier, wood, and foliage have separate schema-tagged outputs.
-
-Reef and Aquarium share `src/domains/factory/scene/aquatic/phased-kit.js` and execute:
+Reef and Aquarium execute:
 
 ```text
 terrain → environment → population → placement → subjects
         → effects → compose → artifact → validate
 ```
 
-They reuse the same pipeline but pass different policies for layers, terrain, flora, rocks, colors, framing, and composition metadata.
+Procedural Reef Fish executes:
+
+```text
+anatomy → appendages → face → surface → artifact → validate
+```
+
+`runPhase()` enforces prerequisites and invalidates downstream outputs when an earlier phase is rerun.
 
 ## Artifact boundaries
 
-Mesh kits produce positions, normals, indices, materials, bounds, statistics, optional timeline tracks, metadata, and a deterministic hash. Image kits produce an RGBA8 base64 image, dimensions, transparency and sampling declarations, statistics, metadata, and a deterministic hash.
+Mesh artifacts may contain:
 
-The GLB encoder serializes meshes, normals, indices, materials, nodes, and artifact identity extras. It does not serialize `artifact.timeline` into glTF animations. Image kits use the repository's software raster and PNG encoder.
+- positions, normals, indices;
+- optional UVs, tangents, and colors;
+- material references and mesh flags;
+- core and extended PBR material definitions;
+- embedded RGBA textures with color-space and sampling metadata;
+- bounds, statistics, metadata, timeline tracks, and deterministic hash.
 
-## Generated registry
+Image artifacts contain RGBA8 base64 image data, dimensions, sampling, statistics, metadata, and deterministic hash.
 
-`registry.json` is a derived snapshot containing:
+Textured mesh support is a backward-compatible extension of `nexusfactory.artifact/1`; older mesh kits remain valid without optional fields.
 
-- schema `nexusfactory.registry/1`;
-- revision `1`;
-- sorted domains and kits;
-- capability providers, edges, missing dependencies, and graph validity;
-- an integrity SHA-256 over the snapshot body.
+## GLB encoding
 
-At baseline it contains 42 domains, seven kits, and integrity `sha256:a0e255b52b7afb47c1c77701bd22983419027bfa6c8f145aa1ff8d53dffdd93b`.
+The GLB encoder supports:
+
+- `POSITION`, `NORMAL`, `TEXCOORD_0`, `TANGENT`, and `COLOR_0`;
+- embedded PNG images, samplers, and textures;
+- base-color, normal, metallic-roughness, AO, and emissive maps;
+- alpha mode, alpha cutoff, and sidedness;
+- `KHR_materials_clearcoat`, `KHR_materials_iridescence`, and `KHR_materials_transmission`;
+- artifact identity and generator metadata.
+
+It still does not convert artifact timeline tracks into glTF animations.
+
+## Browser-safe runtime boundary
+
+Modules reachable from a registered Kit must not import Node built-ins. Filesystem writes, batch review, contact sheets, and CLI parsing live under `tools/`. Studio can therefore dynamically import the registered fish Kit in the browser while Node tools reuse exactly the same generator core.
 
 ## Ownership boundary
 
-Kits owns generation meaning, parameters, seeds, phases, artifacts, validation, and export encoding. Studio owns registry loading, generic invocation, controls, previews, snapshots, and downloads. Details of that handoff are in [studio-handoff.md](studio-handoff.md).
+Kits owns generation meaning, parameters, seeds, phases, artifacts, validation, and export encoding. Studio owns registry loading, generic invocation, controls, previews, snapshots, and downloads. Studio must not implement fish-specific behavior.

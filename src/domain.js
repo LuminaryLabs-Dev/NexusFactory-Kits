@@ -5,7 +5,7 @@ function ids(value) { return list(value).map(String); }
 
 function inferredCategory(domainPath = "") {
   const path = String(domainPath);
-  const rules = [[":weapon","Weapons"],[":foliage","Nature"],[":structure","Structures"],[":vehicle","Vehicles"],[":material","Materials"],[":texture","Textures"],[":vfx","VFX"],[":scene","Scenes"],[":animation","Animation"],[":prop","Props"]];
+  const rules = [[":creature","Creatures"],[":weapon","Weapons"],[":foliage","Nature"],[":structure","Structures"],[":vehicle","Vehicles"],[":material","Materials"],[":texture","Textures"],[":vfx","VFX"],[":scene","Scenes"],[":animation","Animation"],[":prop","Props"]];
   return rules.find(([needle]) => path.includes(needle))?.[1] ?? "Other";
 }
 function inferredLevel(entry) {
@@ -32,7 +32,7 @@ function normalizeEditor(editor = {}, parameterSchema = [], context = {}) {
     }
   }
   const fallbackPrimary = primary.length || advanced.length || internal.length ? primary : [...parameterIds];
-  const materialIds = parameterSchema.filter((entry) => /(wear|roughness|metallic|color|material|weather)/i.test(String(entry.id))).map((entry) => String(entry.id));
+  const materialIds = parameterSchema.filter((entry) => /(wear|roughness|metallic|color|material|weather|surface|clearcoat|iridescence|transmission|pattern|palette)/i.test(String(entry.id))).map((entry) => String(entry.id));
   const autoGroups = [
     { id: "everything", label: "Everything", parameters: [...parameterIds], rerollSeed: true },
     ...(fallbackPrimary.length ? [{ id: "shape", label: "Shape", parameters: fallbackPrimary.filter((id) => !materialIds.includes(id)), rerollSeed: false }] : []),
@@ -45,6 +45,14 @@ function normalizeEditor(editor = {}, parameterSchema = [], context = {}) {
     for (const id of parameters) if (!allowed.has(id)) throw new TypeError(`Randomization group ${group.id} references unknown control: ${id}`);
     return Object.freeze({ id: String(group.id), label: group.label ?? String(group.id), parameters, rerollSeed: group.rerollSeed === true });
   }));
+  const sections = Object.freeze((editor.sections ?? []).map((section) => {
+    if (!section?.id) throw new TypeError("Editor section requires id.");
+    const parameters = ids(section.parameters);
+    for (const id of parameters) if (!allowed.has(id)) throw new TypeError(`Editor section ${section.id} references unknown control: ${id}`);
+    return Object.freeze({ id:String(section.id), label:section.label??String(section.id), parameters });
+  }));
+  const debounceMs = Math.max(0, Math.min(5000, Number(editor.generation?.debounceMs ?? 180)));
+  const generation = Object.freeze({ mode:editor.generation?.mode === "manual" ? "manual" : "debounced", debounceMs:Number.isFinite(debounceMs)?debounceMs:180 });
   return Object.freeze({
     title: editor.title ?? context.displayName ?? null,
     category: editor.category ?? inferredCategory(context.domainPath),
@@ -55,7 +63,9 @@ function normalizeEditor(editor = {}, parameterSchema = [], context = {}) {
     primary: Object.freeze(fallbackPrimary),
     advanced: Object.freeze(advanced),
     internal: Object.freeze(internal),
-    randomizationGroups: groups
+    randomizationGroups: groups,
+    sections,
+    generation,
   });
 }
 
