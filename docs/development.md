@@ -15,7 +15,7 @@
 | `npm test` | Runs all Node tests |
 | `npm run validate` | Rebuilds the registry and runs the complete suite |
 | `npm run demo` | Generates and validates Ballista and Tree demos |
-| `npm run coral:render` | Generates coral and reef validation evidence |
+| `npm run coral:render` | Generates three reviewed variations for each coral species plus four reef scenes |
 | `npm run fish:generate` | Generates one fish artifact, GLB, and validation report |
 | `npm run fish:validate` | Validates a generated fish artifact |
 | `npm run fish:inspect` | Inspects exported GLB structure |

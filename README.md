@@ -27,7 +27,7 @@ npm run demo
 | Windup Ballista Turret | `factory-object-weapon-ballista` | Mesh artifact; GLB or JSON | `0.1.0` |
 | Procedural Broadleaf Tree | `factory-object-foliage-tree` | Mesh artifact; GLB or JSON | `0.2.0` |
 | Procedural Reef Fish | `factory-object-creature-fish` | Textured mesh artifact; GLB or JSON | `0.1.0` |
-| Coral Generator | `factory-texture-coral` | 96×96 RGBA image; PNG or JSON | `0.2.0` |
+| Coral Generator | `factory-texture-coral` | 96×96 RGBA image; PNG or JSON | `0.3.0` |
 | Fish Generator | `factory-texture-fish` | 64×64 pixel-art image; PNG or JSON | `0.1.0` |
 | Aquatic Flora Generator | `factory-texture-aquatic-flora` | 64×64 RGBA image; PNG or JSON | `0.1.0` |
 | Reef Generator | `factory-scene-aquatic-reef` | 128×128 RGBA scene; PNG or JSON | `0.1.0` |
@@ -75,6 +75,20 @@ npm run fish:review
 ```
 
 These tools import the same browser-safe generation core as the registered kit. Generated evidence is written under the ignored `validation/` directory.
+
+## Coral Generator
+
+The Coral Generator preserves one five-color pixel-art language while giving all seven species separate procedural identities:
+
+- Staghorn grows tapered antler colonies with many terminal fingers.
+- Elkhorn forms broad, flattened paddle crowns.
+- Brain produces a low dome with continuous labyrinth valleys.
+- Pillar grows uneven rounded columns with channels and polyp marks.
+- Lettuce stacks angled, ruffled plates around a central rosette.
+- Sea Fan builds an asymmetric open lattice on a narrow holdfast.
+- Sea Rod grows fewer, softer candelabrum branches with rounded polyp tips.
+
+`size`, `density`, `asymmetry`, and `highlight` retain the same public meanings but now affect each species through its own growth rules. The Kit remains deterministic and exports transparent 96×96 RGBA images as PNG or JSON.
 
 ## Registry and Studio
 

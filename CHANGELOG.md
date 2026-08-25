@@ -6,6 +6,8 @@ This file records notable human-facing project changes. Dated sections are devel
 
 ### Added
 
+- Added species-specific Coral morphology metrics and silhouette-distance tests.
+- Added three-variation visual review coverage for all seven Coral species.
 - Added `factory-object-creature-fish`, a deterministic high-fidelity Procedural Reef Fish textured-mesh Kit.
 - Added creature, aquatic-creature, and aquatic-fish object domains with capability `aquatic:fish:mesh`.
 - Added phased fish generation: anatomy, appendages, face, surface, artifact, and validation.
@@ -17,6 +19,7 @@ This file records notable human-facing project changes. Dated sections are devel
 
 ### Changed
 
+- Redesigned Coral Generator `0.3.0` so Staghorn, Elkhorn, Brain, Pillar, Lettuce, Sea Fan, and Sea Rod use separate growth, silhouette, base, and surface-detail grammars while preserving the existing public controls and artifact contract.
 - Kept the existing `factory-texture-fish` raster Kit as an independent pixel-art generator.
 - Aligned Reef and Aquarium composition metadata with their public test contract: `reef` and `aquarium`.
 - Added Creatures category inference, editor sections, and manifest-driven generation debounce metadata.
@@ -24,9 +27,11 @@ This file records notable human-facing project changes. Dated sections are devel
 
 ### Validation
 
+- Complete repository validation passes 35/35 tests with a valid 45-domain, 8-Kit registry.
+- A local registry-to-Studio validation pass downloaded and exercised all 8 module graphs; all generation, determinism, randomize, reroll, validation, phase, and export checks passed before publication.
+- Twenty-one standalone Coral variations and four reef scenes were generated and visually reviewed at native output scale and nearest-neighbor enlargement.
 - Focused fish integration suite: 9 passing tests, zero failures.
 - Seven image-review loops passed, including a twenty-fish representative batch and source-versus-reloaded GLB comparison.
-- Complete repository validation passed 33/33 tests with a valid 45-domain, 8-Kit registry.
 - A live-CDN Studio runner imported and exercised 8/8 Kits through deterministic generation, randomize, reroll, validation, declared phases, and export.
 - Studio browser validation fully passed all 5 image Kits and captured ten distinct variations. The 3 mesh Kits reached validated artifacts and GLB export, but cloud-browser preview remained blocked by unavailable WebGL.
 

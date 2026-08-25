@@ -2,6 +2,13 @@
 
 Record only material changes to repository state, governing documentation, validation state, or durable context.
 
+## 2026-08-25 — Redesign Coral species identities
+
+- Change: Replaced shared generic Coral structures with seven species-specific morphology renderers and updated the public Kit to `0.3.0` without changing its services, controls, artifact schema, or Studio boundary.
+- Visual system: Preserved the five-color nearest-neighbor style while separating antler, paddle, labyrinth, column, ruffled-plate, lattice-fan, and soft-rod treatments.
+- Validation: Added actual silhouette-distance, morphology-signature, parameter-response, and seed-sweep checks; complete validation passed 35/35 tests.
+- Integration: A local Studio validator downloaded and exercised all 8 generated registry module graphs before publication; 21 Coral variants and 4 reef scenes were generated and visually inspected.
+
 ## 2026-08-25 — Validate live registry and Studio consumption
 
 - Kits: Complete validation passed 33/33 tests; the generated registry remained valid with 45 domains and 8 Kits.

@@ -54,9 +54,14 @@ Timeline tracks remain metadata; current GLB export does not encode animations.
 
 ## Coral Generator
 
-- Kit: `factory-texture-coral`, version `0.2.0`
+- Kit: `factory-texture-coral`, version `0.3.0`
 - Output: transparent 96×96 RGBA8 image
 - Export: PNG or JSON
+- Species: Staghorn, Elkhorn, Brain, Pillar, Lettuce, Sea Fan, and Sea Rod
+- Shared controls: species, palette, size, density, asymmetry, and highlight
+- Visual contract: one five-color nearest-neighbor pixel-art language with a separate growth grammar, silhouette, base, and surface-detail treatment for every species
+
+Artifacts record the resolved morphology, design profile, feature count, tip count, detail-mask coverage, silhouette fill, and silhouette aspect. Validation checks image structure, transparency, occupancy, connectivity, palette depth, species identity, design profile, generated features, and surface detail.
 
 ## Aquatic Flora Generator
 

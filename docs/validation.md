@@ -1,5 +1,33 @@
 # Validation
 
+## Coral species redesign — 2026-08-25
+
+The Coral Generator `0.3.0` candidate was validated in the sandbox before publication.
+
+```text
+node scripts/build-registry.mjs
+domains: 45
+kits: 8
+registry integrity: sha256:decce0a53ace66b88908ff3db81d7d1b7b7179eb5459022144ba33af75820f47
+
+node --test tests/*.test.mjs
+tests: 35 passed, 0 failed
+```
+
+Coral-specific checks now prove more than distinct hashes:
+
+- all seven species expose unique design profiles;
+- every pair of normalized alpha silhouettes clears the declared separation threshold;
+- species-specific feature, tip, fill, and aspect signatures remain within their intended ranges;
+- increasing density increases morphology features for every species;
+- increasing size increases occupied area and does not shrink bounds;
+- eight representative seeds per species retain valid artifacts and the correct design profile;
+- PNG export remains valid and deterministic.
+
+`node scripts/render-coral-validation.mjs` generated three parameter variations for every species and four composed reef scenes. All 21 standalone assets and all 4 scene outputs were inspected at native resolution and nearest-neighbor enlargement.
+
+NexusFactory-Studio then consumed a local HTTP copy of the generated registry. Its sequential module validator downloaded isolated source graphs and passed all 8 Kits through import, describe, deterministic generation, randomize, reroll, validation, declared phases, and export. This local pre-publication result does not by itself prove CDN propagation or the deployed browser path.
+
 ## Complete repository and live-channel validation — 2026-08-25
 
 At `ef56843def052d55b0685e96b8e9d29c114e6477`:
