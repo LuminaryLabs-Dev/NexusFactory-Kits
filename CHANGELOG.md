@@ -26,11 +26,13 @@ This file records notable human-facing project changes. Dated sections are devel
 
 - Focused fish integration suite: 9 passing tests, zero failures.
 - Seven image-review loops passed, including a twenty-fish representative batch and source-versus-reloaded GLB comparison.
-- Complete repository validation remains enforced by the registry workflow on `main`.
+- Complete repository validation passed 33/33 tests with a valid 45-domain, 8-Kit registry.
+- A live-CDN Studio runner imported and exercised 8/8 Kits through deterministic generation, randomize, reroll, validation, declared phases, and export.
+- Studio browser validation fully passed all 5 image Kits and captured ten distinct variations. The 3 mesh Kits reached validated artifacts and GLB export, but cloud-browser preview remained blocked by unavailable WebGL.
 
 ### Known limitations
 
-- Fish animation, genetics, breeding, game integration, worker execution, live CDN smoke testing, and production performance gates remain outside this milestone.
+- Fish animation, genetics, breeding, game integration, worker execution, WebGL mesh-preview completion, and production performance gates remain outside this milestone.
 - Ballista GLB animation and complete artifact provenance remain open.
 
 ## 2026-08-24 — Repository documentation system

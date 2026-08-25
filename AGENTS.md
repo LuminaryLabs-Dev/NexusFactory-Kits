@@ -28,7 +28,7 @@ Record contradictions; do not silently choose the most convenient claim.
 - Never edit `registry.json` manually. Change source manifests and run `node scripts/build-registry.mjs`.
 - Treat `validation/` as generated output. Do not commit it unless a future task explicitly establishes it as a tracked artifact.
 - Do not claim browser, worker, Studio, visual, performance, publication, release, or production support without direct evidence.
-- Preserve the known test baseline. Do not hide, skip, or relabel the aquatic failure as passing.
+- Preserve the zero-failure test baseline. Do not hide, skip, or relabel a failing check as passing.
 - Do not create branches, commits, pull requests, releases, deployments, tracker updates, or other external writes without explicit authorization.
 
 ## Validation routing

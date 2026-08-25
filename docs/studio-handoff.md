@@ -83,3 +83,5 @@ Before changing a public manifest or artifact field:
 - validate old image and mesh viewers;
 - validate Kits and Studio separately;
 - perform a live smoke test before claiming deployed end-to-end support.
+
+The 2026-08-25 live smoke test passed all 8 module contracts and all 5 image-Kit browser flows. Ballista, Tree, and Procedural Reef Fish reached validated artifacts and GLB export, but their visual preview remains pending in a WebGL-capable browser.

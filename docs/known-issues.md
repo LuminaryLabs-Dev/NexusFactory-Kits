@@ -21,11 +21,11 @@ Artifacts identify Kit, domain, seed, parameters, metadata, and deterministic ha
 
 ## Browser and worker coverage
 
-The Procedural Reef Fish public import graph is checked for Node built-ins and Studio has generic source/fixture coverage. Direct browser execution of every Kit and worker execution remain separate validation requirements.
+All live public module graphs run through the Studio-side Node validator. Direct browser generation, preview, randomize, reroll, validation, and export pass for all 5 image Kits. Worker execution and WebGL mesh-preview execution remain separate validation requirements.
 
 ## Live Studio integration
 
-The deployed Studio and jsDelivr live registry path must be smoke-tested after registry propagation. Local fixture and renderer tests do not prove CDN availability, cross-origin imports, live screenshots, or downloads together.
+The deployed Studio and jsDelivr registry path has been smoke-tested for 8 live Kits. The 3 mesh Kits reached validated artifacts and GLB downloads, but the cloud browser had no WebGL context. A WebGL-capable browser run is still required before claiming complete visual end-to-end coverage.
 
 ## Performance budgets
 

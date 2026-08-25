@@ -101,7 +101,7 @@ Do not edit `registry.json` manually. Studio resolves each manifest's `source.mo
 ## Current limits
 
 - The 3D fish is a static asset; animation, skeletons, genetics, breeding, and aquarium simulation are outside this kit.
-- Worker execution, live deployed Studio browser operation, and performance budgets require separate direct evidence.
+- Worker execution, WebGL mesh-preview completion, and performance budgets require separate direct evidence. Live image-Kit Studio operation is validated.
 - Ballista timeline tracks are still not serialized into glTF animations.
 - Artifact provenance does not yet identify the exact source commit and implementation fingerprint.
 
