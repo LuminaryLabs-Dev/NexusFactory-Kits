@@ -6,6 +6,8 @@ This file records notable human-facing project changes. Dated sections are devel
 
 ### Added
 
+- Added Aquatic Flora style-identity, silhouette-separation, connectivity, palette-depth, feature, and parameter-response validation.
+- Added a 50-image Aquatic Flora comparison and final review set.
 - Added species-specific Coral morphology metrics and silhouette-distance tests.
 - Added three-variation visual review coverage for all seven Coral species.
 - Added `factory-object-creature-fish`, a deterministic high-fidelity Procedural Reef Fish textured-mesh Kit.
@@ -19,6 +21,7 @@ This file records notable human-facing project changes. Dated sections are devel
 
 ### Changed
 
+- Redesigned Aquatic Flora Generator `0.2.0` with separate rooted Seagrass, broad-leaf Kelp, forked Branching, and radial Tuft grammars while preserving its public controls and artifact contract.
 - Redesigned Coral Generator `0.3.0` so Staghorn, Elkhorn, Brain, Pillar, Lettuce, Sea Fan, and Sea Rod use separate growth, silhouette, base, and surface-detail grammars while preserving the existing public controls and artifact contract.
 - Kept the existing `factory-texture-fish` raster Kit as an independent pixel-art generator.
 - Aligned Reef and Aquarium composition metadata with their public test contract: `reef` and `aquarium`.
@@ -27,7 +30,8 @@ This file records notable human-facing project changes. Dated sections are devel
 
 ### Validation
 
-- Complete repository validation passes 35/35 tests with a valid 45-domain, 8-Kit registry.
+- The accepted Aquatic Flora candidate passed 80/80 comparison artifacts, reduced average connected components from 3.55 to 1.00, increased average palette depth from 2.9125 to 3.75, and cleared every declared review gate.
+- Complete repository validation passes 37/37 tests with a valid 45-domain, 8-Kit registry.
 - A local registry-to-Studio validation pass downloaded and exercised all 8 module graphs; all generation, determinism, randomize, reroll, validation, phase, and export checks passed before publication.
 - Twenty-one standalone Coral variations and four reef scenes were generated and visually reviewed at native output scale and nearest-neighbor enlargement.
 - Focused fish integration suite: 9 passing tests, zero failures.

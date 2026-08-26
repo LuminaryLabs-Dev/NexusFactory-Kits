@@ -29,7 +29,7 @@ npm run demo
 | Procedural Reef Fish | `factory-object-creature-fish` | Textured mesh artifact; GLB or JSON | `0.1.0` |
 | Coral Generator | `factory-texture-coral` | 96×96 RGBA image; PNG or JSON | `0.3.0` |
 | Fish Generator | `factory-texture-fish` | 64×64 pixel-art image; PNG or JSON | `0.1.0` |
-| Aquatic Flora Generator | `factory-texture-aquatic-flora` | 64×64 RGBA image; PNG or JSON | `0.1.0` |
+| Aquatic Flora Generator | `factory-texture-aquatic-flora` | 64×64 RGBA image; PNG or JSON | `0.2.0` |
 | Reef Generator | `factory-scene-aquatic-reef` | 128×128 RGBA scene; PNG or JSON | `0.1.0` |
 | Aquarium Generator | `factory-scene-aquatic-aquarium` | 128×128 RGBA scene; PNG or JSON | `0.1.0` |
 
@@ -89,6 +89,10 @@ The Coral Generator preserves one five-color pixel-art language while giving all
 - Sea Rod grows fewer, softer candelabrum branches with rounded polyp tips.
 
 `size`, `density`, `asymmetry`, and `highlight` retain the same public meanings but now affect each species through its own growth rules. The Kit remains deterministic and exports transparent 96×96 RGBA images as PNG or JSON.
+
+## Aquatic Flora Generator
+
+Aquatic Flora `0.2.0` gives Seagrass, Kelp, Branching, and Tuft separate rooted growth grammars while preserving the existing style, palette, size, density, and sway controls. Artifacts now record design profiles and feature counts, and validation proves connected silhouettes, palette depth, style identity, and parameter response.
 
 ## Registry and Studio
 

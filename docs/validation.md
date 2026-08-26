@@ -1,5 +1,15 @@
 # Validation
 
+## Aquatic Flora redesign — 2026-08-26
+
+Aquatic Flora `0.2.0` was selected only after five comparable 50-image review attempts against the `0.1.0` baseline. The accepted generator preserves the public controls and image/export contract while replacing shared line clusters with four distinct rooted grammars.
+
+The baseline-versus-candidate comparison used 80 artifacts per version. The accepted candidate passed all 80 validations, reduced average connected components from `3.55` to `1.00`, increased average palette depth from `2.9125` to `3.75`, cleared the `0.50` style-separation threshold at `0.5456`, and retained a strong average size-height response of `18.975` pixels.
+
+Fifty final variants were rendered under one locked capture profile and indexed in a labeled contact sheet. Generated review evidence remains ignored under `validation/` or task-local output and is not part of the source package.
+
+Complete repository validation passed `37/37` tests with a valid 45-domain, 8-Kit generated registry. The aquatic Coral and Reef validation renderer also completed, and representative reef outputs were visually inspected.
+
 ## Coral species redesign — 2026-08-25
 
 The Coral Generator `0.3.0` candidate was validated in the sandbox before publication.

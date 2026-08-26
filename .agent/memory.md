@@ -14,8 +14,9 @@
 - GLB export supports embedded PBR textures, alpha behavior, clearcoat, iridescence, and transmission.
 - Reef and Aquarium composition metadata use `reef` and `aquarium`.
 - The generated registry currently contains 45 domains and 8 public Kits.
-- Complete repository validation currently passes 35/35 tests.
+- Complete repository validation currently passes 37/37 tests.
 - Coral Generator `0.3.0` gives all seven species separate growth, silhouette, base, and surface-detail grammars while retaining the existing public controls and image/export contract.
+- Aquatic Flora Generator `0.2.0` gives all four styles separate rooted growth grammars and validates connectivity, palette depth, style identity, generated features, and parameter response while retaining its existing controls and image/export contract.
 - Coral validation now measures normalized silhouette separation, species-specific feature signatures, size and density response, and representative seed stability.
 - A 2026-08-25 live-CDN run imported and exercised all 8 Kits sequentially from the generated registry.
 - Live Studio browser checks fully exercised all 5 image Kits; the 3 mesh Kits generated, validated, randomized, rerolled, and exported, but cloud-browser mesh preview remained blocked by unavailable WebGL.

@@ -65,9 +65,14 @@ Artifacts record the resolved morphology, design profile, feature count, tip cou
 
 ## Aquatic Flora Generator
 
-- Kit: `factory-texture-aquatic-flora`, version `0.1.0`
+- Kit: `factory-texture-aquatic-flora`, version `0.2.0`
 - Output: transparent 64×64 RGBA8 image
 - Export: PNG or JSON
+- Styles: Seagrass, Kelp, Branching, and Tuft
+- Shared controls: style, palette, size, density, and sway
+- Visual contract: connected rooted pixel-art silhouettes with a separate blade, broad-leaf, forked-thicket, or radial-rosette grammar for each style
+
+Artifacts retain design profile, feature counts, occupied bounds, palette depth, and deterministic identity. Validation checks connectivity, style identity, feature presence, palette depth, dimensions, occupancy, and minimum height response.
 
 ## Reef Generator
 

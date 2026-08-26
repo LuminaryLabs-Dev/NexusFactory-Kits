@@ -2,6 +2,13 @@
 
 Record only material changes to repository state, governing documentation, validation state, or durable context.
 
+## 2026-08-26 — Redesign Aquatic Flora identities
+
+- Change: Replaced the shared sparse-line Aquatic Flora treatment with separate rooted Seagrass, broad-leaf Kelp, forked Branching, and radial Tuft grammars and advanced the public Kit to `0.2.0`.
+- Compatibility: Preserved the existing style, palette, size, density, sway, service, image, PNG, and JSON contracts.
+- Validation: Added connectivity, palette-depth, style-profile, silhouette-separation, generated-feature, and parameter-response gates.
+- Review: Compared five 50-image attempts with the baseline and accepted only the candidate that cleared all technical and visual thresholds.
+
 ## 2026-08-25 — Redesign Coral species identities
 
 - Change: Replaced shared generic Coral structures with seven species-specific morphology renderers and updated the public Kit to `0.3.0` without changing its services, controls, artifact schema, or Studio boundary.
