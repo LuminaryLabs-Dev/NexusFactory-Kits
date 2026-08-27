@@ -6,6 +6,7 @@ This file records notable human-facing project changes. Dated sections are devel
 
 ### Added
 
+- Added the deterministic offline 3D coral generator, ten reviewed GLB exports, numbered presets, checksums, contact sheet, and reload validation used by Little Reef.
 - Added Aquatic Flora style-identity, silhouette-separation, connectivity, palette-depth, feature, and parameter-response validation.
 - Added a 50-image Aquatic Flora comparison and final review set.
 - Added species-specific Coral morphology metrics and silhouette-distance tests.

@@ -13,6 +13,8 @@
     "validate": "npm run registry:build && npm test",
     "demo": "node scripts/demo.mjs",
     "coral:render": "node scripts/render-coral-validation.mjs",
+    "coral:3d:generate": "node tools/coral-3d/generate.mjs",
+    "coral:3d:validate": "node tools/coral-3d/validate.mjs",
     "fish:generate": "node tools/fish/generate.mjs",
     "fish:validate": "node tools/fish/validate.mjs",
     "fish:inspect": "node tools/fish/inspect-glb.mjs",
@@ -21,6 +23,9 @@
   },
   "engines": {
     "node": ">=20"
+  },
+  "devDependencies": {
+    "three": "0.180.0"
   },
   "license": "MIT"
 }

@@ -1,0 +1,424 @@
+{
+  "schema": "nexus-factory/coral-3d-exports/v1",
+  "selection": "reviewed catalog; no single winner selected",
+  "generator": "tools/coral-3d/coral-generator.mjs",
+  "presetSource": "tools/coral-3d/coral-presets.mjs",
+  "candidateCount": 10,
+  "review": {
+    "file": "review/coral-candidates-01-10.png",
+    "sha256": "c94927756e97b59992d59b4f4817c0d9da05c9d9dd0747712c31bad2103bd5f6",
+    "ordering": "numeric 01 through 10, row-major"
+  },
+  "records": [
+    {
+      "id": "01",
+      "name": "Staghorn Crown",
+      "file": "01-staghorn-crown.glb",
+      "type": "staghorn",
+      "seed": 11031,
+      "signature": "607c55d3",
+      "triangles": 1008,
+      "bounds": {
+        "minimum": [
+          -1.2131,
+          0,
+          -0.6666
+        ],
+        "maximum": [
+          1.2131,
+          3.2,
+          0.6666
+        ],
+        "size": [
+          2.4262,
+          3.2,
+          1.3332
+        ]
+      },
+      "bytes": 121912,
+      "sha256": "dcdd988f5c84abde4bce4c17d7fdba94c901ab6b4f1978b332e3d9aabee6091a",
+      "encoding": {
+        "schema": "nexus-factory/coral-candidate/v1",
+        "id": "01",
+        "type": "staghorn",
+        "seed": 11031,
+        "palette": {
+          "base": 15104616,
+          "accent": 16754318,
+          "tip": 16766133,
+          "dark": 7221312
+        },
+        "targetSize": 3.2
+      }
+    },
+    {
+      "id": "02",
+      "name": "Elkhorn Grove",
+      "file": "02-elkhorn-grove.glb",
+      "type": "elkhorn",
+      "seed": 22063,
+      "signature": "53731f55",
+      "triangles": 924,
+      "bounds": {
+        "minimum": [
+          -1.2263,
+          0,
+          -0.2016
+        ],
+        "maximum": [
+          1.2263,
+          3.2,
+          0.2016
+        ],
+        "size": [
+          2.4527,
+          3.2,
+          0.4032
+        ]
+      },
+      "bytes": 117136,
+      "sha256": "b0d909d96e18f4025abcb2a82afd4218a3841beb19d4f80d7bef1da565f48e03",
+      "encoding": {
+        "schema": "nexus-factory/coral-candidate/v1",
+        "id": "02",
+        "type": "elkhorn",
+        "seed": 22063,
+        "palette": {
+          "base": 15306834,
+          "accent": 16760179,
+          "tip": 16766369,
+          "dark": 7421745
+        },
+        "targetSize": 3.2
+      }
+    },
+    {
+      "id": "03",
+      "name": "Brain Coral",
+      "file": "03-brain-coral.glb",
+      "type": "brain",
+      "seed": 33097,
+      "signature": "f6a637e0",
+      "triangles": 2196,
+      "bounds": {
+        "minimum": [
+          -1.5,
+          0,
+          -1.2054
+        ],
+        "maximum": [
+          1.5,
+          1.9558,
+          1.2054
+        ],
+        "size": [
+          3,
+          1.9558,
+          2.4107
+        ]
+      },
+      "bytes": 239000,
+      "sha256": "e1a3483d975ec566ce733ba06a93367898f117ab22ff827aade628f36ca00ab6",
+      "encoding": {
+        "schema": "nexus-factory/coral-candidate/v1",
+        "id": "03",
+        "type": "brain",
+        "seed": 33097,
+        "palette": {
+          "base": 9859525,
+          "accent": 14065895,
+          "tip": 15780086,
+          "dark": 4665695
+        },
+        "targetSize": 3
+      }
+    },
+    {
+      "id": "04",
+      "name": "Pillar Colony",
+      "file": "04-pillar-colony.glb",
+      "type": "pillars",
+      "seed": 44131,
+      "signature": "0b99de55",
+      "triangles": 1040,
+      "bounds": {
+        "minimum": [
+          -1.6,
+          0,
+          -0.81
+        ],
+        "maximum": [
+          1.6,
+          2.9811,
+          0.81
+        ],
+        "size": [
+          3.2,
+          2.9811,
+          1.6201
+        ]
+      },
+      "bytes": 105020,
+      "sha256": "26696d3ff2c1af91147b45375786d731a31c16dc4d723c94b4ecb684c81464d6",
+      "encoding": {
+        "schema": "nexus-factory/coral-candidate/v1",
+        "id": "04",
+        "type": "pillars",
+        "seed": 44131,
+        "palette": {
+          "base": 5224362,
+          "accent": 9295810,
+          "tip": 12972000,
+          "dark": 2121058
+        },
+        "targetSize": 3.2
+      }
+    },
+    {
+      "id": "05",
+      "name": "Lettuce Coral",
+      "file": "05-lettuce-coral.glb",
+      "type": "lettuce",
+      "seed": 55169,
+      "signature": "b04d581a",
+      "triangles": 1008,
+      "bounds": {
+        "minimum": [
+          -1.55,
+          0,
+          -1.5494
+        ],
+        "maximum": [
+          1.55,
+          1.1266,
+          1.5494
+        ],
+        "size": [
+          3.1,
+          1.1266,
+          3.0988
+        ]
+      },
+      "bytes": 52652,
+      "sha256": "673971a0e7f7e76f451d4a7e06a1ceb76fd17919c26778f49089f8620bcc3abc",
+      "encoding": {
+        "schema": "nexus-factory/coral-candidate/v1",
+        "id": "05",
+        "type": "lettuce",
+        "seed": 55169,
+        "palette": {
+          "base": 12806806,
+          "accent": 15768504,
+          "tip": 16762838,
+          "dark": 7156056
+        },
+        "targetSize": 3.1
+      }
+    },
+    {
+      "id": "06",
+      "name": "Sea Fan",
+      "file": "06-sea-fan.glb",
+      "type": "sea-fan",
+      "seed": 66203,
+      "signature": "22d2afd9",
+      "triangles": 868,
+      "bounds": {
+        "minimum": [
+          -1.625,
+          0,
+          -0.0785
+        ],
+        "maximum": [
+          1.625,
+          2.7045,
+          0.0785
+        ],
+        "size": [
+          3.25,
+          2.7045,
+          0.157
+        ]
+      },
+      "bytes": 102452,
+      "sha256": "a2c849ae2567047e6fa7aed42233015081c4e3d867da389d036083c3aff86ef7",
+      "encoding": {
+        "schema": "nexus-factory/coral-candidate/v1",
+        "id": "06",
+        "type": "sea-fan",
+        "seed": 66203,
+        "palette": {
+          "base": 10313415,
+          "accent": 14125542,
+          "tip": 15777015,
+          "dark": 5189489
+        },
+        "targetSize": 3.25
+      }
+    },
+    {
+      "id": "07",
+      "name": "Sea Rod Garden",
+      "file": "07-sea-rod-garden.glb",
+      "type": "sea-rods",
+      "seed": 77239,
+      "signature": "801b0192",
+      "triangles": 1680,
+      "bounds": {
+        "minimum": [
+          -1.5315,
+          0,
+          -1.2065
+        ],
+        "maximum": [
+          1.5315,
+          3.2,
+          1.2065
+        ],
+        "size": [
+          3.063,
+          3.2,
+          2.4129
+        ]
+      },
+      "bytes": 195212,
+      "sha256": "3f798df4457958b051295b81e6a6f33414b803d2df1b1d528021ee5627e10cec",
+      "encoding": {
+        "schema": "nexus-factory/coral-candidate/v1",
+        "id": "07",
+        "type": "sea-rods",
+        "seed": 77239,
+        "palette": {
+          "base": 14901110,
+          "accent": 16226970,
+          "tip": 16765069,
+          "dark": 7745092
+        },
+        "targetSize": 3.2
+      }
+    },
+    {
+      "id": "08",
+      "name": "Table Coral",
+      "file": "08-table-coral.glb",
+      "type": "table",
+      "seed": 88277,
+      "signature": "2a511953",
+      "triangles": 632,
+      "bounds": {
+        "minimum": [
+          -1.6082,
+          0,
+          -1.625
+        ],
+        "maximum": [
+          1.6082,
+          1.4856,
+          1.625
+        ],
+        "size": [
+          3.2164,
+          1.4856,
+          3.25
+        ]
+      },
+      "bytes": 59804,
+      "sha256": "c2b2b515843eb2110d70c37ba3e1ba945f8090ed08f80a024d81403f4e78fb1e",
+      "encoding": {
+        "schema": "nexus-factory/coral-candidate/v1",
+        "id": "08",
+        "type": "table",
+        "seed": 88277,
+        "palette": {
+          "base": 5744831,
+          "accent": 9164754,
+          "tip": 12906719,
+          "dark": 2381670
+        },
+        "targetSize": 3.25
+      }
+    },
+    {
+      "id": "09",
+      "name": "Tube Colony",
+      "file": "09-tube-colony.glb",
+      "type": "tubes",
+      "seed": 99317,
+      "signature": "1c34b722",
+      "triangles": 1022,
+      "bounds": {
+        "minimum": [
+          -1.575,
+          0,
+          -0.8956
+        ],
+        "maximum": [
+          1.575,
+          2.1865,
+          0.8956
+        ],
+        "size": [
+          3.15,
+          2.1865,
+          1.7912
+        ]
+      },
+      "bytes": 61004,
+      "sha256": "5725a0c57892b07082c6b23ee3089941f0e55a1370385dba3a7b90a7911913ee",
+      "encoding": {
+        "schema": "nexus-factory/coral-candidate/v1",
+        "id": "09",
+        "type": "tubes",
+        "seed": 99317,
+        "palette": {
+          "base": 14907973,
+          "accent": 16756838,
+          "tip": 16767131,
+          "dark": 5515323
+        },
+        "targetSize": 3.15
+      }
+    },
+    {
+      "id": "10",
+      "name": "Mixed Reef Cluster",
+      "file": "10-mixed-reef-cluster.glb",
+      "type": "mixed",
+      "seed": 110357,
+      "signature": "44527b20",
+      "triangles": 4884,
+      "bounds": {
+        "minimum": [
+          -1.625,
+          0,
+          -0.7993
+        ],
+        "maximum": [
+          1.625,
+          2.1785,
+          0.7993
+        ],
+        "size": [
+          3.25,
+          2.1785,
+          1.5985
+        ]
+      },
+      "bytes": 556304,
+      "sha256": "3353a086aaa17992a9df2c35c98f15aba3abf14d751516930104f62e1a23e099",
+      "encoding": {
+        "schema": "nexus-factory/coral-candidate/v1",
+        "id": "10",
+        "type": "mixed",
+        "seed": 110357,
+        "palette": {
+          "base": 14841718,
+          "accent": 9296070,
+          "tip": 16766348,
+          "dark": 3950947
+        },
+        "targetSize": 3.25
+      }
+    }
+  ]
+}

@@ -9,7 +9,7 @@ The repository is active and experimental. `main` is the live registry channel c
 - Node.js 20 or newer
 - Git when cloning the repository
 
-The project uses native ECMAScript modules, declares no third-party runtime dependencies, and has no transpilation step.
+The project uses native ECMAScript modules, declares no third-party runtime dependencies, and has no transpilation step. Offline 3D export tools use the pinned `three` development dependency.
 
 ## Quick start
 
@@ -89,6 +89,17 @@ The Coral Generator preserves one five-color pixel-art language while giving all
 - Sea Rod grows fewer, softer candelabrum branches with rounded polyp tips.
 
 `size`, `density`, `asymmetry`, and `highlight` retain the same public meanings but now affect each species through its own growth rules. The Kit remains deterministic and exports transparent 96×96 RGBA images as PNG or JSON.
+
+## Reviewed 3D coral exports
+
+The offline `tools/coral-3d` pipeline owns ten deterministic, numbered coral models used by Little Reef. It keeps the reviewed GLBs and their checksums under `artifacts/coral-3d`; it is an asset-production tool and is not registered as a browser runtime Kit.
+
+```bash
+npm run coral:3d:generate -- /tmp/coral-exports
+npm run coral:3d:validate
+```
+
+The first command regenerates the ten GLBs and export records. The second reloads the approved exports, validates finite mesh positions, exact checksums and triangle counts, and proves floor contact.
 
 ## Aquatic Flora Generator
 
