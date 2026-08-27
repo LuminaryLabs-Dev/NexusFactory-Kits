@@ -1,0 +1,217 @@
+{
+  "schemaVersion": "1.0",
+  "factoryId": "triceratops-mesh-editor",
+  "goal": "Provide a deterministic offline harness that can describe, edit, regenerate, validate, visually review, and export procedural mesh kits through replayable JSON transactions.",
+  "target": "A reusable Three.js mesh-edit factory with a declarative mesh-program AST, live JSON injection, incremental evaluation, ten-angle review orchestration, and topology-gated export.",
+  "factoryType": "composed",
+  "selectionReason": "The decisive complexity is coordination across independently meaningful AST, evaluator, live-state, renderer, validator, reviewer, and exporter components. Mathematical generation and guided review are explicit subcomponents.",
+  "rejectedTypes": [
+    {
+      "type": "mathematical",
+      "reason": "Deterministic geometry rules alone do not provide transactional editing, incremental state, review evidence, or export coordination."
+    },
+    {
+      "type": "guided",
+      "reason": "Visual judgment is required, but review alone does not define the reusable editing and generation system."
+    },
+    {
+      "type": "hybrid",
+      "reason": "No authoritative measured dataset is currently required to calibrate the first kit; reference images guide appearance but do not define geometry truth."
+    },
+    {
+      "type": "learned",
+      "reason": "The requested edits, topology constraints, and variations can be expressed explicitly without model training."
+    }
+  ],
+  "sources": [
+    {
+      "id": "unified-triceratops-generator",
+      "role": "grounding",
+      "provenance": "Captured as kit/mesh-program.json with its accepted transaction history",
+      "license": "User-owned sandbox work; external reuse terms unresolved",
+      "synthetic": true
+    },
+    {
+      "id": "unified-triceratops-validation",
+      "role": "validation",
+      "provenance": "Captured as compact evidence under evidence/",
+      "license": "User-owned sandbox work",
+      "synthetic": false
+    },
+    {
+      "id": "approved-triceratops-reference",
+      "role": "validation",
+      "provenance": "User-supplied and approved visual direction in the current conversation",
+      "license": "Use permitted for this user-directed study; broader publication rights unresolved",
+      "synthetic": false
+    }
+  ],
+  "inputs": [
+    "mesh-program/v1 JSON document",
+    "RFC 6902 JSON Patch transaction with base revision",
+    "named seed and deterministic random streams",
+    "capture and review profile",
+    "optional approved reference images"
+  ],
+  "parameters": [
+    {
+      "name": "meshProgram.nodes[*].params",
+      "type": "typed-object",
+      "range": "Declared per node by schema and kit constraints",
+      "source": "Kit-authored rules"
+    },
+    {
+      "name": "seed",
+      "type": "uint32",
+      "range": [
+        1,
+        4294967295
+      ],
+      "source": "Deterministic generation policy"
+    },
+    {
+      "name": "review.batchSize",
+      "type": "integer",
+      "range": [
+        1,
+        10
+      ],
+      "source": "Bounded sandbox review budget"
+    },
+    {
+      "name": "review.orbitViews",
+      "type": "integer",
+      "range": [
+        4,
+        16
+      ],
+      "source": "Capture profile; default 10"
+    }
+  ],
+  "seedPolicy": {
+    "required": true,
+    "algorithm": "Declared uint32 PRNG with FNV-1a-derived named streams and path-stable sampling",
+    "streams": [
+      "anatomy",
+      "attachments",
+      "surface",
+      "pose",
+      "lighting",
+      "candidate"
+    ]
+  },
+  "stages": [
+    {
+      "id": "parse",
+      "input": "mesh-program/v1 document",
+      "output": "normalized typed AST",
+      "validation": "Schema, stable IDs, references, types, ranges, and acyclic dependency graph pass"
+    },
+    {
+      "id": "evaluate",
+      "input": "normalized AST plus seed",
+      "output": "incrementally cached Three.js geometry, materials, and scene state",
+      "validation": "Only dirty nodes and their dependents recompute; repeat hashes match"
+    },
+    {
+      "id": "inject",
+      "input": "revision-guarded JSON Patch transaction",
+      "output": "preview or committed document revision",
+      "validation": "Patch is authorized by schema, evaluated in isolation, and rolled back on failure"
+    },
+    {
+      "id": "validate",
+      "input": "evaluated mesh asset",
+      "output": "machine-readable geometry and performance report",
+      "validation": "Topology, winding, finite values, UVs, bounds, budgets, and determinism gates pass"
+    },
+    {
+      "id": "capture",
+      "input": "eligible candidate and fixed capture profile",
+      "output": "ten-angle orbit, hero render, and contact sheet",
+      "validation": "Every view is present, nonblank, consistently framed, and hash-recorded"
+    },
+    {
+      "id": "review",
+      "input": "incumbent, challengers, hard-gate reports, and comparable captures",
+      "output": "accept, reject, or retain-incumbent decision with reasons",
+      "validation": "No technically failed candidate can win; human or agent visual judgment is recorded separately from synthetic scores"
+    },
+    {
+      "id": "export",
+      "input": "committed winning revision",
+      "output": "GLB, mesh-program JSON, manifest, and evidence package",
+      "validation": "Export reimports, matches expected structure, and retains source revision and hashes"
+    }
+  ],
+  "serviceSurface": [
+    "describe",
+    "generate",
+    "randomize",
+    "reroll",
+    "validate",
+    "export"
+  ],
+  "validation": {
+    "authorities": [
+      "Independent topology analyzer",
+      "Deterministic rerender and geometry hashes",
+      "Fixed-profile ten-angle capture",
+      "Recorded human or agent visual comparison against the approved reference"
+    ],
+    "claims": [
+      "Every committed edit is replayable from the base document and transaction log",
+      "A failed patch cannot mutate committed live state",
+      "Dirty-node evaluation is equivalent to a clean full rebuild",
+      "Winning structural meshes satisfy the declared topology and winding gates",
+      "Final exported artifacts correspond to the accepted AST revision"
+    ],
+    "syntheticIsSoleTruth": false
+  },
+  "humanReview": {
+    "required": true,
+    "criteria": [
+      "silhouette",
+      "anatomy",
+      "facial readability",
+      "surface language",
+      "attachment integration",
+      "consistency across orbit angles",
+      "reference fidelity"
+    ],
+    "authority": "User approval is final; the assistant may choose an interim incumbent when evidence is retained"
+  },
+  "delivery": {
+    "format": "Repository-local offline ESM package, browser preview, CLI, kit folder, JSON schemas, tests, and reproducible evidence outputs",
+    "consumer": "NexusFactory asset-production workflows"
+  },
+  "outputs": [
+    "mesh-program.json",
+    "transaction-log.ndjson",
+    "live-state.json",
+    "validation.json",
+    "hero.png",
+    "orbit/contact-sheet.png",
+    "review-decisions.json",
+    "asset.glb",
+    "factory-manifest.json"
+  ],
+  "constraints": [
+    "Offline asset-production tool; it is not added to the public browser Kit registry",
+    "Plain Node ESM and existing rendering dependencies; no mandatory framework",
+    "No hard-coded absolute dependency paths",
+    "Stable IDs and schema versions for all AST nodes and transactions",
+    "Preview edits never overwrite committed state",
+    "Hard technical gates run before visual review",
+    "Rejected candidates and failed attempts remain in evidence",
+    "Core harness contains no Triceratops-specific anatomy rules",
+    "The reviewed revision 45 candidate remains the incumbent until a challenger is explicitly accepted"
+  ],
+  "unknowns": [
+    "Final animation and rigging contract is outside the first harness scope",
+    "Whether Blender-native export/edit round-tripping is required after GLB proof",
+    "Whether later kits need texture baking beyond procedural vertex colors and generated maps",
+    "Whether a remote vision reviewer will be available; the initial review adapter must support assistant or human decisions"
+  ],
+  "status": "reviewed-candidate"
+}

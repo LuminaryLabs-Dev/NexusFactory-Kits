@@ -1,0 +1,20 @@
+{
+  "schemaVersion": "1.0",
+  "kitId": "triceratops-guided-reviewed-candidate-v1",
+  "factoryId": "triceratops-mesh-editor",
+  "status": "reviewed-candidate",
+  "program": "mesh-program.json",
+  "constraints": "constraints.json",
+  "reviewProfile": "review-profile.json",
+  "transactionHistory": "accepted-transactions.ndjson",
+  "baseline": {
+    "seed": 927239,
+    "revision": 45,
+    "geometrySha256": "30f337bb5e95f0cab2d9b9df4e6d7d7a22c16514a7b38da30d117cf3fbf17835",
+    "glbSha256": "c20fe58886cf05d5482616dbdf341a08aba44f861acb819ed6a728f0ffe146a9",
+    "bodyTriangles": 17788,
+    "completeAssetTriangles": 18614,
+    "structuralShellMeshes": 1,
+    "replaceableAttachments": 27
+  }
+}

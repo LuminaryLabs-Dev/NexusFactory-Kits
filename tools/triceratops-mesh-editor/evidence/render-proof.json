@@ -1,0 +1,13 @@
+{
+  "schema": "triceratops-mesh-editor-render-proof/v1",
+  "verdict": "pass",
+  "checks": {
+    "allTenViewsVisible": true,
+    "heroMatchesReviewedEvidence": true,
+    "geometryMatchesReviewedCandidate": true
+  },
+  "profile": "triceratops-guided-reviewed-candidate-v1",
+  "contactSheet": "output/render-proof/orbit/contact-sheet.png",
+  "heroSha256": "03c3461c239a710824c17b9ee03beef09eeef7443439271940b4fbb6a3a8847b",
+  "reviewedHeroSha256": "03c3461c239a710824c17b9ee03beef09eeef7443439271940b4fbb6a3a8847b"
+}

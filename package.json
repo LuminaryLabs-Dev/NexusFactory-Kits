@@ -19,7 +19,11 @@
     "fish:validate": "node tools/fish/validate.mjs",
     "fish:inspect": "node tools/fish/inspect-glb.mjs",
     "fish:batch": "node tools/fish/batch-generate.mjs",
-    "fish:review": "node tools/fish/run-review-pipeline.mjs"
+    "fish:review": "node tools/fish/run-review-pipeline.mjs",
+    "triceratops:install": "npm --prefix tools/triceratops-mesh-editor install",
+    "triceratops:test": "npm --prefix tools/triceratops-mesh-editor test",
+    "triceratops:validate": "npm --prefix tools/triceratops-mesh-editor run validate",
+    "triceratops:serve": "npm --prefix tools/triceratops-mesh-editor run serve"
   },
   "engines": {
     "node": ">=20"

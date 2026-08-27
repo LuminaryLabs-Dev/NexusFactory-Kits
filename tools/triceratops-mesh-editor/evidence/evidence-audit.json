@@ -1,0 +1,467 @@
+{
+  "schema": "guided-review-evidence-audit/v1",
+  "verdict": "pass",
+  "failures": [],
+  "loops": [
+    {
+      "loop": 1,
+      "candidates": 5,
+      "feedback": true,
+      "comparison": true,
+      "dayCycle": "pass",
+      "reflectionRing": "pass"
+    },
+    {
+      "loop": 2,
+      "candidates": 5,
+      "feedback": true,
+      "comparison": true,
+      "dayCycle": "pass",
+      "reflectionRing": "pass"
+    },
+    {
+      "loop": 3,
+      "candidates": 5,
+      "feedback": true,
+      "comparison": true,
+      "dayCycle": "pass",
+      "reflectionRing": "pass"
+    },
+    {
+      "loop": 4,
+      "candidates": 5,
+      "feedback": true,
+      "comparison": true,
+      "dayCycle": "pass",
+      "reflectionRing": "pass"
+    },
+    {
+      "loop": 5,
+      "candidates": 5,
+      "feedback": true,
+      "comparison": true,
+      "dayCycle": "pass",
+      "reflectionRing": "pass"
+    },
+    {
+      "loop": 6,
+      "candidates": 5,
+      "feedback": true,
+      "comparison": true,
+      "dayCycle": "pass",
+      "reflectionRing": "pass"
+    },
+    {
+      "loop": 7,
+      "candidates": 5,
+      "feedback": true,
+      "comparison": true,
+      "dayCycle": "pass",
+      "reflectionRing": "pass"
+    },
+    {
+      "loop": 8,
+      "candidates": 5,
+      "feedback": true,
+      "comparison": true,
+      "dayCycle": "pass",
+      "reflectionRing": "pass"
+    },
+    {
+      "loop": 9,
+      "candidates": 5,
+      "feedback": true,
+      "comparison": true,
+      "dayCycle": "pass",
+      "reflectionRing": "pass"
+    },
+    {
+      "loop": 10,
+      "candidates": 5,
+      "feedback": true,
+      "comparison": true,
+      "dayCycle": "phase-gate",
+      "reflectionRing": "phase-gate"
+    },
+    {
+      "loop": 11,
+      "candidates": 5,
+      "feedback": true,
+      "comparison": true,
+      "dayCycle": "pass",
+      "reflectionRing": "pass"
+    },
+    {
+      "loop": 12,
+      "candidates": 5,
+      "feedback": true,
+      "comparison": true,
+      "dayCycle": "pass",
+      "reflectionRing": "pass"
+    },
+    {
+      "loop": 13,
+      "candidates": 5,
+      "feedback": true,
+      "comparison": true,
+      "dayCycle": "pass",
+      "reflectionRing": "pass"
+    },
+    {
+      "loop": 14,
+      "candidates": 5,
+      "feedback": true,
+      "comparison": true,
+      "dayCycle": "pass",
+      "reflectionRing": "pass"
+    },
+    {
+      "loop": 15,
+      "candidates": 5,
+      "feedback": true,
+      "comparison": true,
+      "dayCycle": "pass",
+      "reflectionRing": "pass"
+    },
+    {
+      "loop": 16,
+      "candidates": 5,
+      "feedback": true,
+      "comparison": true,
+      "dayCycle": "pass",
+      "reflectionRing": "pass"
+    },
+    {
+      "loop": 17,
+      "candidates": 5,
+      "feedback": true,
+      "comparison": true,
+      "dayCycle": "pass",
+      "reflectionRing": "pass"
+    },
+    {
+      "loop": 18,
+      "candidates": 5,
+      "feedback": true,
+      "comparison": true,
+      "dayCycle": "pass",
+      "reflectionRing": "pass"
+    },
+    {
+      "loop": 19,
+      "candidates": 5,
+      "feedback": true,
+      "comparison": true,
+      "dayCycle": "pass",
+      "reflectionRing": "pass"
+    },
+    {
+      "loop": 20,
+      "candidates": 5,
+      "feedback": true,
+      "comparison": true,
+      "dayCycle": "phase-gate",
+      "reflectionRing": "phase-gate"
+    },
+    {
+      "loop": 21,
+      "candidates": 5,
+      "feedback": true,
+      "comparison": true,
+      "dayCycle": "pass",
+      "reflectionRing": "pass"
+    },
+    {
+      "loop": 22,
+      "candidates": 5,
+      "feedback": true,
+      "comparison": true,
+      "dayCycle": "pass",
+      "reflectionRing": "pass"
+    },
+    {
+      "loop": 23,
+      "candidates": 5,
+      "feedback": true,
+      "comparison": true,
+      "dayCycle": "pass",
+      "reflectionRing": "pass"
+    },
+    {
+      "loop": 24,
+      "candidates": 5,
+      "feedback": true,
+      "comparison": true,
+      "dayCycle": "pass",
+      "reflectionRing": "pass"
+    },
+    {
+      "loop": 25,
+      "candidates": 5,
+      "feedback": true,
+      "comparison": true,
+      "dayCycle": "pass",
+      "reflectionRing": "pass"
+    },
+    {
+      "loop": 26,
+      "candidates": 5,
+      "feedback": true,
+      "comparison": true,
+      "dayCycle": "pass",
+      "reflectionRing": "pass"
+    },
+    {
+      "loop": 27,
+      "candidates": 5,
+      "feedback": true,
+      "comparison": true,
+      "dayCycle": "pass",
+      "reflectionRing": "pass"
+    },
+    {
+      "loop": 28,
+      "candidates": 5,
+      "feedback": true,
+      "comparison": true,
+      "dayCycle": "pass",
+      "reflectionRing": "pass"
+    },
+    {
+      "loop": 29,
+      "candidates": 5,
+      "feedback": true,
+      "comparison": true,
+      "dayCycle": "pass",
+      "reflectionRing": "pass"
+    },
+    {
+      "loop": 30,
+      "candidates": 5,
+      "feedback": true,
+      "comparison": true,
+      "dayCycle": "phase-gate",
+      "reflectionRing": "phase-gate"
+    },
+    {
+      "loop": 31,
+      "candidates": 5,
+      "feedback": true,
+      "comparison": true,
+      "dayCycle": "pass",
+      "reflectionRing": "pass"
+    },
+    {
+      "loop": 32,
+      "candidates": 5,
+      "feedback": true,
+      "comparison": true,
+      "dayCycle": "pass",
+      "reflectionRing": "pass"
+    },
+    {
+      "loop": 33,
+      "candidates": 5,
+      "feedback": true,
+      "comparison": true,
+      "dayCycle": "pass",
+      "reflectionRing": "pass"
+    },
+    {
+      "loop": 34,
+      "candidates": 5,
+      "feedback": true,
+      "comparison": true,
+      "dayCycle": "pass",
+      "reflectionRing": "pass"
+    },
+    {
+      "loop": 35,
+      "candidates": 5,
+      "feedback": true,
+      "comparison": true,
+      "dayCycle": "pass",
+      "reflectionRing": "pass"
+    },
+    {
+      "loop": 36,
+      "candidates": 5,
+      "feedback": true,
+      "comparison": true,
+      "dayCycle": "pass",
+      "reflectionRing": "pass"
+    },
+    {
+      "loop": 37,
+      "candidates": 5,
+      "feedback": true,
+      "comparison": true,
+      "dayCycle": "pass",
+      "reflectionRing": "pass"
+    },
+    {
+      "loop": 38,
+      "candidates": 5,
+      "feedback": true,
+      "comparison": true,
+      "dayCycle": "pass",
+      "reflectionRing": "pass"
+    },
+    {
+      "loop": 39,
+      "candidates": 5,
+      "feedback": true,
+      "comparison": true,
+      "dayCycle": "pass",
+      "reflectionRing": "pass"
+    },
+    {
+      "loop": 40,
+      "candidates": 5,
+      "feedback": true,
+      "comparison": true,
+      "dayCycle": "phase-gate",
+      "reflectionRing": "phase-gate"
+    },
+    {
+      "loop": 41,
+      "candidates": 5,
+      "feedback": true,
+      "comparison": true,
+      "dayCycle": "pass",
+      "reflectionRing": "pass"
+    },
+    {
+      "loop": 42,
+      "candidates": 5,
+      "feedback": true,
+      "comparison": true,
+      "dayCycle": "pass",
+      "reflectionRing": "pass"
+    },
+    {
+      "loop": 43,
+      "candidates": 5,
+      "feedback": true,
+      "comparison": true,
+      "dayCycle": "pass",
+      "reflectionRing": "pass"
+    },
+    {
+      "loop": 44,
+      "candidates": 5,
+      "feedback": true,
+      "comparison": true,
+      "dayCycle": "pass",
+      "reflectionRing": "pass"
+    },
+    {
+      "loop": 45,
+      "candidates": 5,
+      "feedback": true,
+      "comparison": true,
+      "dayCycle": "pass",
+      "reflectionRing": "pass"
+    },
+    {
+      "loop": 46,
+      "candidates": 5,
+      "feedback": true,
+      "comparison": true,
+      "dayCycle": "pass",
+      "reflectionRing": "pass"
+    },
+    {
+      "loop": 47,
+      "candidates": 5,
+      "feedback": true,
+      "comparison": true,
+      "dayCycle": "pass",
+      "reflectionRing": "pass"
+    },
+    {
+      "loop": 48,
+      "candidates": 5,
+      "feedback": true,
+      "comparison": true,
+      "dayCycle": "pass",
+      "reflectionRing": "pass"
+    },
+    {
+      "loop": 49,
+      "candidates": 5,
+      "feedback": true,
+      "comparison": true,
+      "dayCycle": "pass",
+      "reflectionRing": "pass"
+    },
+    {
+      "loop": 50,
+      "candidates": 5,
+      "feedback": true,
+      "comparison": true,
+      "dayCycle": "phase-gate",
+      "reflectionRing": "phase-gate"
+    }
+  ],
+  "checkpoints": [
+    {
+      "checkpoint": 10,
+      "dayCycleViews": 80,
+      "movingSunFrames": 36,
+      "video": {
+        "duration": "3.000000",
+        "size": "45636"
+      },
+      "verdict": "pass"
+    },
+    {
+      "checkpoint": 20,
+      "dayCycleViews": 80,
+      "movingSunFrames": 36,
+      "video": {
+        "duration": "3.000000",
+        "size": "46096"
+      },
+      "verdict": "pass"
+    },
+    {
+      "checkpoint": 30,
+      "dayCycleViews": 80,
+      "movingSunFrames": 36,
+      "video": {
+        "duration": "3.000000",
+        "size": "47326"
+      },
+      "verdict": "pass"
+    },
+    {
+      "checkpoint": 40,
+      "dayCycleViews": 80,
+      "movingSunFrames": 36,
+      "video": {
+        "duration": "3.000000",
+        "size": "46501"
+      },
+      "verdict": "pass"
+    },
+    {
+      "checkpoint": 50,
+      "dayCycleViews": 80,
+      "movingSunFrames": 36,
+      "video": {
+        "duration": "3.000000",
+        "size": "55441"
+      },
+      "verdict": "pass"
+    }
+  ],
+  "totals": {
+    "loops": 50,
+    "candidates": 250,
+    "perLoopFeedback": 50,
+    "referenceFirstComparisons": 50,
+    "checkpointDayCycleViews": 400,
+    "checkpointMovingSunFrames": 180
+  }
+}

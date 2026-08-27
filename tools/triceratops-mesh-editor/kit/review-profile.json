@@ -1,0 +1,61 @@
+{
+  "schema": "mesh-review-profile/v1",
+  "profileId": "triceratops-guided-reviewed-candidate-v1",
+  "batchSize": 5,
+  "maxAttempts": 3,
+  "orbitViews": 10,
+  "capture": {
+    "width": 640,
+    "height": 640,
+    "startAzimuth": 140,
+    "elevation": 18,
+    "background": "#45484c"
+  },
+  "hardGates": {
+    "structuralShellMeshes": 1,
+    "connectedComponents": 1,
+    "boundaryEdges": 0,
+    "nonManifoldEdges": 0,
+    "inconsistentWindingEdges": 0,
+    "duplicateFaces": 0,
+    "degenerateTriangles": 0,
+    "invalidValues": 0,
+    "normalDefects": 0,
+    "minLogicalQuads": 8000,
+    "triangleBudget": 32000
+  },
+  "visualCriteria": [
+    "silhouette",
+    "anatomy",
+    "facial-readability",
+    "surface-language",
+    "attachment-integration",
+    "orbit-consistency",
+    "reference-fidelity"
+  ],
+  "referenceIds": ["original-low-poly-triceratops-reference"],
+  "referencePath": "references/approved-reference.webp",
+  "candidateParameters": [
+    {"id": "stature-scale", "path": "/nodes/edit.ring.stature/params/scale/1", "start": 1.025, "end": 1.09, "target": 1.0575, "jitter": 0.0015},
+    {"id": "stature-lift", "path": "/nodes/edit.ring.stature/params/translate/1", "start": 0.045, "end": 0.16, "target": 0.1025, "jitter": 0.002},
+    {"id": "chest-length", "path": "/nodes/edit.ring.chest/params/scale/0", "start": 1.025, "end": 1.105, "target": 1.065, "jitter": 0.0015},
+    {"id": "chest-height", "path": "/nodes/edit.ring.chest/params/scale/1", "start": 1.05, "end": 1.17, "target": 1.11, "jitter": 0.002},
+    {"id": "chest-width", "path": "/nodes/edit.ring.chest/params/scale/2", "start": 1.035, "end": 1.13, "target": 1.0825, "jitter": 0.0015},
+    {"id": "hip-length", "path": "/nodes/edit.ring.hip/params/scale/0", "start": 1.02, "end": 1.09, "target": 1.055, "jitter": 0.0015},
+    {"id": "hip-height", "path": "/nodes/edit.ring.hip/params/scale/1", "start": 1.055, "end": 1.175, "target": 1.115, "jitter": 0.002},
+    {"id": "hip-width", "path": "/nodes/edit.ring.hip/params/scale/2", "start": 1.035, "end": 1.135, "target": 1.085, "jitter": 0.0015},
+    {"id": "head-length", "path": "/nodes/edit.ring.head/params/scale/0", "start": 0.975, "end": 0.9, "target": 0.9375, "jitter": 0.0015},
+    {"id": "head-height", "path": "/nodes/edit.ring.head/params/scale/1", "start": 0.965, "end": 0.84, "target": 0.9025, "jitter": 0.002},
+    {"id": "head-width", "path": "/nodes/edit.ring.head/params/scale/2", "start": 0.97, "end": 0.86, "target": 0.915, "jitter": 0.002},
+    {"id": "head-drop", "path": "/nodes/edit.ring.head/params/translate/1", "start": -0.01, "end": -0.065, "target": -0.0375, "jitter": 0.001}
+  ],
+  "firstObjective": {
+    "id": "adult-proportions",
+    "groups": [
+      "loop-rings",
+      "adult-proportions"
+    ],
+    "observed": "The procedural baseline is too front-heavy and baby-like compared with the approved reference.",
+    "instruction": "Use bounded loop-ring edits to lengthen and deepen the torso, strengthen the hips and shoulders, raise the adult stance, and reduce head dominance while preserving face readability and the watertight shell."
+  }
+}

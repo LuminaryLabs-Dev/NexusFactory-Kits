@@ -1,0 +1,36 @@
+{
+  "schema": "mesh-harness-server-api-validation/v1",
+  "verdict": "pass",
+  "target": "http://127.0.0.1:4174/",
+  "checks": {
+    "ready": true,
+    "htmlServed": true,
+    "previewAccepted": true,
+    "previewChangedSignature": true,
+    "previewTopologyPassed": true,
+    "rollbackRestored": true,
+    "staleRejected": true
+  },
+  "health": {
+    "status": "ready",
+    "revision": 0,
+    "surface": "webgl"
+  },
+  "before": {
+    "revision": 0,
+    "signature": "42445fae"
+  },
+  "preview": {
+    "revision": 0,
+    "signature": "2b29e2ce"
+  },
+  "rollback": {
+    "revision": 0,
+    "signature": "42445fae"
+  },
+  "stale": {
+    "error": "STALE_REVISION",
+    "message": "Stale revision 99; current revision is 0",
+    "revision": 0
+  }
+}

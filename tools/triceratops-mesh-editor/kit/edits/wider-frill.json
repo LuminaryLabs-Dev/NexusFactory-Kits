@@ -1,0 +1,12 @@
+{
+  "transactionId": "example-wider-frill",
+  "baseRevision": 0,
+  "mode": "preview",
+  "patch": [
+    {
+      "op": "replace",
+      "path": "/nodes/anatomy.frill-crown/params/radii/2",
+      "value": 1.31
+    }
+  ]
+}

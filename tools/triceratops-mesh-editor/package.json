@@ -1,0 +1,27 @@
+{
+  "name": "@luminarylabs/triceratops-mesh-editor",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "describe": "node mesh-editor.mjs describe",
+    "generate": "node mesh-editor.mjs generate --clean=true",
+    "validate": "node commands/validate-kit.mjs",
+    "test": "node --test tests/*.test.mjs",
+    "serve": "node mesh-editor.mjs serve --port=4173",
+    "render": "node commands/render-orbit.mjs",
+    "review": "node mesh-editor.mjs review --count=5",
+    "review:50": "node commands/review-50.mjs",
+    "clean-room": "node commands/clean-room-probe.mjs",
+    "audit:package": "node commands/package-audit.mjs",
+    "validate:server": "node commands/validate-server.mjs"
+  },
+  "dependencies": {
+    "@headless-three/renderer": "0.4.0",
+    "sharp": "0.34.3",
+    "three": "0.183.0"
+  }
+}

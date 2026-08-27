@@ -1,0 +1,327 @@
+{
+  "schema": "triceratops-mesh-editor-package-audit/v1",
+  "verdict": "pass",
+  "checks": {
+    "inventoryComplete": true,
+    "noAbsoluteDependencyPaths": true,
+    "noSecretPatterns": true,
+    "fullArchiveExcluded": true
+  },
+  "missing": [],
+  "absolutePathFailures": [],
+  "secretFailures": [],
+  "inventory": [
+    {
+      "path": "commands/audit-evidence.mjs",
+      "role": "headless command",
+      "bytes": 4302,
+      "sha256": "5b14cd06532b7d45f0348ba31871a1dff242c1f64a887ef1be9ab04cf1e60c97"
+    },
+    {
+      "path": "commands/clean-room-probe.mjs",
+      "role": "headless command",
+      "bytes": 2041,
+      "sha256": "73cd7f7e7fed3a146513279d115e8bc158b4136033090441862435df1ed039a7"
+    },
+    {
+      "path": "commands/finalize-review.mjs",
+      "role": "headless command",
+      "bytes": 8786,
+      "sha256": "15b3166bce30c4b64772d603697935d6801be0bdcf6867e5f9d9a4505ad82fec"
+    },
+    {
+      "path": "commands/package-audit.mjs",
+      "role": "headless command",
+      "bytes": 3660,
+      "sha256": "be3ce938d569b2e44608d676a24752879b834f651f6a4d7c7e09c794303ea5be"
+    },
+    {
+      "path": "commands/render-orbit.mjs",
+      "role": "headless command",
+      "bytes": 1620,
+      "sha256": "2ff83e68c71ff986fb2ae0f3b65bb59989593e60374e52d0e4a30ea483574262"
+    },
+    {
+      "path": "commands/review-50.mjs",
+      "role": "headless command",
+      "bytes": 998,
+      "sha256": "47349404ed289964371f5c1ae790e9f8bb9acfef3a30c3f89b1999c538faaf05"
+    },
+    {
+      "path": "commands/validate-kit.mjs",
+      "role": "headless command",
+      "bytes": 4139,
+      "sha256": "03ebf85faa030d93f859d7f6cf72eabbadb7164bc62f128a864f14044c3bf96b"
+    },
+    {
+      "path": "commands/validate-server.mjs",
+      "role": "headless command",
+      "bytes": 2665,
+      "sha256": "315f0361e58057a092a70a4f9ffbfa3fd093cb9619d892f45aa80ce455eb9888"
+    },
+    {
+      "path": "evidence/clean-room.json",
+      "role": "compact evidence",
+      "bytes": 1081,
+      "sha256": "82348c13df9050f794486ffa231d6a76354c2fd725db95d2fecd477aa420666e"
+    },
+    {
+      "path": "evidence/evidence-audit.json",
+      "role": "compact evidence",
+      "bytes": 9421,
+      "sha256": "f17e0d4d804326804cacb88961b6d1769b8c46a2bed6499a5c3be8bc2a55f1d0"
+    },
+    {
+      "path": "evidence/final-orbit.png",
+      "role": "compact evidence",
+      "bytes": 660507,
+      "sha256": "9208a45e51fa8871d31817a8ca245e2e0388f5dc12aecabfce06dfab92b5d8a6"
+    },
+    {
+      "path": "evidence/final-reference.png",
+      "role": "compact evidence",
+      "bytes": 181176,
+      "sha256": "03c3461c239a710824c17b9ee03beef09eeef7443439271940b4fbb6a3a8847b"
+    },
+    {
+      "path": "evidence/package-audit.json",
+      "role": "compact evidence",
+      "bytes": null,
+      "sha256": null
+    },
+    {
+      "path": "evidence/reference-comparison.png",
+      "role": "compact evidence",
+      "bytes": 285595,
+      "sha256": "a86e44ecc6c53d826aaa9f8dfb0a9086d73f8506d4dc1b2aeaae1660c3fe469f"
+    },
+    {
+      "path": "evidence/render-proof.json",
+      "role": "compact evidence",
+      "bytes": 514,
+      "sha256": "1f3d63bf966ded61b6a7d90216f99fba3b405acb55c761ba242da31d8181431b"
+    },
+    {
+      "path": "evidence/server-api-validation.json",
+      "role": "compact evidence",
+      "bytes": 745,
+      "sha256": "326d842ce4c6e282befa517e9adb58b18a8b63346fa61e25260cf5484c0ec06b"
+    },
+    {
+      "path": "evidence/technical-validation.json",
+      "role": "compact evidence",
+      "bytes": 20513,
+      "sha256": "f9b5419e1ff7671f5c46b0caeb760f925322a776248adfb704e8f2df8d610eb3"
+    },
+    {
+      "path": "exports/triceratops-reviewed-candidate.glb",
+      "role": "validated export",
+      "bytes": 579656,
+      "sha256": "c20fe58886cf05d5482616dbdf341a08aba44f861acb819ed6a728f0ffe146a9"
+    },
+    {
+      "path": "factory-contract.json",
+      "role": "package contract or entrypoint",
+      "bytes": 8154,
+      "sha256": "87c0048589bf50ce17acffe39a54d7291e40c9f9197294bc02b159e3167ce75f"
+    },
+    {
+      "path": "index.html",
+      "role": "package contract or entrypoint",
+      "bytes": 1878,
+      "sha256": "9e7729f5871720fe56df92a2ede079241cce16e35731e66752455ff7465d669f"
+    },
+    {
+      "path": "kit/accepted-transactions.ndjson",
+      "role": "kit source",
+      "bytes": 22464,
+      "sha256": "a3fa9838b5f64585d3bb91e6801a01ac8bcdf946db2c978081ae56a8f2e50d77"
+    },
+    {
+      "path": "kit/constraints.json",
+      "role": "kit source",
+      "bytes": 4120,
+      "sha256": "63491f93e95f455865c2e9ed493b99ad0991b969723936b585774daa6a63b9b2"
+    },
+    {
+      "path": "kit/edits/wider-frill.json",
+      "role": "kit source",
+      "bytes": 219,
+      "sha256": "00a92f0d871ade47e5f726f26c7db3ff48203a90adb793283f00b2ad84919ebb"
+    },
+    {
+      "path": "kit/kit.json",
+      "role": "kit source",
+      "bytes": 695,
+      "sha256": "343976dbeae73563eb2fddb4f9fd59510cde365be2b1cf6541ea84918f4534a8"
+    },
+    {
+      "path": "kit/mesh-program.json",
+      "role": "kit source",
+      "bytes": 34829,
+      "sha256": "b64d0a5679569e88d5a996889e6670c6928156656c8695ed03b30abffe6a390a"
+    },
+    {
+      "path": "kit/references/approved-reference.webp",
+      "role": "visual reference",
+      "bytes": 300330,
+      "sha256": "2dc1bf421c1da252a8f819631b7b47388631b23a84b660477d549ff7b5f75161"
+    },
+    {
+      "path": "kit/review-profile.json",
+      "role": "kit source",
+      "bytes": 3110,
+      "sha256": "3f8c171e5d13a4f711ae3bc023dca67f7ee80355e7fb6f8ee0b7dcb67d65acc0"
+    },
+    {
+      "path": "kit.manifest.json",
+      "role": "package contract or entrypoint",
+      "bytes": 1971,
+      "sha256": "43343e9fef135552f84e18d99c99e535b7b0f11f7f5874e580262a7bf5fe68e1"
+    },
+    {
+      "path": "mesh-editor.mjs",
+      "role": "package contract or entrypoint",
+      "bytes": 4331,
+      "sha256": "4b357c7ee1857709075fbaba3a3916064021172b83340409ff1aabd3ef5b8f89"
+    },
+    {
+      "path": "package-lock.json",
+      "role": "package contract or entrypoint",
+      "bytes": 22735,
+      "sha256": "40eff0f9862f93fec3631a3eb0e73e41fae20662ae80440265c9cbf981ac6927"
+    },
+    {
+      "path": "package.json",
+      "role": "package contract or entrypoint",
+      "bytes": 868,
+      "sha256": "39ac2fde7d98b69aceb96ef97cec86622435be33db4c621f9a8097ca7ebbce8c"
+    },
+    {
+      "path": "README.md",
+      "role": "package contract or entrypoint",
+      "bytes": 2368,
+      "sha256": "84508f6fd9b94638276a24a8135842976b29c847eb5dafaec1743677b5b642ae"
+    },
+    {
+      "path": "services/ast-service.mjs",
+      "role": "runtime service",
+      "bytes": 3163,
+      "sha256": "b8cca112e24cb41c2490c516e7100b49186eeb259758b60232d45dd4cb47d530"
+    },
+    {
+      "path": "services/evaluator-service.mjs",
+      "role": "runtime service",
+      "bytes": 2754,
+      "sha256": "7f5157bf4ea8f6207ba486bcb76e41820cc4a83f13f9463d9e7a38dd8b715289"
+    },
+    {
+      "path": "services/export-service.mjs",
+      "role": "runtime service",
+      "bytes": 8977,
+      "sha256": "f0c8410c0cc2ffe568fc25c0ca09129466dab536f274fa702de5cf14cbe1f189"
+    },
+    {
+      "path": "services/factory-service.mjs",
+      "role": "runtime service",
+      "bytes": 4989,
+      "sha256": "d45908a7186dfe50c5eafbc8dd6c1163318ca2c3737ac5e431541dd70317b7e4"
+    },
+    {
+      "path": "services/guided-profile.mjs",
+      "role": "runtime service",
+      "bytes": 17872,
+      "sha256": "ec7ffad2e93d06510085650e7afe68526acc4b2fdc4eb516bea163380597d720"
+    },
+    {
+      "path": "services/guided-review-service.mjs",
+      "role": "runtime service",
+      "bytes": 14052,
+      "sha256": "e2854fcfc41003b88462365c52f5f5a8d3d4d8d9eeeefc0d9a5737655a66ce0a"
+    },
+    {
+      "path": "services/io-service.mjs",
+      "role": "runtime service",
+      "bytes": 1293,
+      "sha256": "9d0b29e716820ba02716977462d98488cec097779eb91e29637ed2c954d6841a"
+    },
+    {
+      "path": "services/node-service.mjs",
+      "role": "runtime service",
+      "bytes": 31158,
+      "sha256": "2457d07527e58e945198996802337dd766605c5cd20e3a30205390a60065bb23"
+    },
+    {
+      "path": "services/preview-service.mjs",
+      "role": "runtime service",
+      "bytes": 8812,
+      "sha256": "ad32655e1be94311adf32beefb48c17a5dcd9135c0440b8a3b4127267d993d47"
+    },
+    {
+      "path": "services/render-service.mjs",
+      "role": "runtime service",
+      "bytes": 14331,
+      "sha256": "4532ec766c473e30e436f4c1bf438010d26f443d878f0db09b4f85f03a2a1585"
+    },
+    {
+      "path": "services/review-service.mjs",
+      "role": "runtime service",
+      "bytes": 14326,
+      "sha256": "dbc8c19e6da4a70d29f38cf5201834264af2ff3bb76082754b25b719418f04e1"
+    },
+    {
+      "path": "services/runtime-service.mjs",
+      "role": "runtime service",
+      "bytes": 1502,
+      "sha256": "c118307930408196dbfe437507c6d7b761888837a6b431cf2edb634190584220"
+    },
+    {
+      "path": "services/server-service.mjs",
+      "role": "runtime service",
+      "bytes": 5981,
+      "sha256": "8b1057a28efe2030dd1ffe50e4bb95b6062b77e43b9a43059dc053a8c704ef67"
+    },
+    {
+      "path": "services/state-service.mjs",
+      "role": "runtime service",
+      "bytes": 6577,
+      "sha256": "3ef30565e851d78db7754c7c6b85e957877758aa9df6579d33faa25a9e4fab54"
+    },
+    {
+      "path": "services/transaction-service.mjs",
+      "role": "runtime service",
+      "bytes": 3273,
+      "sha256": "445d768d6937148d6debff1a1fdd6b90b93e0d5cfc3b15b9941a2861c11e55b1"
+    },
+    {
+      "path": "services/validation-service.mjs",
+      "role": "runtime service",
+      "bytes": 8125,
+      "sha256": "2182ae49747383170aebc595970f4d4dee47ac3bc3d65296bbf1a536f33d4aed"
+    },
+    {
+      "path": "source-model.json",
+      "role": "package contract or entrypoint",
+      "bytes": 2195,
+      "sha256": "ed21d4063eaa50080ae10e8d60f536a270db42ce5394636e375af476b8b3154d"
+    },
+    {
+      "path": "tests/factory.test.mjs",
+      "role": "test",
+      "bytes": 4766,
+      "sha256": "f796a7efafdfd3fe8aed54ab804c4ef05800109ec2557e3eaf0a4e866c991e95"
+    },
+    {
+      "path": "vendor/three.module.js",
+      "role": "browser runtime dependency",
+      "bytes": 1284651,
+      "sha256": "e4be591454d429c46b7b96a2a2df475a18c89d2dae5f5aa47cfdb90c83ae6120"
+    },
+    {
+      "path": "web/styles.css",
+      "role": "editor presentation",
+      "bytes": 3787,
+      "sha256": "fc5aef38ecff22aa4699310df61e072f687bc15f851ba91adea0abba80e52193"
+    }
+  ]
+}

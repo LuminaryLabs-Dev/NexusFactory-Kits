@@ -1,0 +1,63 @@
+{
+  "schemaVersion": "1.0",
+  "factoryId": "triceratops-mesh-editor",
+  "factoryType": "composed",
+  "status": "reviewed-candidate",
+  "factoryContract": "factory-contract.json",
+  "sourceModel": "source-model.json",
+  "serviceSurface": [
+    "describe",
+    "generate",
+    "randomize",
+    "reroll",
+    "validate",
+    "export"
+  ],
+  "paths": {
+    "cli": "mesh-editor.mjs",
+    "factoryService": "services/factory-service.mjs",
+    "transactionService": "services/transaction-service.mjs",
+    "stateService": "services/state-service.mjs",
+    "validationService": "services/validation-service.mjs",
+    "reviewService": "services/guided-review-service.mjs",
+    "kit": "kit/kit.json",
+    "program": "kit/mesh-program.json",
+    "history": "kit/accepted-transactions.ndjson",
+    "interactiveEntry": "index.html",
+    "test": "tests/factory.test.mjs",
+    "validator": "commands/validate-kit.mjs",
+    "cleanRoomProbe": "commands/clean-room-probe.mjs"
+  },
+  "seedPolicy": {
+    "rootSeed": 927239,
+    "algorithm": "mulberry32 with FNV-1a named stream derivation",
+    "namedStreams": [
+      "anatomy",
+      "attachments",
+      "surface",
+      "pose",
+      "lighting",
+      "candidate"
+    ]
+  },
+  "exports": [
+    "glb",
+    "mesh-program-json",
+    "manifest-json",
+    "png"
+  ],
+  "validationClaims": [
+    "revision-guarded JSON Patch edits",
+    "incremental evaluation equals clean evaluation",
+    "loop-ring deformation rebuilds only dirty dependents",
+    "one watertight structural body shell",
+    "zero boundary, non-manifold, winding, duplicate-face, degenerate, or invalid-value defects",
+    "deterministic geometry and GLB hashes",
+    "export reimport matches the accepted revision"
+  ],
+  "limitations": [
+    "Reviewed candidate; user art approval is still required.",
+    "The GLB has no rig, skin weights, or animation clips.",
+    "The committed evidence is compact; the 101 MB full review archive remains outside Git history."
+  ]
+}

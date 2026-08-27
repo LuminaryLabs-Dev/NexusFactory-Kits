@@ -1,0 +1,29 @@
+{
+  "schema": "triceratops-mesh-editor-clean-room/v1",
+  "verdict": "pass",
+  "checks": {
+    "isolatedDirectory": true,
+    "noCopiedNodeModules": true,
+    "testsPass": true,
+    "validationPass": true,
+    "exportPass": true,
+    "exportExists": true
+  },
+  "runs": [
+    {
+      "command": "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node --test tests/factory.test.mjs",
+      "status": 0,
+      "outputSha256": "fbf1fc5bba537e37c3b944b8e23bc65b4a7e96614e2b5a9ff63b2aec41b7abeb"
+    },
+    {
+      "command": "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node commands/validate-kit.mjs",
+      "status": 0,
+      "outputSha256": "83daf35cf4370f55b47f8df64eedfa4b3d0ad39c302f5c058f9038867f881129"
+    },
+    {
+      "command": "/opt/codex/runtimes/codex-primary-runtime/dependencies/node/bin/node mesh-editor.mjs export --out=/tmp/triceratops-mesh-editor-cIVtAu/output/export-proof --name=triceratops-clean-room.glb",
+      "status": 0,
+      "outputSha256": "5c17f49f7d3a69a043d236b1ef8e7790c0f464d95ef4d9680c98875dc46b48f1"
+    }
+  ]
+}

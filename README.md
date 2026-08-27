@@ -101,6 +101,19 @@ npm run coral:3d:validate
 
 The first command regenerates the ten GLBs and export records. The second reloads the approved exports, validates finite mesh positions, exact checksums and triangle counts, and proves floor contact.
 
+## Triceratops mesh editor
+
+`tools/triceratops-mesh-editor` is a reusable offline procedural editor built around a typed JSON AST and a flat service surface. It owns the reviewed Triceratops program, accepted RFC 6902 transactions, incremental evaluation, topology gates, browser preview, guided review runner, and deterministic GLB export. It is not registered as a public browser Kit.
+
+```bash
+npm run triceratops:install
+npm run triceratops:test
+npm run triceratops:validate
+npm run triceratops:serve
+```
+
+The committed GLB is a `reviewed-candidate`: it passes structural validation but still requires user art approval and has no rig or animation clips. Compact comparison, orbit, validation, and replay evidence is committed; the 101 MB full review archive is intentionally kept outside Git history.
+
 ## Aquatic Flora Generator
 
 Aquatic Flora `0.2.0` gives Seagrass, Kelp, Branching, and Tuft separate rooted growth grammars while preserving the existing style, palette, size, density, and sway controls. Artifacts now record design profiles and feature counts, and validation proves connected silhouettes, palette depth, style identity, and parameter response.

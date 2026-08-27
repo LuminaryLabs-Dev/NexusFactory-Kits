@@ -6,6 +6,8 @@ This file records notable human-facing project changes. Dated sections are devel
 
 ### Added
 
+- Added the offline, service-driven Triceratops mesh editor with a typed JSON AST, revision-guarded patch injection, incremental evaluation, live viewport, guided review runner, topology-gated export, accepted transaction history, and compact evidence.
+- Added the revision-45 reviewed Triceratops candidate GLB with deterministic geometry/export hashes and clean-room regeneration proof.
 - Added the deterministic offline 3D coral generator, ten reviewed GLB exports, numbered presets, checksums, contact sheet, and reload validation used by Little Reef.
 - Added Aquatic Flora style-identity, silhouette-separation, connectivity, palette-depth, feature, and parameter-response validation.
 - Added a 50-image Aquatic Flora comparison and final review set.
@@ -31,6 +33,7 @@ This file records notable human-facing project changes. Dated sections are devel
 
 ### Validation
 
+- Triceratops editor service tests pass 6/6; topology, exact geometry parity, API preview/rollback, ten-angle render parity, package audit, clean-room test, and clean-room GLB export pass.
 - The accepted Aquatic Flora candidate passed 80/80 comparison artifacts, reduced average connected components from 3.55 to 1.00, increased average palette depth from 2.9125 to 3.75, and cleared every declared review gate.
 - Complete repository validation passes 37/37 tests with a valid 45-domain, 8-Kit registry.
 - A local registry-to-Studio validation pass downloaded and exercised all 8 module graphs; all generation, determinism, randomize, reroll, validation, phase, and export checks passed before publication.
@@ -42,6 +45,7 @@ This file records notable human-facing project changes. Dated sections are devel
 
 ### Known limitations
 
+- The Triceratops remains a reviewed candidate: it is not reference-identical and has no rig, skin weights, or animation clips.
 - Fish animation, genetics, breeding, game integration, worker execution, WebGL mesh-preview completion, and production performance gates remain outside this milestone.
 - Ballista GLB animation and complete artifact provenance remain open.
 

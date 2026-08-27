@@ -1,0 +1,149 @@
+{
+  "schema": "mesh-constraints/v1",
+  "parameters": {
+    "/nodes/anatomy.torso/params/radii/0": {
+      "type": "number",
+      "min": 2.25,
+      "max": 2.65,
+      "groups": ["anatomy", "torso"]
+    },
+    "/nodes/anatomy.shoulder/params/radii/0": {
+      "type": "number",
+      "min": 1.08,
+      "max": 1.32,
+      "groups": ["anatomy", "shoulders"]
+    },
+    "/nodes/anatomy.frill-crown/params/radii/1": {
+      "type": "number",
+      "min": 1.02,
+      "max": 1.28,
+      "groups": ["anatomy", "frill"]
+    },
+    "/nodes/anatomy.frill-crown/params/radii/2": {
+      "type": "number",
+      "min": 1.15,
+      "max": 1.42,
+      "groups": ["anatomy", "frill"]
+    },
+    "/nodes/attachments.detail/params/frillWidth": {
+      "type": "number",
+      "min": 1.02,
+      "max": 1.28,
+      "groups": ["attachments", "frill"]
+    },
+    "/nodes/attachments.detail/params/hornLength": {
+      "type": "number",
+      "min": 0.95,
+      "max": 1.2,
+      "groups": ["attachments", "horns"]
+    },
+    "/nodes/materials.character/params/roughness": {
+      "type": "number",
+      "min": 0.62,
+      "max": 0.82,
+      "groups": ["surface"]
+    },
+    "/nodes/edit.ring.stature/params/scale/1": {
+      "type": "number",
+      "min": 1,
+      "max": 1.2,
+      "groups": ["loop-rings", "adult-proportions", "stature"]
+    },
+    "/nodes/edit.ring.stature/params/translate/1": {
+      "type": "number",
+      "min": 0,
+      "max": 0.32,
+      "groups": ["loop-rings", "adult-proportions", "stature"]
+    },
+    "/nodes/edit.ring.chest/params/scale/0": {
+      "type": "number",
+      "min": 1,
+      "max": 1.2,
+      "groups": ["loop-rings", "adult-proportions", "chest"]
+    },
+    "/nodes/edit.ring.chest/params/scale/1": {
+      "type": "number",
+      "min": 1,
+      "max": 1.32,
+      "groups": ["loop-rings", "adult-proportions", "chest"]
+    },
+    "/nodes/edit.ring.chest/params/scale/2": {
+      "type": "number",
+      "min": 1,
+      "max": 1.22,
+      "groups": ["loop-rings", "adult-proportions", "chest"]
+    },
+    "/nodes/edit.ring.hip/params/scale/0": {
+      "type": "number",
+      "min": 1,
+      "max": 1.18,
+      "groups": ["loop-rings", "adult-proportions", "hip"]
+    },
+    "/nodes/edit.ring.hip/params/scale/1": {
+      "type": "number",
+      "min": 1,
+      "max": 1.34,
+      "groups": ["loop-rings", "adult-proportions", "hip"]
+    },
+    "/nodes/edit.ring.hip/params/scale/2": {
+      "type": "number",
+      "min": 1,
+      "max": 1.24,
+      "groups": ["loop-rings", "adult-proportions", "hip"]
+    },
+    "/nodes/edit.ring.front-legs/params/scale/0": {
+      "type": "number",
+      "min": 0.72,
+      "max": 1,
+      "groups": ["loop-rings", "adult-proportions", "legs"]
+    },
+    "/nodes/edit.ring.front-legs/params/scale/1": {
+      "type": "number",
+      "min": 1,
+      "max": 1.24,
+      "groups": ["loop-rings", "adult-proportions", "legs"]
+    },
+    "/nodes/edit.ring.rear-legs/params/scale/0": {
+      "type": "number",
+      "min": 0.76,
+      "max": 1,
+      "groups": ["loop-rings", "adult-proportions", "legs"]
+    },
+    "/nodes/edit.ring.rear-legs/params/scale/1": {
+      "type": "number",
+      "min": 1,
+      "max": 1.22,
+      "groups": ["loop-rings", "adult-proportions", "legs"]
+    },
+    "/nodes/edit.ring.head/params/scale/0": {
+      "type": "number",
+      "min": 0.82,
+      "max": 1,
+      "groups": ["loop-rings", "adult-proportions", "head"]
+    },
+    "/nodes/edit.ring.head/params/scale/1": {
+      "type": "number",
+      "min": 0.7,
+      "max": 1,
+      "groups": ["loop-rings", "adult-proportions", "head"]
+    },
+    "/nodes/edit.ring.head/params/scale/2": {
+      "type": "number",
+      "min": 0.74,
+      "max": 1,
+      "groups": ["loop-rings", "adult-proportions", "head"]
+    },
+    "/nodes/edit.ring.head/params/translate/1": {
+      "type": "number",
+      "min": -0.14,
+      "max": 0,
+      "groups": ["loop-rings", "adult-proportions", "head"]
+    },
+    "/nodes/edit.ring.head/params/rotate/2": {
+      "type": "number",
+      "min": 0,
+      "max": 9,
+      "groups": ["loop-rings", "adult-proportions", "head"]
+    }
+  }
+}

@@ -3,6 +3,9 @@
 ## Current facts
 
 - NexusFactory-Kits owns generator meaning, manifests, deterministic inputs, artifacts, validation, exports, and the generated registry.
+- `tools/triceratops-mesh-editor` owns the offline typed-AST Triceratops workflow; it is intentionally a flat service package and is not in the public registry.
+- The Triceratops reviewed candidate uses seed `927239`, revision `45`, geometry SHA-256 `30f337bb5e95f0cab2d9b9df4e6d7d7a22c16514a7b38da30d117cf3fbf17835`, and GLB SHA-256 `c20fe58886cf05d5482616dbdf341a08aba44f861acb819ed6a728f0ffe146a9`.
+- The candidate has one watertight body shell, 27 replaceable attachments, 18,614 total triangles, no rig, and no animation clips; user art approval is still required.
 - NexusFactory-Studio is the linked generic browser host and loads Kit modules from the registry.
 - `main` is the live registry channel consumed through jsDelivr.
 - `registry.json` is generated and must not be edited manually.

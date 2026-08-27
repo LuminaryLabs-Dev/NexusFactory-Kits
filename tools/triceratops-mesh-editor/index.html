@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Mesh Edit Harness</title>
+  <link rel="stylesheet" href="/web/styles.css">
+</head>
+<body>
+  <header>
+    <div><p class="eyebrow">PROCEDURAL FACTORY · TRICERATOPS KIT</p><h1>Mesh Edit Harness</h1></div>
+    <div class="header-state"><span id="status" data-tone="working">Starting runtime…</span><b id="revision">r0</b></div>
+  </header>
+  <main>
+    <section class="viewport-panel">
+      <canvas id="viewport" aria-label="Live Three.js procedural Triceratops preview"></canvas>
+      <div class="viewport-tools">
+        <button data-angle="140">Hero</button><button data-angle="180">Side</button><button data-angle="270">Rear</button><button data-angle="0">Front</button>
+        <span>Drag to orbit</span>
+      </div>
+      <div id="mesh-stats" class="mesh-stats">Loading mesh…</div>
+    </section>
+    <aside class="editor-panel">
+      <nav><button class="active">Parameters</button><button>Graph</button><button>Review</button></nav>
+      <section><h2>Live parameters</h2><p>Every control emits a revision-safe JSON preview.</p><div id="parameter-list"></div></section>
+      <section class="transaction"><h2>JSON injector</h2><textarea id="transaction-editor" spellcheck="false"></textarea><button id="apply-json" class="wide">Apply preview</button></section>
+      <section class="actions"><button id="commit" class="primary">Commit</button><button id="rollback">Rollback</button><button id="undo">Undo</button><button id="redo">Redo</button></section>
+    </aside>
+    <aside class="evidence-panel">
+      <h2>Evaluation graph</h2><p>Only dirty nodes and their dependents rebuild.</p><ol id="stage-list"></ol>
+    </aside>
+  </main>
+  <script type="module" src="/services/preview-service.mjs"></script>
+</body>
+</html>

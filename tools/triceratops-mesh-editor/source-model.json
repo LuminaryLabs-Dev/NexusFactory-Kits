@@ -1,0 +1,57 @@
+{
+  "schemaVersion": "1.0",
+  "modelId": "triceratops-guided-reviewed-candidate-v1",
+  "factoryId": "triceratops-mesh-editor",
+  "goal": "Preserve and continue the reviewed procedural Triceratops through a typed JSON AST and replayable transactions.",
+  "sourceType": "mixed",
+  "sources": [
+    {
+      "id": "approved-visual-reference",
+      "origin": "kit/references/approved-reference.webp",
+      "checksum": "2dc1bf421c1da252a8f819631b7b47388631b23a84b660477d549ff7b5f75161",
+      "license": "User-authorized project reference; redistribution rights are not asserted",
+      "role": "visual-validation",
+      "synthetic": false
+    },
+    {
+      "id": "guided-review-program",
+      "origin": "kit/mesh-program.json",
+      "version": "revision 45 after 50 guided loops",
+      "role": "generation",
+      "synthetic": true
+    },
+    {
+      "id": "accepted-edit-history",
+      "origin": "kit/accepted-transactions.ndjson",
+      "version": "45 accepted transactions",
+      "role": "replay",
+      "synthetic": true
+    }
+  ],
+  "transformations": [
+    {
+      "id": "typed-mesh-program",
+      "operation": "Evaluate whitelisted SDF, deformation, attachment, material, lighting, validation, and export nodes from stable IDs.",
+      "loss": "Rigging, skin weights, and animation are not represented."
+    }
+  ],
+  "observations": [
+    {
+      "claim": "The reviewed candidate contains one watertight structural shell, 27 replaceable attachments, and 18,614 total triangles.",
+      "sourceIds": ["guided-review-program"]
+    },
+    {
+      "claim": "The result improved during the guided review but still requires user approval against the reference.",
+      "sourceIds": ["approved-visual-reference", "guided-review-program"]
+    }
+  ],
+  "assumptions": [
+    "The approved visual reference remains the art-direction authority.",
+    "A reviewed candidate must not replace a production gameplay model until rigging and user approval are complete."
+  ],
+  "uncertainties": [
+    "The muzzle, frill rim, toe anatomy, and horn-to-skull transitions remain less faithful than the reference.",
+    "No Blender-native round-trip claim is made."
+  ],
+  "status": "reviewed-candidate"
+}

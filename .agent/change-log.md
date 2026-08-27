@@ -2,6 +2,14 @@
 
 Record only material changes to repository state, governing documentation, validation state, or durable context.
 
+## 2026-08-27 — Package Triceratops mesh editor
+
+- Change: Added a flat, service-driven offline mesh editor with a typed JSON AST, transactional state, incremental evaluation, topology validation, browser preview, guided review, and deterministic GLB export.
+- Candidate: Preserved seed `927239`, revision `45`, all 45 accepted transactions, one structural body shell, 27 replaceable attachments, and 18,614 total triangles.
+- Boundary: Kept the candidate outside the public browser Kit registry and excluded the 101 MB full review archive from Git.
+- Validation: Service tests, exact geometry/export hashes, server preview/rollback, ten-angle render parity, package audit, clean-room tests, and clean-room export passed.
+- Limitation: The GLB remains a reviewed candidate requiring user art approval; rigging and animation are not included.
+
 ## 2026-08-26 — Redesign Aquatic Flora identities
 
 - Change: Replaced the shared sparse-line Aquatic Flora treatment with separate rooted Seagrass, broad-leaf Kelp, forked Branching, and radial Tuft grammars and advanced the public Kit to `0.2.0`.
