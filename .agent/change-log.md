@@ -1,5 +1,11 @@
 # Agent Maintenance Change Log
 
+## 2026-09-05 — Add procedural horror Kit family
+
+- Registered creature horror, liminal structure, and distressed surface factories; public registry now has 45 domains and 11 Kits.
+- Added browser-safe mathematical generation, six-operation services, GLB/JSON exports, inspection harness and deterministic tests.
+- Visual review, game integration and standalone production readiness require separate direct evidence.
+
 Record only material changes to repository state, governing documentation, validation state, or durable context.
 
 ## 2026-08-27 — Package Triceratops mesh editor

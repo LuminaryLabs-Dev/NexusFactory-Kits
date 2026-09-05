@@ -105,3 +105,7 @@ const report = creatureFishKit.services.validate(artifact);
 if (!report.valid) throw new Error("Generated artifact is invalid");
 const output = creatureFishKit.services.export(artifact, "glb");
 ```
+
+## Horror generation family
+
+The public registry also includes `factory-object-creature-horror`, `factory-object-structure-liminal`, and `factory-material-procedural-distressed`. See [horror factories](horror-factories.md) for seed/parameter contracts, mesh roles, coordinate systems, exports, inspection harness and explicit visual-validation boundaries.

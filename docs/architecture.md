@@ -80,7 +80,7 @@ Each Kit combines:
 - a resolvable source module;
 - callable generation, variation, validation, phase, and export services.
 
-The public catalog contains eight kits. The raster Fish Generator remains independent from the Procedural Reef Fish mesh kit.
+The public catalog contains eleven kits, including horror creature, liminal structure, and distressed material factories. The raster Fish Generator remains independent from the Procedural Reef Fish mesh kit.
 
 ## Phased generation
 

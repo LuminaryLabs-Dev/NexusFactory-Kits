@@ -51,3 +51,7 @@ export { kit as fishKit, manifest as fishManifest } from "./domains/factory/text
 export { kit as aquaticFloraKit, manifest as aquaticFloraManifest } from "./domains/factory/texture/kits/aquatic-flora-kit/index.js";
 export { kit as reefKit, manifest as reefManifest } from "./domains/factory/scene/kits/reef-kit/index.js";
 export { kit as aquariumKit, manifest as aquariumManifest } from "./domains/factory/scene/kits/aquarium-kit/index.js";
+
+export { kit as horrorKit } from "./domains/factory/object/creature/kits/horror-kit/index.js";
+export { kit as liminalKit } from "./domains/factory/object/structure/kits/liminal-kit/index.js";
+export { kit as distressedKit } from "./domains/factory/material/procedural/kits/distressed-kit/index.js";

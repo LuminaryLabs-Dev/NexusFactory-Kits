@@ -1,5 +1,12 @@
 # Changelog
 
+## 2026-09-05 — Procedural horror factories
+
+- Added six custom horror creature grammars, liminal corridor architecture, and distressed architectural surface Kits.
+- Added deterministic parameter groups, validated GLB/JSON exports, browser inspection harness, and technical regression checks.
+- Kept runtime generation dependency-free and compatible with the existing mesh artifact contract.
+- Browser image review and game/Steam release quality remain separate validation boundaries.
+
 This file records notable human-facing project changes. Dated sections are development milestones, not tagged releases.
 
 ## Unreleased

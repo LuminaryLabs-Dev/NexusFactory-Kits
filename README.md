@@ -24,6 +24,9 @@ npm run demo
 
 | Generator | Kit ID | Output | Version |
 | --- | --- | --- | --- |
+| Procedural Horror Entities | `factory-object-creature-horror` | Sculpted mesh; GLB or JSON | `0.1.0` |
+| Liminal Corridor Architecture | `factory-object-structure-liminal` | Corridor mesh; GLB or JSON | `0.1.0` |
+| Distressed Architectural Surfaces | `factory-material-procedural-distressed` | PBR vertex-color swatch; GLB or JSON | `0.1.0` |
 | Windup Ballista Turret | `factory-object-weapon-ballista` | Mesh artifact; GLB or JSON | `0.1.0` |
 | Procedural Broadleaf Tree | `factory-object-foliage-tree` | Mesh artifact; GLB or JSON | `0.2.0` |
 | Procedural Reef Fish | `factory-object-creature-fish` | Textured mesh artifact; GLB or JSON | `0.1.0` |
@@ -34,6 +37,10 @@ npm run demo
 | Aquarium Generator | `factory-scene-aquatic-aquarium` | 128×128 RGBA scene; PNG or JSON | `0.1.0` |
 
 The two fish kits are intentionally separate: `factory-texture-fish` remains the raster subject used by pixel-art scene kits, while `factory-object-creature-fish` produces a reusable PBR 3D asset.
+
+## Horror factories
+
+Three browser-safe factories generate six sculpted creature grammars, modular liminal corridors, and distressed surface color fields. Read [the integration and harness contract](docs/horror-factories.md). Generated geometry exposes animation roles; consumers own animation and gameplay. Static exports are not animated or production-certified.
 
 ## Procedural Reef Fish
 
