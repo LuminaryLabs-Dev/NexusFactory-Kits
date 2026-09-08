@@ -1,0 +1,1 @@
+{"name":"amethyst-profile-factory","version":"1.0.0","private":true,"type":"module","scripts":{"test":"node --test tests/*.test.mjs","start":"node scripts/serve.mjs","capture":"node scripts/headless-run.mjs","batch":"node scripts/batch.mjs"},"dependencies":{"@sparticuz/chromium":"152.0.0","playwright":"1.58.2","sharp":"0.34.5","three":"0.185.1"}}

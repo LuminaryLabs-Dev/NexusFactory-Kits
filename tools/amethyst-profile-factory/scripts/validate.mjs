@@ -1,0 +1,8 @@
+import {mkdir,writeFile,readFile} from 'node:fs/promises';
+import {generate,validate,balancedBatch,describe,resolve} from '../src/factory.mjs';
+import {profiles} from '../src/catalogue.mjs';
+const records=[];for(const specimen of balancedBatch({count:10,seed:20260908})){const a=generate({specimen}),b=generate({specimen}),report=validate(a);records.push({profile:specimen.profile,seed:specimen.seed,parameters:specimen,signature:a.signature,geometrySignature:a.geometrySignature,repeatMatches:a.geometrySignature===b.geometrySignature,validation:report});}
+await mkdir('evidence',{recursive:true});await writeFile('evidence/technical-validation.json',JSON.stringify({status:records.every(r=>r.validation.status==='pass'&&r.repeatMatches)?'pass':'fail',records},null,2));await writeFile('evidence/catalogue.json',JSON.stringify(describe(),null,2));
+await writeFile('evidence/determinism.json',JSON.stringify({status:records.every(r=>r.repeatMatches)?'pass':'fail',records:records.map(({profile,seed,geometrySignature,repeatMatches})=>({profile,seed,geometrySignature,repeatMatches}))},null,2));
+const specimen=resolve({profile:'raw-compact-cluster',seed:1042}),minimal=generate({specimen});await mkdir('examples',{recursive:true});await writeFile('examples/minimal-input.json',JSON.stringify({profile:'raw-compact-cluster',seed:1042},null,2));await writeFile('examples/expected-result.json',JSON.stringify({signature:minimal.signature,geometrySignature:minimal.geometrySignature,validation:validate(minimal)},null,2));
+for(const r of records)console.log(r.profile,r.seed,r.validation.status,r.repeatMatches?'repeat OK':'MISMATCH');if(records.some(r=>r.validation.status!=='pass'||!r.repeatMatches))process.exitCode=1;

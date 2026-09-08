@@ -45,3 +45,5 @@ The Procedural Reef Fish integration includes a browser-safe core, phased Kit ru
 - Six entity grammars expose static meshes with animation roles; the game owns animation and threat behavior.
 - Liminal corridors enter at z=0 and recede -Z. Creatures face +Z with floor contact y=0.
 - See `docs/horror-factories.md` for runtime integration and `tools/horror` for the shared inspection harness.
+
+- `tools/amethyst-profile-factory` is the standalone five-recipe amethyst generator with categorical profiles and bounded parameters. It is not in the Studio registry; generated runs stay in its ignored `evidence/` directory.

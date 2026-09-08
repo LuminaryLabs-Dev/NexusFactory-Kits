@@ -1,0 +1,16 @@
+import {mkdir,writeFile,readFile,cp,readdir} from 'node:fs/promises';
+import {createHash} from 'node:crypto';
+import {fileURLToPath} from 'node:url';
+import path from 'node:path';
+import {serve} from './serve.mjs';
+import {browser} from './browser.mjs';
+const sha=b=>createHash('sha256').update(b).digest('hex');
+export async function capture({out='evidence/baseline',requests=[{profile:'raw-compact-cluster',seed:1042}],views=1,width=1000,height=850,exports=false,snapshot=true}={}){
+ await mkdir(out,{recursive:true});if(snapshot)await cp('src',path.join(out,'source'),{recursive:true});const {server,url}=await serve();let b;const records=[],errors=[];try{b=await browser();const page=await b.newPage({viewport:{width,height},deviceScaleFactor:1});page.on('pageerror',e=>errors.push(e.message));await page.goto(url+'/?capture',{waitUntil:'networkidle'});await page.waitForFunction(()=>window.ready,{timeout:60000});
+ for(let i=0;i<requests.length;i++){const request=requests[i],id=String(i+1).padStart(2,'0')+'-'+(request.specimen?.profile??request.profile);const dir=path.join(out,id);await mkdir(dir,{recursive:true});const info=await page.evaluate(req=>window.lab.load(req),request);const images=[];for(let j=0;j<views;j++){await page.evaluate(a=>window.lab.angle(a),j*Math.PI*2/views);const png=await page.evaluate(()=>window.lab.png());const bytes=Buffer.from(png.split(',')[1],'base64'),filename=`view-${String(j).padStart(2,'0')}.png`;await writeFile(path.join(dir,filename),bytes);images.push({path:filename,sha256:sha(bytes),bytes:bytes.length});}const renderer=await page.evaluate(()=>window.lab.info());const record={id,request,...info,renderer,images,errors:[...errors]};await writeFile(path.join(dir,'specimen.json'),JSON.stringify(info.specimen,null,2));
+ if(exports){const data=Buffer.from(await page.evaluate(()=>window.lab.exportGLB()),'base64');await writeFile(path.join(dir,'specimen.glb'),data);record.export={format:'glb',bytes:data.length,sha256:sha(data)};}
+ await writeFile(path.join(dir,'evidence.json'),JSON.stringify(record,null,2));records.push(record);console.log(`${id}: ${info.validation.status}; ${views} views; ${info.validation.stats.triangles} triangles`);}
+ await page.goto(url,{waitUntil:'networkidle'});await page.waitForFunction(()=>window.ready);await page.screenshot({path:path.join(out,'interactive.png')});
+ const report={status:errors.length||records.some(r=>r.validation.status!=='pass')?'fail':'pass',runId:out,environment:{node:process.version,browser:await b.version()},captureProfile:{width,height,views,angles:Array.from({length:views},(_,i)=>i*360/views),fov:33,exposure:1.12,background:'#eeede9',camera:'bounds-fit locked per specimen'},records,errors};await writeFile(path.join(out,'run-report.json'),JSON.stringify(report,null,2));return report;
+ }catch(e){await writeFile(path.join(out,'run-report.json'),JSON.stringify({status:'blocked',records,errors:[...errors,e.message]},null,2));throw e;}finally{await b?.close();await new Promise(r=>server.close(r));}}
+if(process.argv[1]===fileURLToPath(import.meta.url)){const profile=process.argv[2]??'raw-compact-cluster',out=process.argv[3]??'evidence/baseline',views=Number(process.argv[4]??1);await capture({out,requests:[{profile,seed:1042}],views});}

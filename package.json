@@ -23,7 +23,11 @@
     "triceratops:install": "npm --prefix tools/triceratops-mesh-editor install",
     "triceratops:test": "npm --prefix tools/triceratops-mesh-editor test",
     "triceratops:validate": "npm --prefix tools/triceratops-mesh-editor run validate",
-    "triceratops:serve": "npm --prefix tools/triceratops-mesh-editor run serve"
+    "triceratops:serve": "npm --prefix tools/triceratops-mesh-editor run serve",
+    "amethyst:install": "npm --prefix tools/amethyst-profile-factory ci",
+    "amethyst:test": "npm --prefix tools/amethyst-profile-factory test",
+    "amethyst:serve": "npm --prefix tools/amethyst-profile-factory start",
+    "amethyst:batch": "npm --prefix tools/amethyst-profile-factory run batch"
   },
   "engines": {
     "node": ">=20"

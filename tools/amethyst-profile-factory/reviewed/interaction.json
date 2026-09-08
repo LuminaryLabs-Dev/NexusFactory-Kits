@@ -1,0 +1,20 @@
+{
+  "status": "pass",
+  "checks": [
+    "Profile selector changes recipe",
+    "Numeric override updates resolved specimen",
+    "Selective shape reroll preserves values",
+    "Invalid override retains previous specimen and shows error",
+    "Settings download works",
+    "Orbit interaction changes actual framebuffer"
+  ],
+  "errors": [],
+  "renderer": {
+    "renderer": "ANGLE (Google, Vulkan 1.3.0 (SwiftShader Device (Subzero) (0x0000C0DE)), SwiftShader driver)",
+    "vendor": "WebKit",
+    "webglVersion": "WebGL 2.0 (OpenGL ES 3.0 Chromium)",
+    "three": "185",
+    "drawCalls": 4,
+    "triangles": 25004
+  }
+}

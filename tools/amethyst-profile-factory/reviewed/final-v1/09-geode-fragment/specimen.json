@@ -1,0 +1,340 @@
+{
+  "schemaVersion": 1,
+  "generatorVersion": "1.0.0",
+  "rock": "amethyst",
+  "rockVersion": 1,
+  "profile": "geode-fragment",
+  "profileVersion": 1,
+  "recipe": "cavity-fragment",
+  "seed": 3470577042,
+  "streamSeeds": {
+    "profile": 1485266651,
+    "parameters": 2850760102,
+    "rock": 3078922879,
+    "placement": 3209083873,
+    "shape": 3502319539,
+    "color": 1992560345
+  },
+  "overrides": {},
+  "categories": {
+    "baseShape": "curvedWall",
+    "growthPattern": "inwardMixed",
+    "geology": "volcanicCavity",
+    "preparation": "broken"
+  },
+  "values": {
+    "size": 4.049636,
+    "depthRatio": 0.812641,
+    "outlineIrregularity": 0.175986,
+    "crystalRoughness": 0.212435,
+    "transmission": 0.45605,
+    "colorDepth": 0.502087,
+    "colorPocketScale": 1.20321,
+    "colorContrast": 0.433938,
+    "cloudiness": 0.317841,
+    "baseThicknessRatio": 0.088505,
+    "fractureDepth": 0.043244,
+    "paleLayerRatio": 0.102736,
+    "brownSeamRatio": 0.025364,
+    "rockRoughness": 0.916776,
+    "rockGrain": 0.0694,
+    "crystalWidthRatio": 0.058055,
+    "exposedHeightToWidth": 0.98154,
+    "surfaceCoverage": 0.850562,
+    "primaryCrystalCount": 11,
+    "fillerSizeRatio": 0.262809,
+    "rootBurialRatio": 0.165874,
+    "terminationHeightRatio": 0.510594,
+    "facetVariation": 0.05379,
+    "tipOffset": 0.027907,
+    "chipProbability": 0.080645,
+    "chipDepth": 0.152742,
+    "cavityDepthRatio": 0.470834,
+    "openingAngle": 1.130171,
+    "rimBreakage": 0.09167,
+    "fragmentArc": 3.829688,
+    "fragmentStart": 0.302929
+  },
+  "derived": {
+    "baseDepth": 3.2909002486759995,
+    "baseThickness": 0.35841303418,
+    "paleLayerThickness": 0.036821921479516476,
+    "brownSeamThickness": 0.00909078819894152,
+    "crystalWidth": 0.23510161797999998,
+    "crystalHeight": 0.2307616421120892,
+    "rootBurial": 0.03899724578081452,
+    "fillerWidth": 0.06178682111970582,
+    "secondaryCount": 144,
+    "cavityDepth": 1.9067063164239997
+  },
+  "effectiveRanges": {
+    "size": {
+      "min": 3.2,
+      "max": 5.2,
+      "unit": "cm",
+      "distribution": "centerWeighted",
+      "overrideable": true,
+      "source": "artistic-v1"
+    },
+    "depthRatio": {
+      "min": 0.65,
+      "max": 0.95,
+      "unit": "ratio",
+      "distribution": "centerWeighted",
+      "overrideable": true,
+      "source": "artistic-v1"
+    },
+    "outlineIrregularity": {
+      "min": 0.07,
+      "max": 0.22,
+      "unit": "ratio",
+      "distribution": "centerWeighted",
+      "overrideable": true,
+      "source": "artistic-v1"
+    },
+    "crystalRoughness": {
+      "min": 0.13,
+      "max": 0.28,
+      "unit": "ratio",
+      "distribution": "centerWeighted",
+      "overrideable": true,
+      "source": "artistic-v1"
+    },
+    "transmission": {
+      "min": 0.22,
+      "max": 0.48,
+      "unit": "ratio",
+      "distribution": "centerWeighted",
+      "overrideable": true,
+      "source": "artistic-v1"
+    },
+    "colorDepth": {
+      "min": 0.38,
+      "max": 0.8,
+      "unit": "ratio",
+      "distribution": "centerWeighted",
+      "overrideable": true,
+      "source": "artistic-v1"
+    },
+    "colorPocketScale": {
+      "min": 0.7,
+      "max": 1.8,
+      "unit": "inverse-cm",
+      "distribution": "centerWeighted",
+      "overrideable": true,
+      "source": "artistic-v1"
+    },
+    "colorContrast": {
+      "min": 0.28,
+      "max": 0.68,
+      "unit": "ratio",
+      "distribution": "centerWeighted",
+      "overrideable": true,
+      "source": "artistic-v1"
+    },
+    "cloudiness": {
+      "min": 0.1,
+      "max": 0.38,
+      "unit": "ratio",
+      "distribution": "centerWeighted",
+      "overrideable": true,
+      "source": "artistic-v1"
+    },
+    "baseThicknessRatio": {
+      "min": 0.075,
+      "max": 0.12,
+      "unit": "ratio",
+      "distribution": "centerWeighted",
+      "overrideable": true,
+      "source": "artistic-v1"
+    },
+    "fractureDepth": {
+      "min": 0.025,
+      "max": 0.075,
+      "unit": "ratio",
+      "distribution": "centerWeighted",
+      "overrideable": true,
+      "source": "artistic-v1"
+    },
+    "paleLayerRatio": {
+      "min": 0.06,
+      "max": 0.16,
+      "unit": "ratio",
+      "distribution": "centerWeighted",
+      "overrideable": true,
+      "source": "artistic-v1"
+    },
+    "brownSeamRatio": {
+      "min": 0.012,
+      "max": 0.045,
+      "unit": "ratio",
+      "distribution": "centerWeighted",
+      "overrideable": true,
+      "source": "artistic-v1"
+    },
+    "rockRoughness": {
+      "min": 0.8,
+      "max": 0.98,
+      "unit": "ratio",
+      "distribution": "centerWeighted",
+      "overrideable": true,
+      "source": "artistic-v1"
+    },
+    "rockGrain": {
+      "min": 0.035,
+      "max": 0.085,
+      "unit": "ratio",
+      "distribution": "centerWeighted",
+      "overrideable": true,
+      "source": "artistic-v1"
+    },
+    "crystalWidthRatio": {
+      "min": 0.048,
+      "max": 0.075,
+      "unit": "ratio",
+      "distribution": "centerWeighted",
+      "overrideable": true,
+      "source": "artistic-v1"
+    },
+    "exposedHeightToWidth": {
+      "min": 0.8,
+      "max": 1.5,
+      "unit": "ratio",
+      "distribution": "centerWeighted",
+      "overrideable": true,
+      "source": "artistic-v1"
+    },
+    "surfaceCoverage": {
+      "min": 0.78,
+      "max": 0.97,
+      "unit": "ratio",
+      "distribution": "centerWeighted",
+      "overrideable": true,
+      "source": "artistic-v1"
+    },
+    "primaryCrystalCount": {
+      "min": 5,
+      "max": 12,
+      "unit": "count",
+      "distribution": "uniform",
+      "overrideable": true,
+      "source": "artistic-v1",
+      "integer": true
+    },
+    "fillerSizeRatio": {
+      "min": 0.2,
+      "max": 0.42,
+      "unit": "ratio",
+      "distribution": "centerWeighted",
+      "overrideable": true,
+      "source": "artistic-v1"
+    },
+    "rootBurialRatio": {
+      "min": 0.12,
+      "max": 0.22,
+      "unit": "ratio",
+      "distribution": "centerWeighted",
+      "overrideable": true,
+      "source": "artistic-v1"
+    },
+    "terminationHeightRatio": {
+      "min": 0.44,
+      "max": 0.62,
+      "unit": "ratio",
+      "distribution": "centerWeighted",
+      "overrideable": true,
+      "source": "artistic-v1"
+    },
+    "facetVariation": {
+      "min": 0.015,
+      "max": 0.09,
+      "unit": "ratio",
+      "distribution": "centerWeighted",
+      "overrideable": true,
+      "source": "artistic-v1"
+    },
+    "tipOffset": {
+      "min": 0.01,
+      "max": 0.06,
+      "unit": "ratio",
+      "distribution": "centerWeighted",
+      "overrideable": true,
+      "source": "artistic-v1"
+    },
+    "chipProbability": {
+      "min": 0,
+      "max": 0.12,
+      "unit": "ratio",
+      "distribution": "centerWeighted",
+      "overrideable": true,
+      "source": "artistic-v1"
+    },
+    "chipDepth": {
+      "min": 0.06,
+      "max": 0.2,
+      "unit": "ratio",
+      "distribution": "centerWeighted",
+      "overrideable": true,
+      "source": "artistic-v1"
+    },
+    "cavityDepthRatio": {
+      "min": 0.35,
+      "max": 0.7,
+      "unit": "ratio",
+      "distribution": "centerWeighted",
+      "overrideable": true,
+      "source": "artistic-v1"
+    },
+    "openingAngle": {
+      "min": 0.85,
+      "max": 1.38,
+      "unit": "radians",
+      "distribution": "centerWeighted",
+      "overrideable": true,
+      "source": "artistic-v1"
+    },
+    "rimBreakage": {
+      "min": 0.04,
+      "max": 0.15,
+      "unit": "ratio",
+      "distribution": "centerWeighted",
+      "overrideable": true,
+      "source": "artistic-v1"
+    },
+    "fragmentArc": {
+      "min": 2.8,
+      "max": 4.4,
+      "unit": "radians",
+      "distribution": "centerWeighted",
+      "overrideable": true,
+      "source": "artistic-v1",
+      "dependsOn": {
+        "field": "baseShape",
+        "cases": {
+          "deepCup": [
+            4.4,
+            5.2
+          ]
+        }
+      }
+    },
+    "fragmentStart": {
+      "min": 0.18,
+      "max": 0.36,
+      "unit": "radians",
+      "distribution": "centerWeighted",
+      "overrideable": true,
+      "source": "artistic-v1"
+    }
+  },
+  "source": {
+    "id": "amethyst-qualitative-reference",
+    "version": 1,
+    "status": "ready",
+    "synthetic": false,
+    "scientificReconstruction": false
+  },
+  "synthetic": true,
+  "rangeBasis": "artistic",
+  "signature": "c0458092"
+}

@@ -1,0 +1,76 @@
+{
+  "count": 10,
+  "missing": 0,
+  "files": [
+    {
+      "file": "evidence/final-v1/01-loose-crystal/view-00.png",
+      "label": "01 · loose-crystal · seed 3604797994",
+      "width": 1100,
+      "height": 950,
+      "sha256": "39cf58b4fc345135e5c79f758f4427d022ee9c6f5870d456b159f6525aa43a25"
+    },
+    {
+      "file": "evidence/final-v1/02-sawn-geode/view-00.png",
+      "label": "02 · sawn-geode · seed 3621575613",
+      "width": 1100,
+      "height": 950,
+      "sha256": "32728f223e9ab368ef67347bfaeb718630926688824dacc31137be741ce7ad2d"
+    },
+    {
+      "file": "evidence/final-v1/03-sawn-geode/view-00.png",
+      "label": "03 · sawn-geode · seed 3571242756",
+      "width": 1100,
+      "height": 950,
+      "sha256": "c73455e35ed13c26d595dc67e953273a734eda81bef1f8f45808fa598f9a0a64"
+    },
+    {
+      "file": "evidence/final-v1/04-raw-compact-cluster/view-00.png",
+      "label": "04 · raw-compact-cluster · seed 3588020375",
+      "width": 1100,
+      "height": 950,
+      "sha256": "f4184689fa136b769ad11706339b83ec498de7e593c7cde1c62b16e0e4ffcdb1"
+    },
+    {
+      "file": "evidence/final-v1/05-tumbled-piece/view-00.png",
+      "label": "05 · tumbled-piece · seed 3537687518",
+      "width": 1100,
+      "height": 950,
+      "sha256": "8fba4022955eafc7cb5a33b8b9c84c7f7c79b74d86e9adebd2bd19f2ba5708f6"
+    },
+    {
+      "file": "evidence/final-v1/06-loose-crystal/view-00.png",
+      "label": "06 · loose-crystal · seed 3554465137",
+      "width": 1100,
+      "height": 950,
+      "sha256": "9627f1ab90882a1dced669dac5aeb857f52ee775f918c73010701fd0299d19fb"
+    },
+    {
+      "file": "evidence/final-v1/07-tumbled-piece/view-00.png",
+      "label": "07 · tumbled-piece · seed 3504132280",
+      "width": 1100,
+      "height": 950,
+      "sha256": "0dba2766f282cec83d7ff72099e4a4972a034c22f3172d934166476b2dab2b72"
+    },
+    {
+      "file": "evidence/final-v1/08-geode-fragment/view-00.png",
+      "label": "08 · geode-fragment · seed 3520909899",
+      "width": 1100,
+      "height": 950,
+      "sha256": "c5976feb94a1fd075fe4d1375ed89c7afbafcc14ae2c4c112614b1d4c754690b"
+    },
+    {
+      "file": "evidence/final-v1/09-geode-fragment/view-00.png",
+      "label": "09 · geode-fragment · seed 3470577042",
+      "width": 1100,
+      "height": 950,
+      "sha256": "8adfc14b54703bc458a9d91ff410eed3872fb52073f3b3874e928a1a118607d8"
+    },
+    {
+      "file": "evidence/final-v1/10-raw-compact-cluster/view-00.png",
+      "label": "10 · raw-compact-cluster · seed 3487354661",
+      "width": 1100,
+      "height": 950,
+      "sha256": "9f2cc771e2301edce9abc5b98e5de7a00f016e6abd4ec71acf3d9131430ec8f3"
+    }
+  ]
+}

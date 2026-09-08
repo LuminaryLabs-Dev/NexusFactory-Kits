@@ -1,0 +1,23 @@
+{
+  "status": "pass",
+  "baseCommit": "c6f232b6c104638983e0a163fc1ca62e3190290a",
+  "repositoryTests": {
+    "passed": 43,
+    "failed": 0
+  },
+  "factoryTests": {
+    "passed": 16,
+    "failed": 0
+  },
+  "registryChanged": false,
+  "chromiumSmoke": {
+    "status": "pass",
+    "views": 3,
+    "errors": [],
+    "environment": {
+      "node": "v24.19.0",
+      "browser": "152.0.7977.0"
+    }
+  },
+  "scope": "Exact copied source served locally and rendered in Chromium. Visual inspection confirms rendering, not photorealism or user artistic approval."
+}

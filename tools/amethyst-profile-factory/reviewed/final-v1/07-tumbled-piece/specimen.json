@@ -1,0 +1,142 @@
+{
+  "schemaVersion": 1,
+  "generatorVersion": "1.0.0",
+  "rock": "amethyst",
+  "rockVersion": 1,
+  "profile": "tumbled-piece",
+  "profileVersion": 1,
+  "recipe": "rounded-solid",
+  "seed": 3504132280,
+  "streamSeeds": {
+    "profile": 1034879258,
+    "parameters": 816892077,
+    "rock": 2989623808,
+    "placement": 3221752844,
+    "shape": 2030336410,
+    "color": 3736955628
+  },
+  "overrides": {},
+  "categories": {
+    "baseShape": "roundedFreeform",
+    "growthPattern": "none",
+    "geology": "massiveQuartz",
+    "preparation": "tumbled"
+  },
+  "values": {
+    "size": 3.655934,
+    "depthRatio": 0.864155,
+    "outlineIrregularity": 0.056692,
+    "crystalRoughness": 0.115655,
+    "transmission": 0.497159,
+    "colorDepth": 0.555502,
+    "colorPocketScale": 1.122852,
+    "colorContrast": 0.406646,
+    "cloudiness": 0.331087,
+    "heightRatio": 0.716343,
+    "roundness": 0.922779
+  },
+  "derived": {
+    "baseDepth": 3.15929364577,
+    "solidHeight": 2.6189027293619995
+  },
+  "effectiveRanges": {
+    "size": {
+      "min": 2.6,
+      "max": 4,
+      "unit": "cm",
+      "distribution": "centerWeighted",
+      "overrideable": true,
+      "source": "artistic-v1"
+    },
+    "depthRatio": {
+      "min": 0.65,
+      "max": 0.95,
+      "unit": "ratio",
+      "distribution": "centerWeighted",
+      "overrideable": true,
+      "source": "artistic-v1"
+    },
+    "outlineIrregularity": {
+      "min": 0.025,
+      "max": 0.09,
+      "unit": "ratio",
+      "distribution": "centerWeighted",
+      "overrideable": true,
+      "source": "artistic-v1"
+    },
+    "crystalRoughness": {
+      "min": 0.07,
+      "max": 0.15,
+      "unit": "ratio",
+      "distribution": "centerWeighted",
+      "overrideable": true,
+      "source": "artistic-v1"
+    },
+    "transmission": {
+      "min": 0.35,
+      "max": 0.6,
+      "unit": "ratio",
+      "distribution": "centerWeighted",
+      "overrideable": true,
+      "source": "artistic-v1"
+    },
+    "colorDepth": {
+      "min": 0.38,
+      "max": 0.8,
+      "unit": "ratio",
+      "distribution": "centerWeighted",
+      "overrideable": true,
+      "source": "artistic-v1"
+    },
+    "colorPocketScale": {
+      "min": 0.7,
+      "max": 1.8,
+      "unit": "inverse-cm",
+      "distribution": "centerWeighted",
+      "overrideable": true,
+      "source": "artistic-v1"
+    },
+    "colorContrast": {
+      "min": 0.28,
+      "max": 0.68,
+      "unit": "ratio",
+      "distribution": "centerWeighted",
+      "overrideable": true,
+      "source": "artistic-v1"
+    },
+    "cloudiness": {
+      "min": 0.16,
+      "max": 0.42,
+      "unit": "ratio",
+      "distribution": "centerWeighted",
+      "overrideable": true,
+      "source": "artistic-v1"
+    },
+    "heightRatio": {
+      "min": 0.52,
+      "max": 0.8,
+      "unit": "ratio",
+      "distribution": "centerWeighted",
+      "overrideable": true,
+      "source": "artistic-v1"
+    },
+    "roundness": {
+      "min": 0.8,
+      "max": 1.15,
+      "unit": "ratio",
+      "distribution": "centerWeighted",
+      "overrideable": true,
+      "source": "artistic-v1"
+    }
+  },
+  "source": {
+    "id": "amethyst-qualitative-reference",
+    "version": 1,
+    "status": "ready",
+    "synthetic": false,
+    "scientificReconstruction": false
+  },
+  "synthetic": true,
+  "rangeBasis": "artistic",
+  "signature": "b1eb47bb"
+}

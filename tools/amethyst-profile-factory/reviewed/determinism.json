@@ -1,0 +1,65 @@
+{
+  "status": "pass",
+  "records": [
+    {
+      "profile": "loose-crystal",
+      "seed": 3604797994,
+      "geometrySignature": "41697e19",
+      "repeatMatches": true
+    },
+    {
+      "profile": "sawn-geode",
+      "seed": 3621575613,
+      "geometrySignature": "7cfac9f9",
+      "repeatMatches": true
+    },
+    {
+      "profile": "sawn-geode",
+      "seed": 3571242756,
+      "geometrySignature": "4e91b298",
+      "repeatMatches": true
+    },
+    {
+      "profile": "raw-compact-cluster",
+      "seed": 3588020375,
+      "geometrySignature": "7d02154a",
+      "repeatMatches": true
+    },
+    {
+      "profile": "tumbled-piece",
+      "seed": 3537687518,
+      "geometrySignature": "d09b9f38",
+      "repeatMatches": true
+    },
+    {
+      "profile": "loose-crystal",
+      "seed": 3554465137,
+      "geometrySignature": "80353c9b",
+      "repeatMatches": true
+    },
+    {
+      "profile": "tumbled-piece",
+      "seed": 3504132280,
+      "geometrySignature": "b371c4a2",
+      "repeatMatches": true
+    },
+    {
+      "profile": "geode-fragment",
+      "seed": 3520909899,
+      "geometrySignature": "3a37dffc",
+      "repeatMatches": true
+    },
+    {
+      "profile": "geode-fragment",
+      "seed": 3470577042,
+      "geometrySignature": "a48e5cfb",
+      "repeatMatches": true
+    },
+    {
+      "profile": "raw-compact-cluster",
+      "seed": 3487354661,
+      "geometrySignature": "4846000d",
+      "repeatMatches": true
+    }
+  ]
+}

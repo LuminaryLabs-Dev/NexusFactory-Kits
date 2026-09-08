@@ -1,0 +1,46 @@
+{
+  "signature": "3122b141",
+  "geometrySignature": "70a5d54a",
+  "validation": {
+    "status": "pass",
+    "stats": {
+      "vertices": 21120,
+      "triangles": 7040,
+      "degenerate": 0,
+      "invalidValues": 0,
+      "normalDefects": 0,
+      "boundaryEdges": 0,
+      "nonManifoldEdges": 0,
+      "windingErrors": 0,
+      "duplicateFaces": 0,
+      "components": 120,
+      "negativeComponents": 0
+    },
+    "bounds": {
+      "min": [
+        -2.0053658485412598,
+        0,
+        -1.2815817594528198
+      ],
+      "max": [
+        1.915948748588562,
+        2.0068743228912354,
+        1.5566500425338745
+      ],
+      "size": [
+        3.9213145971298218,
+        2.0068743228912354,
+        2.8382318019866943
+      ]
+    },
+    "floorContact": true,
+    "geometrySignature": "70a5d54a",
+    "tolerance": 0.00001,
+    "checks": "Welded geometric positions; opposing two-use edges, signed volume and finite normals. Multiple intentionally intersecting crystal components allowed.",
+    "limitations": [
+      "Not a unioned watertight single body",
+      "No exact self-intersection or root penetration proof",
+      "Not a scientific or visual quality verdict"
+    ]
+  }
+}

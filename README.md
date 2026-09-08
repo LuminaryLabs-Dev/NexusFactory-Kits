@@ -121,6 +121,18 @@ npm run triceratops:serve
 
 The committed GLB is a `reviewed-candidate`: it passes structural validation but still requires user art approval and has no rig or animation clips. Compact comparison, orbit, validation, and replay evidence is committed; the 101 MB full review archive is intentionally kept outside Git history.
 
+## Amethyst profile factory
+
+[The standalone amethyst factory](tools/amethyst-profile-factory/README.md) resolves rock identity, categorical specimen profiles, then bounded numeric parameters. Five recipes produce raw clusters, geode fragments, sawn geodes, loose crystals, and tumbled pieces. It includes an interactive Three.js preview, deterministic rerolls, GLB export, tests, and a thirty-view review gallery. It is not registered as a public Studio Kit.
+
+```bash
+npm run amethyst:install
+npm run amethyst:test
+npm run amethyst:serve
+```
+
+The output is synthetic and still requires artistic approval; structural validation does not establish photorealism or exhaustive intersection freedom.
+
 ## Aquatic Flora Generator
 
 Aquatic Flora `0.2.0` gives Seagrass, Kelp, Branching, and Tuft separate rooted growth grammars while preserving the existing style, palette, size, density, and sway controls. Artifacts now record design profiles and feature counts, and validation proves connected silhouettes, palette depth, style identity, and parameter response.

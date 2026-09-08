@@ -13,6 +13,8 @@ This file records notable human-facing project changes. Dated sections are devel
 
 ### Added
 
+- Added the standalone amethyst profile factory: five specimen recipes, categorical and bounded numeric controls, seeded rerolls, Chromium previews, GLB export, tests, and compact reviewed evidence.
+
 - Added the offline, service-driven Triceratops mesh editor with a typed JSON AST, revision-guarded patch injection, incremental evaluation, live viewport, guided review runner, topology-gated export, accepted transaction history, and compact evidence.
 - Added the revision-45 reviewed Triceratops candidate GLB with deterministic geometry/export hashes and clean-room regeneration proof.
 - Added the deterministic offline 3D coral generator, ten reviewed GLB exports, numbered presets, checksums, contact sheet, and reload validation used by Little Reef.

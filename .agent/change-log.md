@@ -52,3 +52,9 @@ Record only material changes to repository state, governing documentation, valid
 - Baseline: `main` at `464d404eadad9e70ecdbf27fca265963226f63b4` before the documentation change.
 - Validation: Registry rebuilt without a diff; demos passed; coral validation rendered assets and scenes; Kits tests reported 23 pass and one known failure; Studio syntax and fixture tests passed.
 - Result: Documentation and agent roles became explicit.
+
+## 2026-09-08 — Amethyst factory
+
+Added the sandbox-developed standalone amethyst generator under `tools/amethyst-profile-factory`, following the existing offline-tool convention. Includes source, pinned dependencies, tests, documented controls and compact review evidence; no public registry contract changes.
+
+Validation: unchanged generated registry; 43/43 repository tests and 16/16 factory tests passed. Exact copied source rendered three views in Chromium with no page errors.
