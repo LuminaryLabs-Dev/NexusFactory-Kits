@@ -56,6 +56,8 @@ import { manifest as horrorManifest } from "./domains/factory/object/creature/ki
 import { manifest as liminalManifest } from "./domains/factory/object/structure/kits/liminal-kit/index.js";
 import { manifest as distressedManifest } from "./domains/factory/material/procedural/kits/distressed-kit/index.js";
 
+import { manifest as magicEffectManifest } from "./domains/factory/vfx/kits/magic-effect-kit/index.js";
+
 export const domains = Object.freeze([
   factoryDomain, objectDomain, weaponDomain, foliageDomain,
   treeDomain, treeGrowthDomain, treeCurveDomain, treeBezierDomain, treeWoodDomain, treeCrownDomain,
@@ -69,6 +71,6 @@ export const domains = Object.freeze([
   aquaticSceneDomain, aquaticPopulationDomain, reefDomain, aquariumDomain,
   animationDomain
 ]);
-export const kits = Object.freeze([ballistaManifest, treeManifest, fishObjectManifest, coralManifest, fishManifest, aquaticFloraManifest, reefManifest, aquariumManifest, horrorManifest, liminalManifest, distressedManifest]);
+export const kits = Object.freeze([ballistaManifest, treeManifest, fishObjectManifest, coralManifest, fishManifest, aquaticFloraManifest, reefManifest, aquariumManifest, horrorManifest, liminalManifest, distressedManifest, magicEffectManifest]);
 
 // main is the live NexusFactory-Kits registry channel.
