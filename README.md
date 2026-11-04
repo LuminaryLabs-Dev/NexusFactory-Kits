@@ -24,6 +24,7 @@ npm run demo
 
 | Generator | Kit ID | Output | Version |
 | --- | --- | --- | --- |
+| Magic Effect Generator | `factory-vfx-magic-effect` | 32×32 animated VFX, PNG/atlas/JSON | `0.2.0` |
 | Procedural Horror Entities | `factory-object-creature-horror` | Sculpted mesh; GLB or JSON | `0.1.0` |
 | Liminal Corridor Architecture | `factory-object-structure-liminal` | Corridor mesh; GLB or JSON | `0.1.0` |
 | Distressed Architectural Surfaces | `factory-material-procedural-distressed` | PBR vertex-color swatch; GLB or JSON | `0.1.0` |
@@ -169,3 +170,7 @@ Do not edit `registry.json` manually. Studio resolves each manifest's `source.mo
 ## License
 
 [MIT](LICENSE)
+
+## Magic VFX
+
+The [Magic VFX Kit](docs/magic-vfx.md) is one deterministic VFX generator with ten elemental profiles, 16 formations, transparent animation strips, and 1024×1024 atlas export. The offline builder creates ten candidate effect packs; generated artwork still requires game-context and human art review.
