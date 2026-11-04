@@ -55,3 +55,5 @@ export { kit as aquariumKit, manifest as aquariumManifest } from "./domains/fact
 export { kit as horrorKit } from "./domains/factory/object/creature/kits/horror-kit/index.js";
 export { kit as liminalKit } from "./domains/factory/object/structure/kits/liminal-kit/index.js";
 export { kit as distressedKit } from "./domains/factory/material/procedural/kits/distressed-kit/index.js";
+
+export { kit as magicEffectKit, manifest as magicEffectManifest } from "./domains/factory/vfx/kits/magic-effect-kit/index.js";
