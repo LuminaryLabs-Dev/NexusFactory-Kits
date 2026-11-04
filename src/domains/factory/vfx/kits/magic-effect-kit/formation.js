@@ -178,7 +178,7 @@ function drawEffect(g,theme,effect,seed,t,options){
           if(r>6)g.dot(px,py,3,life*(.75+.25*osc(i)**2));
         }
         for(let i=0;i<5;i++){
-          const angle=Math.PI+(i/5+t*.55)*Math.PI;
+          const angle=Math.PI+(i/5+(loop?.035*Math.sin(clock):t*.55))*Math.PI;
           const x=16+Math.cos(angle)*r,y=19+Math.sin(angle)*r;
           spawn(identity(seed,theme,effect,40+i),x,y,1,life*.75);
         }
@@ -188,13 +188,13 @@ function drawEffect(g,theme,effect,seed,t,options){
           for(let i=0;i<portions;i++){
             const reveal=loop?1:phase(t,.045+i*.028,.14+i*.028)*(1-phase(t,.72+i*.02,.975));
             if(reveal<.06)continue;g.arc(16,16,r,i*TAU/portions,(i+1)*TAU/portions,2,life*reveal);
-            const th=(i+.5)*TAU/portions+clock*(effect==='rune'?.1:.04);
+            const th=(i+.5)*TAU/portions+(loop?.12*Math.sin(clock):clock*(effect==='rune'?.1:.04));
             spawn(identity(seed,theme,effect,i),16+r*Math.cos(th),16+r*Math.sin(th),1,life*reveal);
           }
-          if(effect==='sigil'){g.arc(16,16,3,clock*.6,clock*.6+Math.PI*1.65,1,life*.75);g.star(16,16,2,3,life*.65);}
+          if(effect==='sigil'){const innerAngle=loop?.36*Math.sin(clock):clock*.6;g.arc(16,16,3,innerAngle,innerAngle+Math.PI*1.65,1,life*.75);g.star(16,16,2,3,life*.65);}
         }else{
           ring(r,2,life);ring(Math.max(2,r-2.2),1,life*.7);
-          for(let i=0;i<8;i++){const th=i*TAU/8+clock*.35;
+          for(let i=0;i<8;i++){const th=i*TAU/8+(loop?.35*Math.sin(clock):clock*.35);
             spawn(identity(seed,theme,effect,i),16+r*Math.cos(th),16+r*Math.sin(th),1,life*.7);}
         }
       }
@@ -209,7 +209,7 @@ function drawEffect(g,theme,effect,seed,t,options){
       }
       break;}
     case 'spiral':case 'vortex':{
-      const r=10*grow*rr*(loop?1:fade),spin=clock*(loop?1.2:1.7);
+      const r=10*grow*rr*(loop?1:fade),spin=clock*(loop?1:1.7);
       for(let arm=0;arm<(effect==='spiral'?2:3);arm++){
         let prev=null;
         for(let j=0;j<32;j++){
@@ -219,7 +219,7 @@ function drawEffect(g,theme,effect,seed,t,options){
         }
       }
       if(effect==='vortex'){
-        for(let i=0;i<8;i++){const p=identity(seed,theme,effect,i),th=p.a+spin*1.4;
+        for(let i=0;i<8;i++){const p=identity(seed,theme,effect,i),th=p.a+(loop?clock:spin*1.4);
           const rad=9*(1-(loop?t:phase(t,.13,.72)))*rr;
           spawn(p,16+rad*Math.cos(th),16+rad*Math.sin(th),1,life*.8);}
       }
@@ -234,13 +234,13 @@ function drawEffect(g,theme,effect,seed,t,options){
     for(let j=0;j<5;j++){const p=identity(seed,theme,effect,30+j),y=23-grow*(4+p.b*10)+Math.sin(clock*2+p.a)*1.4;
       spawn(p,12+j*2+(p.c-.5)*2,y,1.2+p.b,modulation*.9);}
   }else if(type==='crystal'){
-    for(let j=0;j<3;j++){const p=identity(seed,theme,effect,30+j),a=p.a+clock*.2;
+    for(let j=0;j<3;j++){const p=identity(seed,theme,effect,30+j),a=p.a+(loop?.2*Math.sin(clock):clock*.2);
       g.line(16,16,16+Math.cos(a)*(3+5*grow),16+Math.sin(a)*(3+5*grow),3,modulation*.65);}
   }else if(type==='electric'){
     for(let j=0;j<2;j++){const p=identity(seed,theme,effect,30+j),x=12+j*6,y=13+osc(j)*2;
       g.line(x-2,y-3,x+1,y,3,modulation*.8);g.line(x+1,y,x-1,y+4,2,modulation*.8);}
   }else if(type==='growth'){
-    for(let j=0;j<4;j++){const a=j*TAU/4+clock*.4;
+    for(let j=0;j<4;j++){const a=j*TAU/4+(loop?.4*Math.sin(clock):clock*.4);
       spawn(identity(seed,theme,effect,30+j),16+5*grow*Math.cos(a),16+5*grow*Math.sin(a),1.4,modulation);}
   }else if(type==='bubble'){
     for(let j=0;j<5;j++){const p=identity(seed,theme,effect,30+j),y=23-14*((t+p.b)%1);
@@ -248,7 +248,7 @@ function drawEffect(g,theme,effect,seed,t,options){
   }else if(type==='radiance'){
     g.star(16,16,3,3,modulation*.75);
   }else if(type==='smoke'){
-    g.arc(16,16,5,clock*.6,clock*.6+Math.PI*1.2,1,modulation);
+    const a=loop?.6*Math.sin(clock):clock*.6;g.arc(16,16,5,a,a+Math.PI*1.2,1,modulation);
   }else if(type==='orbit'){
     for(let j=0;j<4;j++){const th=clock+j*TAU/4;
       spawn(identity(seed,theme,effect,30+j),16+5*Math.cos(th),16+5*Math.sin(th),1,modulation);}
