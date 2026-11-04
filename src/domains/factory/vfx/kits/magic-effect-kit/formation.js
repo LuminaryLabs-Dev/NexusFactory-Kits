@@ -178,7 +178,7 @@ function drawEffect(g,theme,effect,seed,t,options){
           if(r>6)g.dot(px,py,3,life*(.75+.25*osc(i)**2));
         }
         for(let i=0;i<5;i++){
-          const angle=Math.PI+(i/5+(loop?.035*Math.sin(clock):t*.55))*Math.PI;
+          const angle=Math.PI+(i/5+(loop?.10*Math.sin(clock)+.07*Math.sin(2*clock+.4):t*.55))*Math.PI;
           const x=16+Math.cos(angle)*r,y=19+Math.sin(angle)*r;
           spawn(identity(seed,theme,effect,40+i),x,y,1,life*.75);
         }
@@ -188,13 +188,13 @@ function drawEffect(g,theme,effect,seed,t,options){
           for(let i=0;i<portions;i++){
             const reveal=loop?1:phase(t,.045+i*.028,.14+i*.028)*(1-phase(t,.72+i*.02,.975));
             if(reveal<.06)continue;g.arc(16,16,r,i*TAU/portions,(i+1)*TAU/portions,2,life*reveal);
-            const th=(i+.5)*TAU/portions+(loop?.12*Math.sin(clock):clock*(effect==='rune'?.1:.04));
+            const th=(i+.5)*TAU/portions+(loop?.65*Math.sin(clock)+.18*Math.sin(2*clock+.35):clock*(effect==='rune'?.1:.04));
             spawn(identity(seed,theme,effect,i),16+r*Math.cos(th),16+r*Math.sin(th),1,life*reveal);
           }
-          if(effect==='sigil'){const innerAngle=loop?.36*Math.sin(clock):clock*.6;g.arc(16,16,3,innerAngle,innerAngle+Math.PI*1.65,1,life*.75);g.star(16,16,2,3,life*.65);}
+          if(effect==='sigil'){const innerAngle=loop?.42*Math.sin(clock)+.2*Math.sin(2*clock+.35):clock*.6;g.arc(16,16,3,innerAngle,innerAngle+Math.PI*1.65,1,life*.75);g.star(16,16,2,3,life*.65);}
         }else{
           ring(r,2,life);ring(Math.max(2,r-2.2),1,life*.7);
-          for(let i=0;i<8;i++){const th=i*TAU/8+(loop?.35*Math.sin(clock):clock*.35);
+          for(let i=0;i<8;i++){const th=i*TAU/8+(loop?.65*Math.sin(clock)+.18*Math.sin(2*clock+.7):clock*.35);
             spawn(identity(seed,theme,effect,i),16+r*Math.cos(th),16+r*Math.sin(th),1,life*.7);}
         }
       }
